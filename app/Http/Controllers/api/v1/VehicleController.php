@@ -747,7 +747,7 @@ class VehicleController extends Controller
             */ 
 
 
-                $resData = ['data' => array('performance' => array('user' => $user,'totalmiles' => $totmiles, 'totalmaintenancecost' => $totalmaintenancecost, 'milespermonth' => $milespermonth[0]->mileage, 'maintenancepermonth' => $maintenancepermonth[0]->total_cost, 'averagemaintenancecost' => $results, 'averagemiles' => $res, 'mileagedifference' => $mileagedifference, 'daysago' => $getVehicle[0]->created_at->diffForHumans(), 'ivim' => $getVehicle)) ,'message' => "success", 'status' => 200, 'action' => 'performance'];
+                $resData = ['data' => array('performance' => array('user' => $user,'totalmiles' => $totmiles, 'totalmaintenancecost' => $totalmaintenancecost, 'milespermonth' => $milespermonth[0]->mileage, 'maintenancepermonth' => $maintenancepermonth[0]->total_cost, 'averagemaintenancecost' => $results, 'averagemiles' => $res, 'mileagedifference' => $mileagedifference, 'daysago' => $getVehicle[0]->created_at->diffForHumans()), 'ivim' => $getVehicle) ,'message' => "success", 'status' => 200, 'action' => 'performance'];
 
                     $status = 200;
            }
