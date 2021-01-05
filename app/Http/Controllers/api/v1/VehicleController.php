@@ -651,8 +651,6 @@ class VehicleController extends Controller
 
     public function myperformance(Request $request){
 
-            
-
             // Get vehicle record
            $getVehicle = Vehicleinfo::select(DB::raw('estimate_id, opportunity_id, email, telephone, busID, vehicle_licence, date, service_type, make, model, service_option, total_cost, service_note, mileage, created_at'))->where('vehicle_licence', $request->vehicle_reg_no)->where('service_type', 'LIKE', '%'.$request->service_type.'%')->orderBy('created_at', 'DESC')->get();
 
@@ -747,7 +745,9 @@ class VehicleController extends Controller
             */ 
 
 
-                $resData = ['data' => array('performance' => array('user' => $user,'totalmiles' => $totmiles, 'totalmaintenancecost' => $totalmaintenancecost, 'milespermonth' => $milespermonth[0]->mileage, 'maintenancepermonth' => $maintenancepermonth[0]->total_cost, 'averagemaintenancecost' => $results, 'averagemiles' => $res, 'mileagedifference' => $mileagedifference, 'daysago' => $getVehicle[0]->created_at->diffForHumans()), 'ivim' => $getVehicle) ,'message' => "success", 'status' => 200, 'action' => 'performance'];
+                // $resData = ['data' => array('performance' => array('user' => $user,'totalmiles' => $totmiles, 'totalmaintenancecost' => $totalmaintenancecost, 'milespermonth' => $milespermonth[0]->mileage, 'maintenancepermonth' => $maintenancepermonth[0]->total_cost, 'averagemaintenancecost' => $results, 'averagemiles' => $res, 'mileagedifference' => $mileagedifference, 'daysago' => $getVehicle[0]->created_at->diffForHumans()), 'ivim' => $getVehicle) ,'message' => "success", 'status' => 200, 'action' => 'performance'];
+
+                $resData = ['data' => [array('name' => $user[0]->name, 'imageUrl' => $user[0]->imageUrl, 'maintenancePerMonth' => $maintenancepermonth[0]->total_cost, 'milesPerMonth' => $milespermonth[0]->mileage, 'totalMiles' => $totmiles, 'totalMaintenanceCost' => number_format($totalmaintenancecost, 2))], 'message' => "success", 'status' => 200];
 
                     $status = 200;
            }
