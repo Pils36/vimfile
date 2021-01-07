@@ -389,24 +389,30 @@ class VehicleController extends Controller
                             
 
 
-            if (count($mechanics)) {
+            if (count($mechanics) > 0) {
 
-                foreach ($mechanics as $key => $value) {
-                    $mechID = $value->station_name;
+                // foreach ($mechanics as $key => $value) {
 
-                    $rating = Review::where('station_name', $mechID)->get();
+                //     dd($value);
 
-                    if(count($rating) > 0){
+                //     $mechID = $value->station_name;
 
-                        $resData = ['data' => $mechanics, 'rate_review' => $rating, 'message' => 'success', 'status' => 200];
+                //     $rating = Review::where('station_name', $mechID)->get();
+
+                //     if(count($rating) > 0){
+
+                //         $resData = ['data' => $mechanics, 'rate_review' => $rating, 'message' => 'success', 'status' => 200];
+                //         $status = 200;
+                //     }
+                //     else{
+                //         $resData = ['data' => $mechanics, 'rate_review' => 0, 'message' => 'success', 'status' => 200];
+                //         $status = 200;
+                //     }
+                // }
+
+
+                $resData = ['data' => $mechanics, 'message' => 'success', 'status' => 200];
                         $status = 200;
-                    }
-                    else{
-                        $resData = ['data' => $mechanics, 'rate_review' => 0, 'message' => 'success', 'status' => 200];
-                        $status = 200;
-                    }
-                }
-
 
 
             } 
