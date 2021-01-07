@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\api\v1;
 
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Log;
+
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -424,7 +427,10 @@ class VehicleController extends Controller
         elseif($request->get('lat') != null || $request->get('lon') != null){
 
 
-            $data = $this->getDistance($request->get('lat'), $request->get('lon'), $this->arr_ip['state_name'], $this->arr_ip['state']);
+            $data = $this->getDistance($this->arr_ip->lat, $this->arr_ip->lon, $this->arr_ip['state_name'], $this->arr_ip['state']);
+
+
+            Log::info($data);
 
 
             if($data != null){

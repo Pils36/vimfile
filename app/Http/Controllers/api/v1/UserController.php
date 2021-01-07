@@ -1110,7 +1110,10 @@ class UserController extends Controller
 		$updateUser = $user->where('id', $id)->update(['name' => $req->name, 'specialization' => $req->occupation, 'avatar' => $fileNameToStore]);
 
 
-		$resData = ['data' => $updateUser, 'message' => 'Success', 'status' => 200];
+		$getUser = $user->select('name', 'specialization', 'avatar')->where('id', $id)->get();
+
+
+		$resData = ['data' => $getUser, 'message' => 'Success', 'status' => 200];
 
 		$status = 200;
 

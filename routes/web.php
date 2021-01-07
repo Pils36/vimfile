@@ -20,6 +20,9 @@
 */
 
 
+// Application LOGS
+Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+
 Route::get('caa/migratedata', ['uses' => 'CAAController@index', 'as' => 'migratedata']);
 Route::get('admin/pdf/claimbusiness', ['uses' => 'HomeController@checkbusiness', 'as' => 'checkbusiness']);
 Route::get('startup', ['uses' => 'HomeController@startup', 'as' => 'Startup']);

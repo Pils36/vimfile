@@ -16,6 +16,9 @@ trait LatLon{
 
     public function getDistance($latitudeFrom, $longitudeFrom, $state, $state_short){
 
+        // dd("My latitude:  ".$latitudeFrom." | My Longitude: ".$longitudeFrom);
+
+
         // Get Mechanic LAT ANd LON
         $getusers = User::where('userType', 'Auto Care')->where('lon', '!=', "")->where('ref_code', '!=', "")->orWhere('userType', 'Certified Mechanics')->get();
 
@@ -42,7 +45,6 @@ trait LatLon{
 
 
     public function distanceCalc($ref_code, $latFrom, $longFrom, $latTo, $longTo, $state, $state_short){
-
         
 
         //Calculate distance from latitude and longitude
@@ -50,12 +52,16 @@ trait LatLon{
 
 
         $dist = sin(deg2rad($latFrom)) * sin(deg2rad($latTo)) +  cos(deg2rad($latFrom)) * cos(deg2rad($latTo)) * cos(deg2rad($theta));
-
+        
 
         $dist = acos($dist);
+
         $dist = rad2deg($dist);
+
+
         $miles = $dist * 60 * 1.1515;
 
+        
 
 
         $distance = round($miles * 1.609344, 2);
@@ -64,7 +70,9 @@ trait LatLon{
 
         if($distance <= 10000){
             // Get Mechanics
-            $data = User::distinct('email')->select(DB::raw('id, busID as station_id, name, station_name as companyName, email, phone_number as phoneNumber, address, city, state, specialization, image as imageUrl, zipcode as zipCode, lon as longitude, lat as latitude'))->where('ref_code', $ref_code)->where('state', $state)->orWhere('state', $state_short)->where('lon', '!=', "")->where('email', '!=', "")->where('ref_code', '!=', "")->get();
+            $data = User::distinct('email')->select(DB::raw('id, busID as station_id, name, station_name as companyName, email, phone_number as phoneNumber, address, city, state, specialization, image as imageUrl, zipcode as zipCode, lon as longitude, lat as latitude'))->where('userType', '!=', 'Individual')->where('state', $state)->where('lon', '!=', NULL)->where('email', '!=', NULL)->orWhere('state', $state_short)->where('ref_code', '!=', NULL)->where('lat', '!=', NULL)->get();
+
+
 
             return $data;
         }
