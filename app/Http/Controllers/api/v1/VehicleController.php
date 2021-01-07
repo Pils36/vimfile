@@ -747,7 +747,7 @@ class VehicleController extends Controller
 
                 // $resData = ['data' => array('performance' => array('user' => $user,'totalmiles' => $totmiles, 'totalmaintenancecost' => $totalmaintenancecost, 'milespermonth' => $milespermonth[0]->mileage, 'maintenancepermonth' => $maintenancepermonth[0]->total_cost, 'averagemaintenancecost' => $results, 'averagemiles' => $res, 'mileagedifference' => $mileagedifference, 'daysago' => $getVehicle[0]->created_at->diffForHumans()), 'ivim' => $getVehicle) ,'message' => "success", 'status' => 200, 'action' => 'performance'];
 
-                $resData = ['data' => [array('name' => $user[0]->name, 'imageUrl' => $user[0]->imageUrl, 'maintenancePerMonth' => $maintenancepermonth[0]->total_cost, 'milesPerMonth' => $milespermonth[0]->mileage, 'totalMiles' => $totmiles, 'totalMaintenanceCost' => number_format($totalmaintenancecost, 2))], 'message' => "success", 'status' => 200];
+                $resData = ['data' => array('name' => $user[0]->name, 'imageUrl' => array($carrecord[0]->file), 'maintenancePerMonth' => $maintenancepermonth[0]->total_cost, 'milesPerMonth' => $milespermonth[0]->mileage, 'totalMiles' => $totmiles, 'totalMaintenanceCost' => number_format($totalmaintenancecost, 2), 'licenseNumber' => $getVehicle[0]->vehicle_licence, 'chassisNumber' => $carrecord[0]->chassis_no, 'currentMileage' => $carrecord[0]->current_mileage), 'message' => "success", 'status' => 200];
 
                     $status = 200;
            }
