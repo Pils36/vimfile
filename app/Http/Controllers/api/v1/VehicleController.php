@@ -381,9 +381,9 @@ class VehicleController extends Controller
 
             $searchQuery = trim($category);
             
-            $requestData = ['city', 'state', 'country', 'station_name', 'specialization'];
+            $requestData = ['users.city', 'users.state', 'users.country', 'users.station_name', 'users.specialization'];
 
-            $mechanics = User::select(DB::raw('id, busID as station_id, name, station_name as companyName, email, phone_number as phoneNumber, address, city, state, specialization, image as imageUrl, zipcode as zipCode, lon as longitude, lat as latitude'))->where(function($q) use($requestData, $searchQuery) {
+            $mechanics = User::select(DB::raw('users.id, users.busID as station_id, users.name, station_name as stationName, users.email, users.phone_number as phoneNumber, users.address, users.city, users.state, users.specialization, users.image as imageUrl, users.zipcode as zipCode, users.lon as longitude, users.lat as latitude, business.name_of_company as companyName'))->join('business', 'users.busID', '=', 'business.busID')->where(function($q) use($requestData, $searchQuery) {
                                     foreach ($requestData as $field)
                                     $q->orWhere($field, 'like', "%{$searchQuery}%");
                             })->where('userType', 'Auto Care')->orWhere('userType', 'Certified Professional')->get();
@@ -461,9 +461,9 @@ class VehicleController extends Controller
 
         $searchQuery = trim($category);
         
-        $requestData = ['city', 'state', 'country', 'station_name', 'specialization'];
+        $requestData = ['users.city', 'users.state', 'users.country', 'users.station_name', 'users.specialization'];
 
-        $mechanics = User::select(DB::raw('id, busID as station_id, name, station_name as companyName, email, phone_number as phoneNumber, address, city, state, specialization, image as imageUrl, zipcode as zipCode, lon as longitude, lat as latitude'))->where(function($q) use($requestData, $searchQuery) {
+        $mechanics = User::select(DB::raw('users.id, users.busID as station_id, users.name, station_name as stationName, users.email, users.phone_number as phoneNumber, users.address, users.city, users.state, users.specialization, users.image as imageUrl, users.zipcode as zipCode, users.lon as longitude, users.lat as latitude, business.name_of_company as companyName'))->join('business', 'users.busID', '=', 'business.busID')->where(function($q) use($requestData, $searchQuery) {
                                 foreach ($requestData as $field)
                                 $q->orWhere($field, 'like', "%{$searchQuery}%");
                         })->where('userType', 'Auto Care')->orWhere('userType', 'Certified Professional')->get();

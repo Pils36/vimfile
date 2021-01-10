@@ -70,7 +70,10 @@ trait LatLon{
 
         if($distance <= 10000){
             // Get Mechanics
-            $data = User::distinct('email')->select(DB::raw('id, busID as station_id, name, station_name as companyName, email, phone_number as phoneNumber, address, city, state, specialization, image as imageUrl, zipcode as zipCode, lon as longitude, lat as latitude'))->where('userType', '!=', 'Individual')->where('state', $state)->where('lon', '!=', NULL)->where('email', '!=', NULL)->orWhere('state', $state_short)->where('ref_code', '!=', NULL)->where('lat', '!=', NULL)->get();
+            $data = User::distinct('email')->select(DB::raw('users.id, users.busID as station_id, users.name, station_name as stationName, users.email, users.phone_number as phoneNumber, users.address, users.city, users.state, users.specialization, users.image as imageUrl, users.zipcode as zipCode, users.lon as longitude, users.lat as latitude, business.name_of_company as companyName'))->join('business', 'users.busID', '=', 'business.busID')->where('users.userType', '!=', 'Individual')->where('users.state', $state)->where('users.lon', '!=', NULL)->where('users.email', '!=', NULL)->orWhere('users.state', $state_short)->where('users.ref_code', '!=', NULL)->where('users.lat', '!=', NULL)->get();
+
+
+            
 
 
 
