@@ -1735,6 +1735,18 @@
                 
                 
                 </div>
+
+
+                <div class="row mt-1">
+                <br>
+                <div class="col-md-12">
+                  <p>Country</p>
+                  {{-- <input type="text" name="telephone" class="form-control" placeholder="Country" required> --}}
+                  <select name="country" id="mech_country" class="form-control" required></select>
+              </div>
+                
+                
+                </div>
                 
                 <br>
 

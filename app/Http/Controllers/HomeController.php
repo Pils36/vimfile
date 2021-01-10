@@ -5997,7 +5997,7 @@ class HomeController extends Controller
             }
             else{
                 // Update Information
-                User::where('station_name', $req->company)->update(['city' => $checkuser[0]->city, 'state' => $checkuser[0]->state, 'country' => $checkuser[0]->country, 'zipcode' => $checkuser[0]->zipcode]);
+                User::where('station_name', $req->company)->update(['city' => $checkuser[0]->city, 'state' => $checkuser[0]->state, 'country' => $checkuser[0]->country, 'zipcode' => $checkuser[0]->zipcode, 'verified_mechanics' => 0]);
 
                 $resData = ['title' => 'Great!', 'res' => 'We noticed that some of your informations are not complete. You shall be redirected shortly', 'message' => 'success', 'link' => $checkuser[0]->station_name, 'action' => 'claim'];
             }
@@ -6019,7 +6019,7 @@ class HomeController extends Controller
 
 
                 // Insert Record
-                $ins = User::insert(['busID' => "BW_".mt_rand(00001, 99999), 'userType' => "Auto Care", 'phone_number' => $checkStation[0]->telephone, 'email' => $checkStation[0]->email, 'address' => $checkStation[0]->address, 'city' => $checkStation[0]->city, 'state' => $checkStation[0]->state, 'country' => $checkStation[0]->country, 'zipcode' => $checkStation[0]->zipcode, 'station_name' => $checkStation[0]->name_of_company, 'platform' => "Busy Wrench", 'specialization' => $checkStation[0]->service_offered]);
+                $ins = User::insert(['busID' => "BW_".mt_rand(00001, 99999), 'userType' => "Auto Care", 'phone_number' => $checkStation[0]->telephone, 'email' => $checkStation[0]->email, 'address' => $checkStation[0]->address, 'city' => $checkStation[0]->city, 'state' => $checkStation[0]->state, 'country' => $checkStation[0]->country, 'zipcode' => $checkStation[0]->zipcode, 'station_name' => $checkStation[0]->name_of_company, 'platform' => "Busy Wrench", 'specialization' => $checkStation[0]->service_offered, 'verified_mechanics' => 0]);
 
                 if($ins == true){
 
@@ -6035,7 +6035,7 @@ class HomeController extends Controller
                 $checkStation = SuggestedMechanics::where('station_name', $req->company)->get();
 
                 // Insert Record
-                $ins = User::insert(['busID' => "BW_".mt_rand(00001, 99999), 'userType' => "Auto Care", 'phone_number' => $checkStation[0]->telephone, 'address' => $checkStation[0]->address, 'station_name' => $checkStation[0]->station_name, 'city' => $checkStation[0]->city, 'state' => $checkStation[0]->state, 'country' => $checkStation[0]->country, 'platform' => "Busy Wrench"]);
+                $ins = User::insert(['busID' => "BW_".mt_rand(00001, 99999), 'userType' => "Auto Care", 'phone_number' => $checkStation[0]->telephone, 'address' => $checkStation[0]->address, 'station_name' => $checkStation[0]->station_name, 'city' => $checkStation[0]->city, 'state' => $checkStation[0]->state, 'country' => $checkStation[0]->country, 'platform' => "Busy Wrench", 'verified_mechanics' => 0]);
 
                 if($ins == true){
 
@@ -6080,7 +6080,7 @@ class HomeController extends Controller
             }
             else{
 
-                $update = User::where('email', $req->email)->update(['ref_code' => $ref_code, 'name' => $req->fullname, 'email' => $req->email, 'phone_number' => $req->phone_number, 'address' => $req->station_address, 'city' => $req->city, 'state' => $req->state, 'country' => $req->country, 'zipcode' => $req->zipcode, 'station_name' => $req->station_name, 'size_of_employee' => $req->size_of_employee, 'year_of_practice' => $req->year_of_practice, 'mobile' => $req->mobile, 'office' => $req->office, 'year_started_since' => $req->year_started_since, 'mechanical_skill' => $req->mechanical_skill, 'electrical_skill' => $req->electrical_skill, 'transmission_skill' => $req->transmission_skill, 'body_work_skill' => $req->body_work_skill, 'other_skills' => $req->other_skills, 'vimfile_discount' => $req->vimfile_discount, 'repair_guaranteed' => $req->repair_guaranteed, 'free_estimated' => $req->free_estimated, 'walk_in_specified' => $req->walk_in_specified, 'other_value_added' => $req->other_value_added, 'average_waiting' => $req->average_waiting, 'hours_of_operation' => $req->hours_of_operation, 'wifi' => $req->wifi, 'restroom' => $req->restroom, 'lounge' => $req->lounge, 'parking_space' => $req->parking_space, 'year_established' => $req->year_established, 'background' => $req->background, 'other_skills_specify' => $req->other_skills_specify, 'discountPercent' => $req->discountPercent]);
+                $update = User::where('email', $req->email)->update(['ref_code' => $ref_code, 'name' => $req->fullname, 'email' => $req->email, 'phone_number' => $req->phone_number, 'address' => $req->station_address, 'city' => $req->city, 'state' => $req->state, 'country' => $req->country, 'zipcode' => $req->zipcode, 'station_name' => $req->station_name, 'size_of_employee' => $req->size_of_employee, 'year_of_practice' => $req->year_of_practice, 'mobile' => $req->mobile, 'office' => $req->office, 'year_started_since' => $req->year_started_since, 'mechanical_skill' => $req->mechanical_skill, 'electrical_skill' => $req->electrical_skill, 'transmission_skill' => $req->transmission_skill, 'body_work_skill' => $req->body_work_skill, 'other_skills' => $req->other_skills, 'vimfile_discount' => $req->vimfile_discount, 'repair_guaranteed' => $req->repair_guaranteed, 'free_estimated' => $req->free_estimated, 'walk_in_specified' => $req->walk_in_specified, 'other_value_added' => $req->other_value_added, 'average_waiting' => $req->average_waiting, 'hours_of_operation' => $req->hours_of_operation, 'wifi' => $req->wifi, 'restroom' => $req->restroom, 'lounge' => $req->lounge, 'parking_space' => $req->parking_space, 'year_established' => $req->year_established, 'background' => $req->background, 'other_skills_specify' => $req->other_skills_specify, 'discountPercent' => $req->discountPercent, 'verified_mechanics' => 1, 'unverified_mechanics' => 0]);
 
 
 
@@ -6130,6 +6130,8 @@ class HomeController extends Controller
 
                         Business::where('busID', $getID[0]->busID)->update(['claims' => 1]);
 
+                        User::where('email', $req->email)->update(['station_name' => $req->station_name]);
+
 
                         $this->email = $req->email;
                         // $this->email = "bambo@vimfile.com";
@@ -6146,7 +6148,7 @@ class HomeController extends Controller
                 }
                 else{
 
-                    $update = User::where('station_name', $req->station_name)->update(['ref_code' => $ref_code, 'name' => $req->fullname, 'email' => $req->email, 'phone_number' => $req->phone_number, 'address' => $req->station_address, 'city' => $req->city, 'state' => $req->state, 'country' => $req->country, 'zipcode' => $req->zipcode, 'station_name' => $req->station_name, 'size_of_employee' => $req->size_of_employee, 'year_of_practice' => $req->year_of_practice, 'mobile' => $req->mobile, 'office' => $req->office, 'year_started_since' => $req->year_started_since, 'mechanical_skill' => $req->mechanical_skill, 'electrical_skill' => $req->electrical_skill, 'transmission_skill' => $req->transmission_skill, 'body_work_skill' => $req->body_work_skill, 'other_skills' => $req->other_skills, 'vimfile_discount' => $req->vimfile_discount, 'repair_guaranteed' => $req->repair_guaranteed, 'free_estimated' => $req->free_estimated, 'walk_in_specified' => $req->walk_in_specified, 'other_value_added' => $req->other_value_added, 'average_waiting' => $req->average_waiting, 'hours_of_operation' => $req->hours_of_operation, 'wifi' => $req->wifi, 'restroom' => $req->restroom, 'lounge' => $req->lounge, 'parking_space' => $req->parking_space, 'year_established' => $req->year_established, 'background' => $req->background, 'other_skills_specify' => $req->other_skills_specify, 'discountPercent' => $req->discountPercent]);
+                    $update = User::where('station_name', $req->station_name)->update(['ref_code' => $ref_code, 'name' => $req->fullname, 'email' => $req->email, 'phone_number' => $req->phone_number, 'address' => $req->station_address, 'city' => $req->city, 'state' => $req->state, 'country' => $req->country, 'zipcode' => $req->zipcode, 'station_name' => $req->station_name, 'size_of_employee' => $req->size_of_employee, 'year_of_practice' => $req->year_of_practice, 'mobile' => $req->mobile, 'office' => $req->office, 'year_started_since' => $req->year_started_since, 'mechanical_skill' => $req->mechanical_skill, 'electrical_skill' => $req->electrical_skill, 'transmission_skill' => $req->transmission_skill, 'body_work_skill' => $req->body_work_skill, 'other_skills' => $req->other_skills, 'vimfile_discount' => $req->vimfile_discount, 'repair_guaranteed' => $req->repair_guaranteed, 'free_estimated' => $req->free_estimated, 'walk_in_specified' => $req->walk_in_specified, 'other_value_added' => $req->other_value_added, 'average_waiting' => $req->average_waiting, 'hours_of_operation' => $req->hours_of_operation, 'wifi' => $req->wifi, 'restroom' => $req->restroom, 'lounge' => $req->lounge, 'parking_space' => $req->parking_space, 'year_established' => $req->year_established, 'background' => $req->background, 'other_skills_specify' => $req->other_skills_specify, 'discountPercent' => $req->discountPercent, 'verified_mechanics' => 1, 'unverified_mechanics' => 0]);
 
                     if($update){
 
@@ -6175,6 +6177,8 @@ class HomeController extends Controller
 
 
                         Business::where('busID', $getID[0]->busID)->update(['claims' => 1]);
+
+                        User::where('station_name', $req->station_name)->update(['station_name' => $req->station_name]);
 
 
                         $this->email = $req->email;

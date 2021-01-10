@@ -44,6 +44,10 @@
 
     @endif
 
+    <script language="javascript">
+      populateCountries("mech_country", "mech_state");
+  </script>
+
 
   <script language="javascript">
     populateCountries("agent_country", "agent_state");
@@ -59,6 +63,8 @@
 <script language="javascript">
     populateCountries("prof_country", "prof_state");
 </script>
+
+
 
 
 

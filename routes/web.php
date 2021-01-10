@@ -154,6 +154,8 @@ Route::get('bankbalance/{id}', ['uses' => 'HomeController@bankbalance', 'as' => 
 
 Route::get('Admin', ['uses' => 'AdminController@index', 'as' => 'Admin']);
 
+Route::get('Admin/createdmechanics', ['uses' => 'AdminController@createdMechanics', 'as' => 'createdmechanics']);
+
 Route::get('Pricings', ['uses' => 'AdminController@pricing', 'as' => 'Pricings']);
 Route::get('AdminLogin', ['uses' => 'AdminController@login', 'as' => 'AdminLogin']);
 

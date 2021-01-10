@@ -153,6 +153,7 @@ class AgentController extends Controller
                 $user->name = $request->firstname.' '.$request->lastname;
                 $user->email = $request->email;
                 $user->phone_number = $request->telephone;
+                $user->country = $request->country;
                 $user->password = Hash::make($username);
                 $user->admin = 1;
                 $user->status = 1;
@@ -168,6 +169,7 @@ class AgentController extends Controller
                 $business->name = $request->firstname.' '.$request->lastname;
                 $business->email = $request->email;
                 $business->telephone = $request->telephone;
+                $business->country = $request->country;
                 $business->accountType = "Auto Care";
                 $business->plan = "Super";
                 $business->specialty = "Automotive Service";
@@ -188,6 +190,7 @@ class AgentController extends Controller
                 $admin->username = $username;
                 $admin->email = $request->email;
                 $admin->telephone = $request->telephone;
+                $admin->country = $request->country;
                 $admin->password = Hash::make($username);
                 $admin->status = 1;
                 $admin->accountType = "Auto Care";

@@ -55,7 +55,8 @@
             @if(session('role') == "Super")
               <li><a href="{{ route('Activitylog') }}"><i class="fa fa-circle-o"></i> Activity Log</a></li>
               <li onclick="createModal('agent')"><a href="#"><i class="fa fa-circle-o"></i> Create Support Agent</a></li>
-              <li onclick="createModal('createusers')"><a href="#"><i class="fa fa-circle-o"></i> Create Mechanics by Admin</a></li>
+              <li onclick="createModal('createusers')"><a href="#"><i class="fa fa-circle-o"></i> Create Mechanics by Adm..</a></li>
+              <li><a href="{{ route('createdmechanics') }}"><i class="fa fa-circle-o"></i> Created Mechanics List</a></li>
             @endif
 
             @if(session('role') == 'Owner')

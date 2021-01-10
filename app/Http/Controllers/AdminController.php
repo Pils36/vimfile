@@ -192,6 +192,7 @@ class AdminController extends Controller
  		$autoStores = $this->autoStores();
          $autoStaffs = $this->autoStaffs();
          $supportagent = $this->supportagent(session('busID'));
+         $mechCreated = $this->mechCreates();
 
  		// GEt Maintenance Record count
  		$maintRec = Vehicleinfo::where('busID', session('busID'))->orderBy('created_at', 'DESC')->get();
@@ -407,14 +408,268 @@ class AdminController extends Controller
 
 		$agreementsign = Admin::where('signed_agreement', 1)->orderBy('updated_at', 'DESC')->get();
 
- 		return view('admin.index')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'crawl' => $crawl, 'crawldealers' => $crawldealers, 'nomails' => $nomails, 'claimsCount' => $claimsCount, 'allmechanic' => $allmechanic, 'reviews' => $reviews, 'newmail' => $newmail, 'askexpert' => $askexpert, 'supportagent' => $supportagent, 'free_trial' => $this->free_trial, 'freeusers' => $freeusers, 'paidusers' => $paidusers, 'freeuserscount' => $this->getFreetrialcount(), 'paiduserscount' => $this->getPaidPlancount(), 'freeplanusers' => $freeplanusers, 'freeplanuserscount' => $this->getfreePlancount(), 'workflowcount' => $workflowcount, 'agreementsign' => $agreementsign]);
+ 		return view('admin.index')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'crawl' => $crawl, 'crawldealers' => $crawldealers, 'nomails' => $nomails, 'claimsCount' => $claimsCount, 'allmechanic' => $allmechanic, 'reviews' => $reviews, 'newmail' => $newmail, 'askexpert' => $askexpert, 'supportagent' => $supportagent, 'free_trial' => $this->free_trial, 'freeusers' => $freeusers, 'paidusers' => $paidusers, 'freeuserscount' => $this->getFreetrialcount(), 'paiduserscount' => $this->getPaidPlancount(), 'freeplanusers' => $freeplanusers, 'freeplanuserscount' => $this->getfreePlancount(), 'workflowcount' => $workflowcount, 'agreementsign' => $agreementsign, 'mechCreated' => $mechCreated]);
  		}
  		else{
  			return redirect()->route('AdminLogin');
  		}
 
 
- 	}
+	 }
+
+	 
+ 	public function createdMechanics(Request $req){
+
+//  		dd($req->session()->all());
+
+ 		if(Session::has('username') == true){
+ 			$getAdmins = Admin::where('role', '!=', 'Super')->orderBy('created_at', 'DESC')->get();
+ 		$getStations = Stations::where('busID', session('busID'))->orderBy('created_at', 'DESC')->get();
+ 		$getUsers = User::orderBy('created_at', 'DESC')->get();
+ 		$getVehicleinfo = Vehicleinfo::orderBy('created_at', 'DESC')->get();
+
+ 		$countnonCom = User::where('userType', 'Individual')->count();
+ 		$countCom = User::where('userType', 'Commercial')->count();
+ 		$countCorp = User::where('userType', 'Business')->count();
+ 		$countstaffCorp = Business::where('accountType', 'Business')->count();
+ 		$countautoDeal = User::where('userType', 'Auto Dealer')->count();
+ 		$countcertProf = User::where('userType', 'Certified Professional')->count();
+ 		$countautCare = User::where('userType', 'Auto Care')->count();
+
+ 		$autoStores = $this->autoStores();
+         $autoStaffs = $this->autoStaffs();
+         $supportagent = $this->supportagent(session('busID'));
+         $mechCreated = $this->mechCreates();
+
+ 		// GEt Maintenance Record count
+ 		$maintRec = Vehicleinfo::where('busID', session('busID'))->orderBy('created_at', 'DESC')->get();
+ 		// $CarRec = Carrecord::where('busID', session('busID'))->get();
+ 		$CarRec = Vehicleinfo::select('vehicle_licence')->distinct()->where('busID', session('busID'))->orderBy('created_at', 'DESC')->get();
+
+ 		$maintReccount = Vehicleinfo::where('busID', session('busID'))->count();
+		$CarReccount = Vehicleinfo::select('vehicle_licence', 'date', 'make', 'model', 'update_by', 'created_at')->distinct()->where('busID', session('busID'))->groupby('vehicle_licence', 'date', 'make', 'model', 'update_by', 'created_at')->orderBy('created_at', 'DESC')->get(['vehicle_licence']);
+		$regCars = Carrecord::orderBy('created_at', 'DESC')->get();
+
+			if(count($regCars) > 0){
+				foreach ($regCars as $key => $value) {
+					// Check Car rec not in maintenance
+					$carwithoutcarrec = Vehicleinfo::distinct('vehicle_licence')->where('vehicle_licence', '!=', $value->vehicle_reg_no)->get();
+
+					$carwithcarrec = Vehicleinfo::distinct('vehicle_licence')->where('vehicle_licence', $value->vehicle_reg_no)->get();
+				}
+			}
+
+		$discount = MinimumDiscount::where('discount', 'discount')->get();
+		$service_charge = MinimumDiscount::where('discount', 'service')->get();
+
+		$discountcharge = clientMinimum::where('discount', 'discount')->where('busID', session('busID'))->get();
+		$service_charges = clientMinimum::where('discount', 'service')->where('busID', session('busID'))->get();
+
+		// dd($discountcharge);
+
+		// dd(count($CarReccount));
+
+		// Get Clients Subscription Plans
+		$this->getPayment = Payplan::where('email', session('email'))->orderBy('created_at', 'DESC')->get();
+
+
+		$from = date('Y-m-01');
+		$to = date('Y-m-d');
+
+		$nextDay = date('Y-m-d', strtotime($to. ' + 1 days'));
+
+		$carNos = Vehicleinfo::select('vehicle_licence')->distinct()->where('busID', session('busID'))->whereBetween('created_at', [$from, $nextDay])->count();
+
+
+ 		// Get No of vehicles count
+ 		$getCarrecord = Carrecord::orderBy('created_at', 'DESC')->get();
+ 		$getBusinessStaffs = BusinessStaffs::where('busID', session('busID'))->orderBy('created_at', 'DESC')->get();
+ 		$getAppointment = BookAppointment::where('busID', session('busID'))->orderBy('created_at', 'DESC')->get();
+ 		$getBussiness = Business::where('busID', session('busID'))->orderBy('created_at', 'DESC')->get();
+ 		$usersPersonal = User::orderBy('created_at', 'DESC')->get();
+
+ 		// Ticketing
+			$tickets = Ticketing::orderBy('created_at', 'DESC')->get();
+			if(count($tickets) > 0){
+				$this->ticketing = $tickets;
+			}
+			else{
+				$this->ticketing = "";
+			}
+
+			$getAD = Admin::where('accountType', 'Auto Dealer')->orderBy('created_at', 'DESC')->get();
+
+			if(count($getAD) > 0){
+				$this->getAD = $getAD;
+			}
+			else{
+				$this->getAD = "";
+			}
+
+
+
+			// Registered & Unregistered clients
+			$_RegClient = GoogleImport::where('status', 'registered')->get();
+			if(count($_RegClient) > 0){
+				$this->RegClient = $_RegClient;
+			}
+			else{
+				$this->RegClient = "";
+			}
+
+
+			$_UnregClient = GoogleImport::where('status', 'not registered')->count();
+
+			if($_UnregClient > 0){
+				$this->unregisteredClients = $_UnregClient;
+			}
+			else{
+				$this->unregisteredClients = 0;
+			}
+
+			$estimatePayment = DB::table('estimatepay')
+                        ->join('opportunitypost', 'opportunitypost.post_id', '=', 'estimatepay.post_id')
+                        ->join('prepareestimate', 'prepareestimate.estimate_id', '=', 'estimatepay.estimate_id')
+                        ->where('opportunitypost.state', '=', 1)
+                        ->orderBy('estimatepay.created_at', 'DESC')->get();
+
+                        // dd($estimatePayment);
+
+            $workinprogress = DB::table('estimate')
+                        ->join('opportunitypost', 'opportunitypost.post_id', '=', 'estimate.opportunity_id')
+                        ->join('prepareestimate', 'prepareestimate.estimate_id', '=', 'estimate.estimate_id')
+                        ->where('opportunitypost.state', '=', 2)
+                        ->orderBy('estimate.created_at', 'DESC')->take(5)->get();
+
+                        // dd($workinprogress);
+
+ 		if(session('role') == "Super"){
+ 			$getStations = Stations::orderBy('created_at', 'DESC')->get();
+ 			$getBusinessStaffs = BusinessStaffs::orderBy('created_at', 'DESC')->get();
+	 		$getAppointment = BookAppointment::orderBy('created_at', 'DESC')->get();
+	 		$getBussiness = Business::all();
+			 $usersPersonal = User::orderBy('created_at', 'DESC')->get();
+			 $this->otherUsers = User::where('userType', '!=', 'Business')->orderBy('created_at', 'DESC')->get();
+			 $this->getPayment = DB::table('payment_plan')
+			->join('vim_admin', 'payment_plan.email', '=', 'vim_admin.email')
+			->orderBy('payment_plan.created_at', 'DESC')->get();
+			$CarReccount = Vehicleinfo::select('vehicle_licence', 'date', 'make', 'model', 'update_by', 'created_at')->distinct()->groupby('vehicle_licence', 'date', 'make', 'model', 'update_by', 'created_at')->orderBy('created_at', 'DESC')->get();
+			$regCars = Carrecord::orderBy('created_at', 'DESC')->get();
+			$maintReccount = Vehicleinfo::count();
+			$maintRec = Vehicleinfo::orderBy('created_at', 'DESC')->get();
+
+
+			// Ticketing
+			$tickets = Ticketing::orderBy('created_at', 'DESC')->get();
+			if(count($tickets) > 0){
+				$this->ticketing = $tickets;
+			}
+			else{
+				$this->ticketing = "";
+			}
+
+			$getAD = Admin::where('accountType', 'Auto Dealer')->orderBy('created_at', 'DESC')->get();
+
+			if(count($getAD) > 0){
+				$this->getAD = $getAD;
+			}
+			else{
+				$this->getAD = "";
+			}
+
+
+
+			// Registered & Unregistered clients
+			$_RegClient = GoogleImport::where('status', 'registered')->get();
+			if(count($_RegClient) > 0){
+				$this->RegClient = $_RegClient;
+			}
+			else{
+				$this->RegClient = "";
+			}
+
+
+			$_UnregClient = GoogleImport::where('status', 'not registered')->count();
+
+			if($_UnregClient > 0){
+				$this->unregisteredClients = $_UnregClient;
+			}
+			else{
+				$this->unregisteredClients = 0;
+			}
+
+			// Get User with referals
+
+			$getUserref = RedeemPoints::orderBy('created_at', 'DESC')->get();
+
+			if(count($getUserref) > 0){
+
+				$this->refree = $getUserref;
+			}
+			else{
+				$this->refree = "";
+			}
+
+		 }
+
+		//  dd($this->getPayment);
+
+		 // if(count($regCars) > 0){
+			// 	foreach ($regCars as $key => $value) {
+			// 		// Check Car rec not in maintenance
+			// 		$carwithoutcarrec = Vehicleinfo::distinct('vehicle_licence')->where('vehicle_licence', '!=', $value->vehicle_reg_no)->get();
+
+			// 		$carwithcarrec = Vehicleinfo::distinct('vehicle_licence')->where('vehicle_licence', $value->vehicle_reg_no)->get();
+			// 	}
+			// }
+
+		 $crawl = $this->crawledmechanics();
+		 $crawldealers = $this->crawledautodealers();
+		 $claimsCount = $this->claimcount();
+		 $askexpert = $this->expertInformation();
+
+		//  Get Free Users
+		$freeusers = $this->getFreetrial();
+		$paidusers = $this->getPaidPlan();
+		$freeplanusers = $this->getfreePlan();
+
+         $nomails = $this->noemails();
+
+         $busMechs = Business::orderBy('created_at', 'DESC')->get();
+         $sugMechs = SuggestedMechanics::orderBy('created_at', 'DESC')->get();
+
+         $allmechanic = array_merge($busMechs->toArray(), $sugMechs->toArray());
+
+         $reviews = Review::where('busID', session('busID'))->get();
+
+         $this->checkplanExp(session('email'));
+
+		 $newmail = $this->newMails(session('email'));
+		 
+
+		 $getUser = Admin::where('busID', session('busID'))->get();
+
+		$this->free_trial = $getUser[0]->free_trial_expire;
+
+		$workflowcount = $this->workflowcount;
+
+		$agreementsign = Admin::where('signed_agreement', 1)->orderBy('updated_at', 'DESC')->get();
+
+ 		return view('admin.createdmechanics')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'crawl' => $crawl, 'crawldealers' => $crawldealers, 'nomails' => $nomails, 'claimsCount' => $claimsCount, 'allmechanic' => $allmechanic, 'reviews' => $reviews, 'newmail' => $newmail, 'askexpert' => $askexpert, 'supportagent' => $supportagent, 'free_trial' => $this->free_trial, 'freeusers' => $freeusers, 'paidusers' => $paidusers, 'freeuserscount' => $this->getFreetrialcount(), 'paiduserscount' => $this->getPaidPlancount(), 'freeplanusers' => $freeplanusers, 'freeplanuserscount' => $this->getfreePlancount(), 'workflowcount' => $workflowcount, 'agreementsign' => $agreementsign, 'mechCreated' => $mechCreated]);
+ 		}
+ 		else{
+ 			return redirect()->route('AdminLogin');
+ 		}
+
+
+	 }
+	 
+
+	 public function mechCreates(){
+		 $data = Admin::where('created_by', '!=', NULL)->orderBy('created_at', 'DESC')->get();
+
+		 return $data;
+	 }
 
 
  	public function adminnoncommercial(Request $req){
