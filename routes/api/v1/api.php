@@ -64,6 +64,7 @@ Route::group(['prefix' => 'vehicle'], function(){
 	Route::post('maintenancerecord', 'api\v1\VehicleController@maintenancerecord');
 	Route::post('maintenancerecordlist', 'api\v1\VehicleController@maintenancerecordlist');
 	Route::post('carrecord', 'api\v1\VehicleController@mycarrecord');
+	Route::get('mycarrecord/{email}', 'api\v1\VehicleController@usercarrecord');
 	Route::post('request_by', 'api\v1\VehicleController@myrequest_by');
 	Route::get('performance', 'api\v1\VehicleController@myperformance');
 	Route::post('workorderlist', 'api\v1\VehicleController@workorderlist');

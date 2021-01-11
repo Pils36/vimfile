@@ -631,6 +631,9 @@ class VehicleController extends Controller
         return $this->returnJSON($resData, $status);
     }
 
+
+    
+
     public function myrequest_by(Request $request){
 
         if($request->request_by == "all"){
@@ -660,6 +663,9 @@ class VehicleController extends Controller
         return $this->returnJSON($resData, $status);
     }
 
+
+
+    // My Performance
 
     public function myperformance(Request $request){
 
@@ -770,6 +776,115 @@ class VehicleController extends Controller
 
             return $this->returnJSON($resData, $status);
     }
+
+    public function usercarrecord(Request $request){
+
+        $checkcar = Carrecord::select(DB::raw('carrecord.email, carrecord.telephone, carrecord.vehicle_nickname, carrecord.date_added as dateAdded, carrecord.make, carrecord.model, carrecord.vehicle_reg_no as vehicleLicence, carrecord.city, carrecord.state, carrecord.country_of_reg as countryOfRegistration, carrecord.zipcode, carrecord.purchase_type as purchaseType, carrecord.year_owned_since as yearOwnedSince, carrecord.current_mileage as currentMileage, carrecord.chassis_no as chassisNumber, carrecord.location, carrecord.file as imageUrl, carrecord.created_at, carrecord.updated_at, vehicleinfo.estimate_id as estimateId, vehicleinfo.opportunity_id as opprotunityId, vehicleinfo.busID as busId, vehicleinfo.date, vehicleinfo.service_type as serviceType, vehicleinfo.service_option as serviceOption, vehicleinfo.total_cost as totalCost, vehicleinfo.service_note as serviceNote, vehicleinfo.mileage, vehicleinfo.created_at as maintenanceDate'))->join('vehicleinfo', 'carrecord.email', '=', 'vehicleinfo.email')->where('carrecord.email', $request->email)->get();
+
+
+        if(count($checkcar) > 0){
+
+            $user = User::select(DB::raw('id, name, email, avatar as imageUrl'))->where('email', $request->email)->get();
+                $previous = Vehicleinfo::where('email', $request->email)->max('mileage');
+                // get next user mileage
+                $next = Vehicleinfo::where('email', $request->email)->min('mileage');
+
+                $totmiles = $previous - $next;
+
+                $from = date('Y-m-01', strtotime($checkcar[0]->created_at));
+                $to = date('Y-m-d');
+
+                $milespermonth = Vehicleinfo::where('email', $request->email)->whereBetween('created_at', [$from, $to])->get('mileage');
+
+                $maintenancepermonth = Vehicleinfo::where('email', $request->email)->whereBetween('created_at', [$from, $to])->get('total_cost');
+
+                // Tot Maint cost
+                $totalmaintenancecost = Vehicleinfo::where('email', $request->email)->sum('total_cost');
+
+
+                $first = date('Y-m-d', strtotime($checkcar[0]->created_at));
+
+                $end = date('Y-m-d', strtotime($checkcar[0]->maintenanceDate));
+                $d1 = new DateTime($first);
+                $d2 = new DateTime($end);
+                $mDiff = $d1->diff($d2)->m;
+
+
+                if($mDiff < 1){
+                    $avg = 0;
+
+                $results =$avg;
+
+                }
+                elseif($mDiff > 1){
+
+                    $avg = $totmiles / $mDiff;
+
+                    $results =round($avg, 0);
+                }
+
+                $today = date('Y-m-d H:i:s');
+                $first = date('Y-m-d', strtotime($user[0]->created_at));
+
+                $end = date('Y-m-d', strtotime($today));
+                $d1 = new DateTime($first);
+                $d2 = new DateTime($end);
+                $mDiff = $d1->diff($d2)->m;
+
+                if($mDiff < 1){
+                $avg = 0;
+
+                $res =$avg;
+
+                }
+                elseif($mDiff > 1){
+
+                    $avg = $totalmaintenancecost / $mDiff;
+
+                    $res =round($avg, 0);
+
+                }
+
+
+                $mileagedifference = $checkcar[0]->mileage - $checkcar[0]->currentMileage;
+
+                $today = date('Y-m-d H:i:s');
+                $datetime1 = strtotime($checkcar[0]->maintenanceDate);
+                $datetime2 = strtotime($today);
+
+                $secs = $datetime2 - $datetime1;// == <seconds between the two times>
+                $daysago = $secs / 86400;
+
+                // vehicle Images Fleet
+
+                $imageData = [];
+
+                $carrecord = Carrecord::where('email', $request->email)->get();
+
+                foreach($carrecord as $key => $value){
+                    $imageUrl = $value->file;
+
+                    $imageData []= $imageUrl;
+                }
+
+                $resData = ['data' => array('name' => $user[0]->name, 'imageUrl' => $imageData, 'maintenancePerMonth' => $maintenancepermonth[0]->total_cost, 'milesPerMonth' => $milespermonth[0]->mileage, 'totalMiles' => $totmiles, 'totalMaintenanceCost' => number_format($totalmaintenancecost, 2), 'licenseNumber' => $checkcar[0]->vehicleLicence, 'chassisNumber' => $checkcar[0]->chassisNumber, 'currentMileage' => $checkcar[0]->currentMileage), 'message' => "success", 'status' => 200];
+
+                    $status = 200;
+
+
+            // $resData = ['data' => $checkcar[0], 'message' => "success", 'status' => 200];
+            // $status = 200;
+        }
+        else{
+            $resData = ['data' => [], 'message' => "No record", 'status' => 200];
+            $status = 200;
+        }
+
+
+    return $this->returnJSON($resData, $status);
+
+    
+}
 
 
     public function workorderlist(Request $req){
