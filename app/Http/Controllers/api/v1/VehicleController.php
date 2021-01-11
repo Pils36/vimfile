@@ -867,7 +867,7 @@ class VehicleController extends Controller
                     $imageData []= $imageUrl;
                 }
 
-                $resData = ['data' => array('name' => $user[0]->name, 'imageUrl' => $imageData, 'maintenancePerMonth' => $maintenancepermonth[0]->total_cost, 'milesPerMonth' => $milespermonth[0]->mileage, 'totalMiles' => $totmiles, 'totalMaintenanceCost' => number_format($totalmaintenancecost, 2), 'licenseNumber' => $checkcar[0]->vehicleLicence, 'chassisNumber' => $checkcar[0]->chassisNumber, 'currentMileage' => $checkcar[0]->currentMileage), 'message' => "success", 'status' => 200];
+                $resData = ['data' => array('name' => $checkcar[0]->vehicle_nickname, 'imageUrl' => $imageData, 'maintenancePerMonth' => $maintenancepermonth[0]->total_cost, 'milesPerMonth' => $milespermonth[0]->mileage, 'totalMiles' => $totmiles, 'totalMaintenanceCost' => number_format($totalmaintenancecost, 2), 'licenseNumber' => $checkcar[0]->vehicleLicence, 'chassisNumber' => $checkcar[0]->chassisNumber, 'currentMileage' => $checkcar[0]->currentMileage), 'message' => "success", 'status' => 200];
 
                     $status = 200;
 
