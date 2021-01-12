@@ -569,7 +569,7 @@ class UserController extends Controller
     	if(count($technician) > 0){
             // Add Review
 
-            $getmaint = Vehicleinfo::where('id', $req->service_maintenance)->get();
+            $getmaint = Vehicleinfo::where('id', $req->id)->get();
 
             if(count($getmaint) > 0){
                 $service_maint = $getmaint[0]->service_type." on ".$getmaint[0]->make." Licence No: ".$getmaint[0]->vehicle_licence." Date: ".$getmaint[0]->date;

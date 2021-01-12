@@ -30,6 +30,7 @@
                 <thead>
                 <tr style="font-size: 13px;">
                   <th>#</th>
+                  <th>Name</th>
                   <th>Company Name</th>
                   <th>Email</th>
                   <th>Phone</th>
@@ -46,7 +47,8 @@
                   @foreach($mechCreated as $clients)
                     <tr>
                       <td>{{ $i++ }}</td>
-                      <td>{{ $clients->name_of_company }}</td>
+                      <td>{{ $clients->name }}</td>
+                      <td>{{ $clients->company }}</td>
                       <td>{{ $clients->email }}</td>
                       <td>{{ $clients->telephone }}</td>
                       <td>{{ $clients->country }}</td>
