@@ -4280,6 +4280,7 @@ class HomeController extends Controller
 
     public function monerispayment(Request $req){
 
+
         if(Auth::user()){
             // Check for Asked questions
             $this->countQuest = AskExpert::where('state', 1)->count();
