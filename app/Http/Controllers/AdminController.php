@@ -124,6 +124,8 @@ class AdminController extends Controller
 	public function __construct(Request $request)
     {
 
+		
+
 
     	// RUN ChEck
     	$data = Admin::all();
@@ -408,6 +410,13 @@ class AdminController extends Controller
 
 		$agreementsign = Admin::where('signed_agreement', 1)->orderBy('updated_at', 'DESC')->get();
 
+		if(session('role') == "Agent"){
+
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits the Dashboard');
+		}
+
+		
+
  		return view('admin.index')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'crawl' => $crawl, 'crawldealers' => $crawldealers, 'nomails' => $nomails, 'claimsCount' => $claimsCount, 'allmechanic' => $allmechanic, 'reviews' => $reviews, 'newmail' => $newmail, 'askexpert' => $askexpert, 'supportagent' => $supportagent, 'free_trial' => $this->free_trial, 'freeusers' => $freeusers, 'paidusers' => $paidusers, 'freeuserscount' => $this->getFreetrialcount(), 'paiduserscount' => $this->getPaidPlancount(), 'freeplanusers' => $freeplanusers, 'freeplanuserscount' => $this->getfreePlancount(), 'workflowcount' => $workflowcount, 'agreementsign' => $agreementsign, 'mechCreated' => $mechCreated]);
  		}
  		else{
@@ -655,6 +664,11 @@ class AdminController extends Controller
 
 		$agreementsign = Admin::where('signed_agreement', 1)->orderBy('updated_at', 'DESC')->get();
 
+		if(session('role') == "Agent"){
+
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits signed up mechanics page');
+		}
+
  		return view('admin.createdmechanics')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'crawl' => $crawl, 'crawldealers' => $crawldealers, 'nomails' => $nomails, 'claimsCount' => $claimsCount, 'allmechanic' => $allmechanic, 'reviews' => $reviews, 'newmail' => $newmail, 'askexpert' => $askexpert, 'supportagent' => $supportagent, 'free_trial' => $this->free_trial, 'freeusers' => $freeusers, 'paidusers' => $paidusers, 'freeuserscount' => $this->getFreetrialcount(), 'paiduserscount' => $this->getPaidPlancount(), 'freeplanusers' => $freeplanusers, 'freeplanuserscount' => $this->getfreePlancount(), 'workflowcount' => $workflowcount, 'agreementsign' => $agreementsign, 'mechCreated' => $mechCreated]);
  		}
  		else{
@@ -868,6 +882,10 @@ class AdminController extends Controller
 		//  dd($this->getPayment);
 
 		$workflowcount = $this->workflowcount;
+
+		if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits list of non-commercial vehicle owners page');
+		}
 
 
  		return view('admin.pages.noncommercial')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'noncommercial' => $noncommercial, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'workflowcount' => $workflowcount]);
@@ -1083,6 +1101,10 @@ class AdminController extends Controller
          $allmechanic = array_merge($busMechs->toArray(), $sugMechs->toArray());
 
 		 $workflowcount = $this->workflowcount;
+
+		 if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits all mechanics page');
+		}
 
 
  		return view('admin.pages.allmechanics')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'noncommercial' => $noncommercial, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'allmechanic' => $allmechanic, 'workflowcount' => $workflowcount]);
@@ -1306,6 +1328,10 @@ class AdminController extends Controller
 
 		$workflowcount = $this->workflowcount;
 
+		if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits compose mail page');
+		}
+
  		return view('admin.pages.mailbox.compose')->with(['pages'=> 'Compose Mail', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'noncommercial' => $noncommercial, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'allmechanic' => $allmechanic, 'newmail' => $newmail, 'sentmail' => $sentmail, 'draftmail' => $draftmail, 'trashmail' => $trashmail, 'workflowcount' => $workflowcount]);
  		}
  		else{
@@ -1526,6 +1552,10 @@ class AdminController extends Controller
 
 		$workflowcount = $this->workflowcount;
 
+		if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits mail inbox page');
+		}
+
  		return view('admin.pages.mailbox.mailbox')->with(['pages'=> 'Inbox', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'noncommercial' => $noncommercial, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'allmechanic' => $allmechanic, 'newmail' => $newmail, 'receivedmail' => $receivedmail, 'sentmail' => $sentmail, 'draftmail' => $draftmail, 'trashmail' => $trashmail, 'workflowcount' => $workflowcount]);
  		}
  		else{
@@ -1744,6 +1774,11 @@ class AdminController extends Controller
         $sentMail = $this->sentMails(session('busID'));
 
 		$workflowcount = $this->workflowcount;
+
+
+		if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits sent mail page');
+		}
 
  		return view('admin.pages.mailbox.sentmail')->with(['pages'=> 'Sent Mail', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'noncommercial' => $noncommercial, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'allmechanic' => $allmechanic, 'newmail' => $newmail, 'sentMail' => $sentMail, 'draftmail' => $draftmail, 'trashmail' => $trashmail, 'workflowcount' => $workflowcount]);
  		}
@@ -1965,6 +2000,10 @@ class AdminController extends Controller
 
 		$workflowcount = $this->workflowcount;
 
+		if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits drafted mail page');
+		}
+
  		return view('admin.pages.mailbox.drafts')->with(['pages'=> 'Draft Mail', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'noncommercial' => $noncommercial, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'allmechanic' => $allmechanic, 'newmail' => $newmail, 'draftMail' => $draftMail, 'sentmail' => $sentmail, 'trashmail' => $trashmail, 'workflowcount' => $workflowcount]);
  		}
  		else{
@@ -2185,6 +2224,10 @@ class AdminController extends Controller
         $trashMail = $this->trashMails(session('busID'));
 
 		$workflowcount = $this->workflowcount;
+
+		if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits trashed mail page');
+		}
 
  		return view('admin.pages.mailbox.trash')->with(['pages'=> 'Trash Mail', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'noncommercial' => $noncommercial, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'allmechanic' => $allmechanic, 'newmail' => $newmail, 'trashMail' => $trashMail, 'sentmail' => $sentmail, 'draftmail' => $draftmail, 'workflowcount' => $workflowcount]);
  		}
@@ -2408,6 +2451,11 @@ class AdminController extends Controller
 
 		$workflowcount = $this->workflowcount;
 
+
+		if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits to read mail');
+		}
+
  		return view('admin.pages.mailbox.readmail')->with(['pages'=> 'Read Mail', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'noncommercial' => $noncommercial, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'allmechanic' => $allmechanic, 'newmail' => $newmail, 'readMail' => $readMail, 'sentmail' => $sentmail, 'draftmail' => $draftmail, 'trashmail' => $trashmail, 'workflowcount' => $workflowcount]);
  		}
  		else{
@@ -2620,6 +2668,10 @@ class AdminController extends Controller
 
 		$workflowcount = $this->workflowcount;
 
+		if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits list of commercial vehicle owners page');
+		}
+
  		return view('admin.pages.commercial')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'commercial' => $commercial, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'workflowcount' => $workflowcount]);
  		}
  		else{
@@ -2829,6 +2881,10 @@ class AdminController extends Controller
 
 		$workflowcount = $this->workflowcount;
 
+		if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits list of corporate vehicle owners page');
+		}
+
 
  		return view('admin.pages.corporate')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'corporate' => $corporate, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'corporate_owner' => $corporate_owner, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'workflowcount' => $workflowcount]);
  		}
@@ -3037,6 +3093,11 @@ class AdminController extends Controller
 		//  dd($this->getPayment);
 
 		$workflowcount = $this->workflowcount;
+
+
+		if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits list of auto dealers page');
+		}
 
  		return view('admin.pages.autodeals')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'autodeals' => $autodeals, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'workflowcount' => $workflowcount]);
  		}
@@ -3248,6 +3309,10 @@ class AdminController extends Controller
 
 		$workflowcount = $this->workflowcount;
 
+		if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits list of mobile mechanics page');
+		}
+
  		return view('admin.pages.mobilemechs')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'mobileMechs' => $mobileMechs, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'workflowcount' => $workflowcount]);
  		}
  		else{
@@ -3458,6 +3523,11 @@ class AdminController extends Controller
 
 		$workflowcount = $this->workflowcount;
 
+
+		if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits list of auto care page');
+		}
+
  		return view('admin.pages.autocare')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'autocares' => $autocares, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'workflowcount' => $workflowcount]);
  		}
  		else{
@@ -3667,6 +3737,10 @@ class AdminController extends Controller
 		//  dd($this->getPayment);
 
 		$workflowcount = $this->workflowcount;
+
+		if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits list of auto care staff page');
+		}
 
 
  		return view('admin.pages.autocarestaff')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'autocares' => $autocares, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'workflowcount' => $workflowcount]);
@@ -3880,6 +3954,10 @@ class AdminController extends Controller
 		//  dd($this->getPayment);
 
 		$workflowcount = $this->workflowcount;
+
+		if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits support ticket page');
+		}
 
  		return view('admin.pages.supportticket')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'autocares' => $autocares, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'workflowcount' => $workflowcount]);
  		}
@@ -4099,6 +4177,11 @@ class AdminController extends Controller
 
 
 		   $workflowcount = $this->workflowcount;
+
+
+		   if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits profile page');
+		}
 
  		return view('admin.pages.profile')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'autocares' => $autocares, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'profileDetails' => $profileDetails, 'reviewcount' => $stationreviews, 'mystaffcount' => $mystaffcount, 'mystationcount' => $mystationcount, 'workflowcount' => $workflowcount]);
  		}
@@ -4321,6 +4404,10 @@ class AdminController extends Controller
 
 		  $workflowcount = $this->workflowcount;
 
+		  if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits profile page');
+		}
+
 		return view('admin.pages.agentprofile')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'autocares' => $autocares, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'profileDetails' => $profileDetails, 'reviewcount' => $stationreviews, 'mystaffcount' => $mystaffcount, 'mystationcount' => $mystationcount, 'workflowcount' => $workflowcount]);
 		}
 		else{
@@ -4533,6 +4620,10 @@ class AdminController extends Controller
 		 $crawlsort = $this->crawlcountrysort();
 
 		 $workflowcount = $this->workflowcount;
+
+		 if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits list of mechanics categorized by country');
+		}
 
  		return view('admin.pages.crawlcountry')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'autocares' => $autocares, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'crawlsort' => $crawlsort, 'workflowcount' => $workflowcount]);
  		}
@@ -4747,6 +4838,10 @@ class AdminController extends Controller
 
 		 $workflowcount = $this->workflowcount;
 
+		 if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits list of mechanics categorized by state/province');
+		}
+
  		return view('admin.pages.crawlstate')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'autocares' => $autocares, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'crawlsort' => $crawlsort, 'workflowcount' => $workflowcount]);
  		}
  		else{
@@ -4959,6 +5054,10 @@ class AdminController extends Controller
 		 $crawlsort = $this->crawLetter($req->get('country'));
 
 		 $workflowcount = $this->workflowcount;
+
+		 if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits page to print letter');
+		}
 
  		return view('admin.pages.crawlletter')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'autocares' => $autocares, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'crawlsort' => $crawlsort, 'workflowcount' => $workflowcount]);
  		}
@@ -5173,6 +5272,10 @@ class AdminController extends Controller
 
 		 $workflowcount = $this->workflowcount;
 
+		 if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits list of mechanics not yet registered');
+		}
+
  		return view('admin.pages.noemail')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'autocares' => $autocares, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'crawlsort' => $crawlsort, 'workflowcount' => $workflowcount]);
  		}
  		else{
@@ -5384,6 +5487,10 @@ class AdminController extends Controller
 		 $crawlsort = $this->noemails();
 
 		 $workflowcount = $this->workflowcount;
+
+		 if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits list of mechanics claiming business');
+		}
 
  		return view('admin.pages.crawlstoclaim')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'autocares' => $autocares, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'crawlsort' => $crawlsort, 'workflowcount' => $workflowcount]);
  		}
@@ -5597,6 +5704,10 @@ class AdminController extends Controller
 
 		 $workflowcount = $this->workflowcount;
 
+		 if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits list of mechanics to print letter');
+		}
+
  		return view('admin.pages.crawlprint')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'autocares' => $autocares, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'crawlsort' => $crawlsort, 'workflowcount' => $workflowcount]);
  		}
  		else{
@@ -5809,6 +5920,10 @@ class AdminController extends Controller
 		 $crawlsort = $this->noemailmechanicbycountry($country);
 
 		 $workflowcount = $this->workflowcount;
+
+		 if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits list of mechanics in '.$country);
+		}
 		 
 
  		return view('admin.pages.mechanicsIn')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'autocares' => $autocares, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'crawlsort' => $crawlsort, 'workflowcount' => $workflowcount]);
@@ -6023,6 +6138,10 @@ class AdminController extends Controller
 
 		 $workflowcount = $this->workflowcount;
 
+		 if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits list of mechanics in '.$country);
+		}
+
  		return view('admin.pages.supportmechanicsIn')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'autocares' => $autocares, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'crawlsort' => $crawlsort, 'workflowcount' => $workflowcount]);
  		}
  		else{
@@ -6172,6 +6291,10 @@ class AdminController extends Controller
 
 
 		$workflowcount = $this->workflowcount;
+
+		if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits the pricing page');
+		}
 
  		return view('admin.pages.pricing')->with(['pages'=> 'Pricing', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'email' => session('email'), 'continent' => $continents[0], 'error' => $this->error, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'workflowcount' => $workflowcount]);
 	 }
@@ -6334,6 +6457,10 @@ class AdminController extends Controller
 		 $this->activities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], 'Making A Payment');
 
 		 $workflowcount = $this->workflowcount;
+
+		 if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits the pricing page');
+		}
 
 		 return view('admin.pages.makepay')->with(['pages' => 'Payment', 'location' => $this->arr_ip, 'transaction' => $this->transID, 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'email' => session('email'), 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' =>$countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'workflowcount' => $workflowcount]);
 	 }
@@ -6533,6 +6660,10 @@ class AdminController extends Controller
 
 		$workflowcount = $this->workflowcount;
 
+		if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits the news happening now page');
+		}
+
  		return view('admin.pages.allnews')->with(['pages'=> 'All News and Happenings', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'allPosts' => $allPosts, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'workflowcount' => $workflowcount]);
  		}
  		else{
@@ -6680,6 +6811,10 @@ class AdminController extends Controller
 
 		 $workflowcount = $this->workflowcount;
 
+		 if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits the station report page');
+		}
+
  		return view('admin.stationreport')->with(['pages'=> 'Dashboard', 'getStations' => $getStations, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'getUsers' => $getUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'workflowcount' => $workflowcount]);
  	}
 
@@ -6800,6 +6935,10 @@ class AdminController extends Controller
 
 		 $workflowcount = $this->workflowcount;
 
+		 if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits the station report page');
+		}
+
 		 return view('admin.maintenanceservicetyperecord')->with(['pages'=> 'Dashboard', 'getVehicleinfo' => $getVehicleinfo, 'getStations' => $getStations, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'getUsers' => $getUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'workflowcount' => $workflowcount]);
 
  	}
@@ -6899,6 +7038,10 @@ class AdminController extends Controller
 
 		 $workflowcount = $this->workflowcount;
 
+		 if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits the station report page');
+		}
+
  		return view('admin.maintenanceserviceoptionrecord')->with(['pages'=> 'Dashboard', 'getVehicleinfo' => $getVehicleinfo, 'getStations' => $getStations, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'getUsers' => $getUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'workflowcount' => $workflowcount]);
  	}
 
@@ -6970,6 +7113,10 @@ class AdminController extends Controller
 		 		}
 
 				 $workflowcount = $this->workflowcount;
+
+				 if(session('role') == "Agent"){
+					$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits the registered users page');
+				}
 
 		 return view('admin.registeredclient')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'maintRec' => $maintRec, 'carRec' => $CarRec, 'otherUsers' => $this->otherUsers, 'reginvites' => $regInvites, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'workflowcount' => $workflowcount]);
  	}
@@ -7045,6 +7192,10 @@ class AdminController extends Controller
 
 
 				 $workflowcount = $this->workflowcount;
+
+				 if(session('role') == "Agent"){
+					$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits the not yet registered users page');
+				}
 
 		 		return view('admin.unregisteredclient')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, '$regCars' => $regCars, 'maintRec' => $maintRec, 'carRec' => $CarRec, 'otherUsers' => $this->otherUsers, 'unreginvites' => $unregInvites, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'workflowcount' => $workflowcount]);
  	}
@@ -7144,6 +7295,10 @@ class AdminController extends Controller
 
 
 		 $workflowcount = $this->workflowcount;
+
+		 if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' views users profile');
+		}
 
  		return view('admin.clientprofile')->with(['pages'=> 'Dashboard', 'getVehicleinfo' => $getVehicleinfo, 'getStations' => $getStations, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'getUsers' => $getUsers, 'getCarrecord' => $getCarrecord, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'workflowcount' => $workflowcount]);
      }
@@ -7361,6 +7516,10 @@ class AdminController extends Controller
            $profileDetails = array_merge($userDetails->toArray(), $station->toArray());
 
 		   $workflowcount = $this->workflowcount;
+
+		   if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits the claim business page');
+		}
 
 
  		return view('admin.pages.claimbusiness')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'autocares' => $autocares, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'profileDetails' => $profileDetails, 'reviewcount' => $stationreviews, 'mystaffcount' => $mystaffcount, 'mystationcount' => $mystationcount, 'suggestClaims' => $suggestClaims, 'userDetails' => $userDetails, 'mystation' => $station, 'workflowcount' => $workflowcount]);
@@ -8343,6 +8502,11 @@ class AdminController extends Controller
 
 		 $workflowcount = $this->workflowcount;
 
+
+		 if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits the promotional material page');
+		}
+
  		return view('admin.pages.editpromotionalmaterial')->with(['pages'=> 'Dashboard', 'getVehicleinfo' => $getVehicleinfo, 'getStations' => $getStations, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'getUsers' => $getUsers, 'getCarrecord' => $getCarrecord, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'OpportunityPost' => $OpportunityPost, 'paidTransactions' => $paidTransactions, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'suggestedDealers' => $suggestedDealers, 'allmaterials' => $allmaterials, 'workflowcount' => $workflowcount]);
 	 }
 	 
@@ -8678,6 +8842,11 @@ class AdminController extends Controller
 		$workflowcount = $this->workflowcount;
 
 
+		if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits the work flow material page');
+		}
+
+
  		return view('admin.pages.supportagent.workflowview')->with(['pages'=> 'Dashboard', 'getVehicleinfo' => $getVehicleinfo, 'getStations' => $getStations, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'getUsers' => $getUsers, 'getCarrecord' => $getCarrecord, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'OpportunityPost' => $OpportunityPost, 'paidTransactions' => $paidTransactions, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'suggestedDealers' => $suggestedDealers, 'data' => $data, 'workflowcount' => $workflowcount]);
      }
      
@@ -8894,6 +9063,10 @@ class AdminController extends Controller
 		 $workflowcount = $this->workflowcount;
 
 		 $agreementsign = Admin::where('signed_agreement', 1)->orderBy('updated_at', 'DESC')->get();
+
+		 if(session('role') == "Agent"){
+			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits the agreement template page');
+		}
 
  		return view('admin.pages.agreementsigned')->with(['pages'=> 'Dashboard', 'getVehicleinfo' => $getVehicleinfo, 'getStations' => $getStations, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'getUsers' => $getUsers, 'getCarrecord' => $getCarrecord, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'OpportunityPost' => $OpportunityPost, 'paidTransactions' => $paidTransactions, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'supportagent' => $supportagent, 'workflowcount' => $workflowcount, 'agreementsign' => $agreementsign]); 
 	 }
@@ -10623,7 +10796,133 @@ class AdminController extends Controller
 		 $workflowcount = $this->workflowcount;
 
  		return view('admin.pages.activitylog')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'maintRec' => $maintRec, 'carRec' => $CarRec, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'activityLog' => $activityLog, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'workflowcount' => $workflowcount]);
- 	}
+	 }
+	 
+
+
+	 public function supportactivity(){
+		$this->checkSession(session('_token'));
+
+		$getAdmins = Admin::where('role', '!=', 'Super')->get();
+		$getStations = Stations::where('busID', session('busID'))->orderBy('created_at', 'DESC')->get();
+		$getUsers = User::orderBy('created_at', 'DESC')->get();
+		$getVehicleinfo = Vehicleinfo::orderBy('created_at', 'DESC')->get();
+
+		$countnonCom = User::where('userType', 'Individual')->count();
+		$countCom = User::where('userType', 'Commercial')->count();
+		$countCorp = User::where('userType', 'Business')->count();
+		$countstaffCorp = Business::where('accountType', 'Business')->count();
+		$countautoDeal = User::where('userType', 'Auto Dealer')->count();
+		$countcertProf = User::where('userType', 'Certified Professional')->count();
+		$countautCare = User::where('userType', 'Auto Care')->count();
+
+		$autoStores = $this->autoStores();
+		$autoStaffs = $this->autoStaffs();
+
+		// GEt Maintenance Record count
+		$maintRec = Vehicleinfo::where('busID', session('busID'))->orderBy('created_at', 'DESC')->get();
+		// $CarRec = Carrecord::where('busID', session('busID'))->get();
+		$CarRec = Vehicleinfo::select('vehicle_licence')->distinct()->where('busID', session('busID'))->get();
+
+		$maintReccount = Vehicleinfo::where('busID', session('busID'))->count();
+	   $CarReccount = Vehicleinfo::select('vehicle_licence', 'date', 'make', 'model', 'update_by', 'created_at')->distinct()->where('busID', session('busID'))->groupby('vehicle_licence', 'date', 'make', 'model', 'update_by', 'created_at')->orderBy('created_at', 'DESC')->get();
+
+	   $regCars = Carrecord::orderBy('created_at', 'DESC')->get();
+
+	   if(count($regCars) > 0){
+			   foreach ($regCars as $key => $value) {
+				   // Check Car rec not in maintenance
+				   $carwithoutcarrec = Vehicleinfo::distinct('vehicle_licence')->where('vehicle_licence', '!=', $value->vehicle_reg_no)->get();
+
+				   $carwithcarrec = Vehicleinfo::distinct('vehicle_licence')->where('vehicle_licence', $value->vehicle_reg_no)->get();
+			   }
+		   }
+
+	   $discount = MinimumDiscount::where('discount', 'discount')->get();
+	   $service_charge = MinimumDiscount::where('discount', 'service')->get();
+
+	   $discountcharge = clientMinimum::where('discount', 'discount')->where('busID', session('busID'))->get();
+	   $service_charges = clientMinimum::where('discount', 'service')->where('busID', session('busID'))->get();
+
+		// Get No of vehicles count
+		$getCarrecord = Carrecord::orderBy('created_at', 'DESC')->get();
+		$getBusinessStaffs = BusinessStaffs::where('busID', session('busID'))->orderBy('created_at', 'DESC')->get();
+		$getAppointment = BookAppointment::where('busID', session('busID'))->orderBy('created_at', 'DESC')->get();
+		$getBussiness = Business::where('busID', session('busID'))->get();
+		$usersPersonal = User::orderBy('created_at', 'DESC')->get();
+		$activityLog = Activity::orderBy('created_at', 'DESC')->take(2000)->get();
+		$supportactivityLog = DB::table('support_activity')->orderBy('created_at', 'DESC')->take(3000)->get();
+
+		if(session('role') == "Super"){
+			$getStations = Stations::orderBy('created_at', 'DESC')->get();
+			$getBusinessStaffs = BusinessStaffs::orderBy('created_at', 'DESC')->get();
+			$getAppointment = BookAppointment::orderBy('created_at', 'DESC')->get();
+			$getBussiness = Business::all();
+			$usersPersonal = User::orderBy('created_at', 'DESC')->get();
+			$CarReccount = Vehicleinfo::select('vehicle_licence', 'date', 'make', 'model', 'update_by', 'created_at')->distinct()->groupby('vehicle_licence', 'date', 'make', 'model', 'update_by', 'created_at')->orderBy('created_at', 'DESC')->get();
+
+			$regCars = Carrecord::orderBy('created_at', 'DESC')->get();
+			$maintReccount = Vehicleinfo::count();
+			$maintRec = Vehicleinfo::orderBy('created_at', 'DESC')->get();
+			$this->otherUsers = User::where('userType', '!=', 'Business')->orderBy('created_at', 'DESC')->get();
+
+			// Ticketing
+		   $tickets = Ticketing::orderBy('created_at', 'DESC')->get();
+		   if(count($tickets) > 0){
+			   $this->ticketing = $tickets;
+		   }
+		   else{
+			   $this->ticketing = "";
+		   }
+
+		   $getAD = Admin::where('accountType', 'Auto Dealer')->orderBy('created_at', 'DESC')->get();
+
+		   if(count($getAD) > 0){
+			   $this->getAD = $getAD;
+		   }
+		   else{
+			   $this->getAD = "";
+		   }
+
+
+
+		   // Registered & Unregistered clients
+		   $_RegClient = GoogleImport::where('status', 'registered')->get();
+		   if(count($_RegClient) > 0){
+			   $this->RegClient = $_RegClient;
+		   }
+		   else{
+			   $this->RegClient = "";
+		   }
+
+
+		   $_UnregClient = GoogleImport::where('status', 'not registered')->count();
+
+		   if($_UnregClient > 0){
+			   $this->unregisteredClients = $_UnregClient;
+		   }
+		   else{
+			   $this->unregisteredClients = 0;
+		   }
+
+		   // Get User with referals
+
+		   $getUserref = RedeemPoints::orderBy('created_at', 'DESC')->get();
+
+		   if(count($getUserref) > 0){
+
+			   $this->refree = $getUserref;
+		   }
+		   else{
+			   $this->refree = "";
+		   }
+		}
+
+
+		$workflowcount = $this->workflowcount;
+
+		return view('admin.pages.supportactivitylog')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'maintRec' => $maintRec, 'carRec' => $CarRec, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'activityLog' => $activityLog, 'supportactivityLog' => $supportactivityLog, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'workflowcount' => $workflowcount]);
+	}
 
  	public function allstations(){
 		$this->checkSession(session('_token'));

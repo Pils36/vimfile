@@ -625,6 +625,10 @@ class Controller extends BaseController
         DB::table('activity')->insert(['ipaddress' => $ip, 'country' => $country, 'city' => $city, 'currency' => $currency, 'action' => $action]);
     }
 
+    // Support Log
+    public function supportActivities($ip, $country, $city, $currency, $action){
+      DB::table('support_activity')->insert(['ipaddress' => $ip, 'country' => $country, 'city' => $city, 'currency' => $currency, 'action' => $action]);
+  }
     
 
     // Send Mail Function

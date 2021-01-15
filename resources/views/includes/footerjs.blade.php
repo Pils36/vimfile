@@ -2444,6 +2444,7 @@ function authCheck(val){
       formData.append("vehicle_make", $("#vehicle_make").val());
       formData.append("model", $("#model").val());
       formData.append("vehicle_reg_no", $("#vehicle_reg_no").val());
+      formData.append("vehicle_vin_number", $("#vehicle_vin_number").val());
       formData.append("city", $("#cityz").val());
       formData.append("state", $("#statez").val());
       formData.append("zipcode", $("#zipycode").val());
@@ -2534,6 +2535,7 @@ function authCheck(val){
       formData.append("vehicle_make", $("#vehicle_make").val());
       formData.append("model", $("#model").val());
       formData.append("vehicle_reg_no", $("#vehicle_reg_no").val());
+      formData.append("vehicle_vin_number", $("#vehicle_vin_number").val());
       formData.append("state", $("#statez").val());
       formData.append("zipcode", $("#zipycode").val());
       formData.append("country_of_reg", $("#country_of_reg").val());
@@ -5363,6 +5365,7 @@ function estimateSave(){
       //SetFormdata
       var setformdata = [
         {appendTo: 'estimate_id', selector: 'estimate_id'},
+        {appendTo: 'vin_number', selector: 'vin_number'},
         {appendTo: 'email', selector: 'email'},
         {appendTo: 'telephone', selector: 'telephone'},
         {appendTo: 'busID', selector: 'businessID'},
@@ -5460,6 +5463,7 @@ function estimateSave(){
             if(result.message == "success"){
 
             $("#estimate_id").val('<?php echo uniqid()."_".time()?>');
+            $("#vin_number").val('');
             $("#email").val('');
             $("#telephone").val('');
             $("#make").val('');
@@ -5796,6 +5800,7 @@ function saveEdited(){
 
       formData.append("estimate_id", $("#estimate_id").val());
       formData.append("email", $("#email").val());
+      formData.append("vin_number", $("#vin_number").val());
       formData.append("telephone", $("#telephone").val());
       formData.append("busID", $("#businessID").val());
       formData.append("make", $("#make").val());
@@ -5883,6 +5888,7 @@ function saveEdited(){
           var res = JSON.parse(result.data);
           $("#estimate_id").val('<?php echo uniqid()."_".time()?>');
           $("#email").val('');
+          $("#vin_number").val('');
           $("#telephone").val('');
           $("#make").val('');
           $("#modelz").val('');
@@ -6067,6 +6073,7 @@ function workOrderSave(){
        //SetFormdata
       var setformdata = [
         {appendTo: 'estimate_id', selector: 'estimate_id'},
+        {appendTo: 'vin_number', selector: 'vin_number'},
         {appendTo: 'opportunity_id', selector: 'opportunity_id'},
         {appendTo: 'email', selector: 'email'},
         {appendTo: 'telephone', selector: 'telephone'},

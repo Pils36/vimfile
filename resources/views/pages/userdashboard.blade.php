@@ -1700,6 +1700,8 @@ to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below
                     <input type="text" name="vehicle_licence" id="vehicle_licence" class="form-control licenceKey">
                 </div>
 
+                
+
                 @if (Auth::user()->userType == "Individual" || Auth::user()->userType == "Commercial")
                     <div class="col-md-3 disp-0">
                     <label><span style="color: red;">*</span> Email</label> <input type="email" name="email" id="email" value="@if(Auth::user()->userType == "Individual" || Auth::user()->userType == "Commercial") {{ Auth::user()->email }} @else @endif" class="form-control">
@@ -2091,6 +2093,11 @@ to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below
                     <input type="text" name="vehicle_licence" id="vehicle_licence" class="form-control licenceKey">
                 </div>
 
+                <div class="col-md-3">
+                    <label> VIN Number:</label>
+                    <input type="text" name="vin_number" id="vin_number" class="form-control">
+                </div>
+
                 @if (Auth::user()->userType == "Individual" || Auth::user()->userType == "Commercial")
                 <br><br>
                     <div class="col-md-3 disp-0">
@@ -2109,29 +2116,35 @@ to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below
                 @endif
 
 
-
-                <div class="col-md-3">
-                    <label><span style="color: red;">*</span> Vehicle Make:</label>
-                    <input type="text" name="make" id="make" class="form-control">
-                </div>
-
-
-
-
             </div>
 
             <div class="row align-items-center justify-content-between" style="margin-top: 10px !important;">
 
-                <div class="col-md-3">
+                <div class="col-md-4">
+                    <label><span style="color: red;">*</span> Vehicle Make:</label>
+                    <input type="text" name="make" id="make" class="form-control">
+                </div>
+
+                <div class="col-md-4">
                     <label><span style="color: red;">*</span> Vehicle Model:</label>
                     <input type="text" name="model" id="modelz" class="form-control">
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label><span style="color: red;">*</span> Date:</label> <input type="date" name="date" id="date" class="form-control">
                 </div>
-
+                {{-- <div class="col-md-3">
+                    <label>Service Item Spec.:</label> <input type="text" name="service_item_spec" id="service_item_spec" class="form-control">
+                </div>
                 <div class="col-md-3">
+                    <label>Manufacturer:</label> <input type="text" name="manufacturer" id="manufacturer" class="form-control">
+                </div> --}}
+
+            </div>
+
+
+            <div class="row align-items-center justify-content-between" style="margin-top: 10px !important;">
+                <div class="col-md-6">
                     <label><span style="color: red;">*</span> Service Option:</label> <select name="service_option" id="service_option" class="form-control">
                                         <option value="Major Repair">Major Repair</option>
                                         <option value="Minor Repair">Minor Repair</option>
@@ -2139,7 +2152,7 @@ to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below
                                         <option value="Emergency Maintenance">Emergency Maintenance</option>
                                     </select>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <label><span style="color: red;">*</span> Service Type:</label> <select name="service_type" id="service_type" class="form-control">
                                         <option value="Service" selected="selected" disabled="disabled">Service</option>
                                         <optgroup label="Admin"><option value="inspection">inspection</option><option value="registration">registration</option><option value="insurance">insurance</option><option value="road assistance">road assistance</option><option value="business taxes">business taxes</option><option value="Road Fines">Road Fines</option><option value="Ticket">Ticket</option></optgroup>
@@ -2149,15 +2162,9 @@ to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below
                                         </optgroup>
                                     </select>
                 </div>
-                {{-- <div class="col-md-3">
-                    <label>Service Item Spec.:</label> <input type="text" name="service_item_spec" id="service_item_spec" class="form-control">
-                </div>
-                <div class="col-md-3">
-                    <label>Manufacturer:</label> <input type="text" name="manufacturer" id="manufacturer" class="form-control">
-                </div> --}}
-
-
             </div>
+
+
             <br>
             <input type="hidden" name="inv_pos" id="inv_pos" value="">
             <input type="hidden" name="inv_position" id="inv_position" value="">
@@ -3644,20 +3651,30 @@ to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below
 
             <div class="row align-items-center justify-content-between">
 
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label><span style="color: red;">*</span> Make</label><input type="text" name="vehicle_make" id="vehicle_make" class="form-control" required="">
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label><span style="color: red;">*</span> Model</label> <input type="text" name="model" id="model" class="form-control">
                 </div>
-                <div class="col-md-3">
-                    <label><span style="color: red;">*</span> Vehicle Reg No</label> <input type="text" name="vehicle_reg_no" id="vehicle_reg_no" class="form-control">
-                </div>
-                <div class="col-md-3">
+                
+
+                <div class="col-md-4">
                     <label><span style="color: red;">*</span> City</label> <input type="text" name="city" id="cityz" class="form-control">
                 </div>
 
 
+            </div>
+
+            <div class="row align-items-center justify-content-between">
+                <div class="col-md-6">
+                    <label><span style="color: red;">*</span> Vehicle Reg No</label> <input type="text" name="vehicle_reg_no" id="vehicle_reg_no" class="form-control">
+                </div>
+
+                <div class="col-md-6">
+                    <label> VIN Number:</label>
+                    <input type="text" name="vehicle_vin_number" id="vehicle_vin_number" class="form-control">
+                </div>
             </div>
 
             <div class="row align-items-center justify-content-between">

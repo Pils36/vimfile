@@ -270,6 +270,7 @@ Route::get('RevenueReport', ['uses' => 'AdminController@revenuereport', 'as' => 
 
 Route::get('Allstaffs', ['uses' => 'AdminController@allstaffs', 'as' => 'Allstaffs']);
 Route::get('Activitylog', ['uses' => 'AdminController@activity', 'as' => 'Activitylog']);
+Route::get('SupportActivitylog', ['uses' => 'AdminController@supportactivity', 'as' => 'SupportActivitylog']);
 Route::get('Allstations', ['uses' => 'AdminController@allstations', 'as' => 'Allstations']);
 Route::get('Allcarrecords', ['uses' => 'AdminController@allcarrecords', 'as' => 'Allcarrecords']);
 Route::get('registeredcars', ['uses' => 'AdminController@allregcars', 'as' => 'registeredcars']);

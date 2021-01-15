@@ -54,6 +54,7 @@
                 To proceed, click 'Next'" ><a href="{{ route('Admin') }}"><i class="fa fa-circle-o"></i> Dashboard</a></li>
             @if(session('role') == "Super")
               <li><a href="{{ route('Activitylog') }}"><i class="fa fa-circle-o"></i> Activity Log</a></li>
+              <li><a href="{{ route('SupportActivitylog') }}"><i class="fa fa-circle-o"></i> Support Activity Log</a></li>
               <li onclick="createModal('agent')"><a href="#"><i class="fa fa-circle-o"></i> Create Support Agent</a></li>
               <li onclick="createModal('createusers')"><a href="#"><i class="fa fa-circle-o"></i> Create Mechanics by Adm..</a></li>
               
