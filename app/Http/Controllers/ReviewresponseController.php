@@ -52,6 +52,9 @@ use App\Activity as Activity;
 use App\Review as Review;
 
 
+use App\ReplyRating as ReplyRating;
+
+
 class ReviewresponseController extends Controller
 {
     public function reviewResponse(Request $req){
@@ -68,8 +71,11 @@ class ReviewresponseController extends Controller
         $checkExist = Review::where('post_id', $req->post_message_id)->get();
 
         if(count($checkExist) > 0){
-            // Update
-            Review::where('post_id', $req->post_message_id)->update(['reply' => $req->review_reply]);
+            
+            // Insert
+            ReplyRating::insert(['post_id' => $req->post_message_id, 'reply' => $req->review_reply]);
+
+            
 
             // Send Mail
             $getUser = User::where('ref_code', $checkExist[0]->ref_code)->get();

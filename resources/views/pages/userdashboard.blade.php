@@ -8,6 +8,7 @@
 <?php use \App\Http\Controllers\LabourPaystub; ?>
 <?php use \App\Http\Controllers\GoogleImport; ?>
 <?php use \App\Http\Controllers\PrepareEstimate; ?>
+<?php use \App\Http\Controllers\ReplyRating; ?>
 
 <style>
     .nav-pills .nav-link.active, .nav-pills .show>.nav-link{
@@ -1260,9 +1261,35 @@ to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below
                     <div class="row">
                         <div class="col-md-12">
                             <p style="font-weight: bold;">Reply <img src="https://img.icons8.com/fluent/20/000000/comments.png"/></p>
-                            <div @if(strlen($myreview->reply) >= 700) class="reviewreply" @else class="reviewothereply" @endif>
-                                {!! $myreview->reply !!}
-                            </div>
+
+                            @if($postReply = \App\ReplyRating::where('post_id', $myreview->post_id)->get()) 
+
+                                @if(count($postReply) > 0)  
+
+                                <div class="reviewreply">
+
+                                @foreach ($postReply as $postItem)
+                                <p>
+                                    {!! $postItem->reply !!}
+                                </p>
+                                <hr>
+                                @endforeach
+                                </div>
+
+                                
+
+                                @else 
+
+                                <div class="reviewothereply">
+                                    No reply yet
+                                </div>
+
+                                @endif  
+                            
+                            @endif
+
+
+                            
                         </div>
                     </div>
                     @endif
@@ -1274,7 +1301,7 @@ to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below
                         <form action="{{ route('reviewresponse') }}" method="post">
                             @csrf
                             <input type="hidden" name="post_message_id" value="{{ $myreview->post_id }}">
-                            <textarea name="review_reply" cols="30" rows="10" class="form-control"></textarea>
+                            <textarea name="review_reply" cols="30" rows="auto" class="form-control"></textarea>
         
                             <br><input type="submit" value="Submit reply" class="btn btn-primary">
                                 <button type="button" class="btn btn-danger" onclick="hideReply('{{ $myreview->id }}')">Cancel</button>

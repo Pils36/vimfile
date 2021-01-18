@@ -8,6 +8,7 @@
 @section('dashContent')
 
 <?php use \App\Http\Controllers\BusinessStaffs; ?>
+<?php use \App\Http\Controllers\ReplyRating; ?>
 
 <div class="wrapper">
 
@@ -108,12 +109,38 @@
                         <b>Service Type:</b> {{ $review->service_type }} <br><br>
                         <b>Date & Time Visited:</b> {{ $review->period_visited }} <br><br>
                         <b>Service Description:</b> {{ $review->service_description }} <br><br>
-                        <b>Service Comment:</b><hr> {!! $review->comment !!} <br><br>
+                        <b>Service Comment:</b><br> {!! $review->comment !!} <br>
                       
 
                       @if($review->reply != "")
-                      <hr>
-                        <b>Reply:</b> {!! $review->reply !!}
+                        <hr>
+
+                      @if($postReply = \App\ReplyRating::where('post_id', $review->post_id)->get()) 
+
+                      @if(count($postReply) > 0)  
+                        <h4 style="font-weight: bold; text-decoration: underline;">Replies: </h4>
+                      @foreach ($postReply as $postItem)
+                      <br>
+
+                      <div @if(strlen($postItem->reply) >= 700) class="reviewreply" @else class="reviewothereply" @endif>
+                          {!! $postItem->reply !!}
+                      </div>
+                      @endforeach
+
+                      
+
+                      @else 
+
+                      <div class="reviewothereply">
+                          No reply yet
+                      </div>
+
+                      @endif  
+                  
+                  @endif
+
+
+
                       @endif
                       </div>
 
