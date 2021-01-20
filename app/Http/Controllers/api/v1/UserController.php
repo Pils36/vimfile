@@ -360,7 +360,7 @@ class UserController extends Controller
     	$data  = Points::where('email', $req->email)->get();
 
     	if(count($data) > 0){
-    		$resData = ['data' => $data, 'message' => 'success', 'status' => 200];
+    		$resData = ['data' => $data[0], 'message' => 'success', 'status' => 200];
 
             $status = 200;
     	}
@@ -1089,7 +1089,7 @@ class UserController extends Controller
 			
 			$filenamestore = rand().'_'.time().'.'.$extension;
 
-			$fileNameToStore = "http://".$_SERVER['HTTP_HOST']."/profile/avatar/".$filenamestore;
+			$fileNameToStore = "https://".$_SERVER['HTTP_HOST']."/profile/avatar/".$filenamestore;
 			
 	        //Upload Image
 	        // $path = $req->file('file')->storeAs('public/uploads', $filenamestore);
@@ -1106,14 +1106,15 @@ class UserController extends Controller
 			$fileNameToStore = 'https://vimfile.com/img/icon/vimlogo.png';
 		}
 
+
 		// Update Proile
 		$updateUser = $user->where('id', $id)->update(['name' => $req->name, 'specialization' => $req->occupation, 'avatar' => $fileNameToStore]);
 
 
-		$getUser = $user->select('name', 'specialization', 'avatar')->where('id', $id)->get();
+		$getUser = $user->select('name', 'specialization', 'avatar as imageUrl')->where('id', $id)->get();
 
 
-		$resData = ['data' => $getUser, 'message' => 'Success', 'status' => 200];
+		$resData = ['data' => $getUser[0], 'message' => 'Success', 'status' => 200];
 
 		$status = 200;
 

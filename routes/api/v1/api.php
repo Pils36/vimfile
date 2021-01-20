@@ -26,7 +26,7 @@ Route::group(['prefix' => 'user'], function(){
 	Route::post('openticket', 'api\v1\UserController@openticket');
 	Route::post('opportunitypost', 'api\v1\UserController@opportunitypost');
 	Route::post('passwordchange', 'api\v1\UserController@passwordchange');
-	Route::post('achievement', 'api\v1\UserController@myachievement');
+	Route::get('achievement/{email}', 'api\v1\UserController@myachievement');
 	Route::get('allachievement', 'api\v1\UserController@allachievement');
 	Route::post('weeklyranking', 'api\v1\UserController@weeklyranking');
 	Route::post('alltimeranking', 'api\v1\UserController@alltimeranking');
@@ -65,7 +65,7 @@ Route::group(['prefix' => 'vehicle'], function(){
 	Route::post('maintenancerecordlist', 'api\v1\VehicleController@maintenancerecordlist');
 	Route::post('carrecord', 'api\v1\VehicleController@mycarrecord');
 	Route::get('mycarrecord/{email}', 'api\v1\VehicleController@usercarrecord');
-	Route::post('request_by', 'api\v1\VehicleController@myrequest_by');
+	Route::post('request_by', 'api\v1\VehicleController@myRequestBy');
 	Route::get('performance', 'api\v1\VehicleController@myperformance');
 	Route::post('workorderlist', 'api\v1\VehicleController@workorderlist');
 	Route::post('diagnosticlist', 'api\v1\VehicleController@diagnosticlist');

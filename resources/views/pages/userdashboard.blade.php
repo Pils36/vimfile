@@ -1247,7 +1247,17 @@ to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below
                     </div>
         
                     <br>
+
                     
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p style="font-weight: bold;">Maintenance Service <img src="https://img.icons8.com/emoji/20/000000/wrench-emoji.png"/></p>
+                            <div class="reviewothereply">
+                                {{ $myreview->service_maintenance }}
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-md-12">
                             <p style="font-weight: bold;">Review Comment <img src="https://img.icons8.com/fluent/20/000000/comments.png"/></p>

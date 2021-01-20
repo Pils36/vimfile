@@ -52,8 +52,7 @@ class VehicleController extends Controller
     public $content2;
     public $content3;
 
-    public function __construct(Request $request)
-    {
+    public function __construct(Request $request){
 
         $this->getIp = $_SERVER['REMOTE_ADDR'];
 
@@ -343,7 +342,10 @@ class VehicleController extends Controller
                 if($updates){
                     // Update OTP status = 1
                     $update = Validateotp::where('email', $vehicle[0]->email)->update(['status' => 1]);
-                    $resData = ['data' => $updates, 'message' => 'Vehicle Image Saved', 'status' => 200];
+
+                    $getimage = Carrecord::where('vehicle_reg_no', $request->vehicle_reg_no)->get();
+
+                    $resData = ['data' => $getimage[0]->file, 'message' => 'Vehicle Image Saved', 'status' => 200];
                     $status = 200;
                 }
                 else{
@@ -634,7 +636,7 @@ class VehicleController extends Controller
 
     
 
-    public function myrequest_by(Request $request){
+    public function myRequestBy(Request $request){
 
         if($request->request_by == "all"){
             $getmechcount = User::where('userType', 'Auto Care')->get();
@@ -811,11 +813,8 @@ class VehicleController extends Controller
             
         }
 
-
-    return $this->returnJSON($resData, $status);
-
-    
-}
+        return $this->returnJSON($resData, $status);
+    }
 
 
     public function workorderlist(Request $req){
@@ -957,6 +956,10 @@ class VehicleController extends Controller
             $user = User::where('email', $getuser[0]->email)->update(['email1' => $req->email1, 'email2' => $req->email2, 'email3' => $req->email3]);
 
             if($user){
+
+                // Get additional email
+                $addEmail = User::select('email1', 'email2', 'email3')->where('email', $getuser[0]->email)->get();
+
                 $getRem = reminderNotify::where('email', $getuser[0]->email)->get();
 
                 if(count($getRem) > 0){
@@ -965,7 +968,7 @@ class VehicleController extends Controller
 
                     $this->activities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], 'Addtional Emails Updated as '.$req->email1.', '.$req->email2.', '.$req->email3);
 
-                    $resData = ['data' => $user, 'message' => "Additional Emails Updated", 'status' => 200];
+                    $resData = ['data' => $addEmail[0], 'message' => "Additional Emails Updated", 'status' => 200];
                     $status = 200;
 
                 }
@@ -978,7 +981,7 @@ class VehicleController extends Controller
                     $this->activities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], 'Addtional Emails Added as '.$req->email1.', '.$req->email2.', '.$req->email3);
 
 
-                    $resData = ['data' => $user, 'message' => "Additional Emails Added", 'status' => 200];
+                    $resData = ['data' => $addEmail[0], 'message' => "Additional Emails Added", 'status' => 200];
                     $status = 200;
                 }
 

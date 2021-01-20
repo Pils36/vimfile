@@ -59,7 +59,7 @@ class LoginController extends Controller
         $letter = chr(rand(65,90));
         $ref_code = $letter.mt_rand(1000, 9999);
 
-        $checking = User::where('email', $request->email)->get();
+        $checking = User::select('id', 'ref_code', 'name', 'email', 'userType', 'phone_number', 'address', 'city', 'state', 'country', 'lon', 'lat', 'zipcode', 'email1', 'email2', 'email3', 'plan', 'specialization', 'avatar as imageUrl')->where('email', $request->email)->get();
 
         if(count($checking) > 0 && $checking[0]->ref_code != null){
 
@@ -75,7 +75,7 @@ class LoginController extends Controller
         $this->logTrial($request->email, $this->arr_ip['lon'], $this->arr_ip['lat']);
         
 
-        $resData = ['data' => Auth::user(), 'access_token' => $accessToken, 'status' => 200, 'message' => 'success', 'action' => 'login'];
+        $resData = ['data' => $checking, 'access_token' => $accessToken, 'status' => 200, 'message' => 'success', 'action' => 'login'];
         $status = 200;
         
 
