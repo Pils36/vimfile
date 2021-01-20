@@ -75,7 +75,7 @@ class LoginController extends Controller
         $this->logTrial($request->email, $this->arr_ip['lon'], $this->arr_ip['lat']);
         
 
-        $resData = ['data' => $checking, 'access_token' => $accessToken, 'status' => 200, 'message' => 'success', 'action' => 'login'];
+        $resData = ['data' => $checking[0], 'access_token' => $accessToken, 'status' => 200, 'message' => 'success', 'action' => 'login'];
         $status = 200;
         
 

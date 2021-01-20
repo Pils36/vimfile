@@ -119,7 +119,7 @@ class RegisterController extends Controller
                     // Get user data
                     $user = TempUser::where('email', $request->email)->get();
 
-                    $resData = ['data' => $user, 'message' => 'Success', 'status' => 200, 'action' => 'register'];
+                    $resData = ['data' => $user[0], 'message' => 'Success', 'status' => 200, 'action' => 'register'];
                     $status= 200;
                 }
                 else{
@@ -161,7 +161,7 @@ class RegisterController extends Controller
                     // Check if email is available
                     $getcode = Validateotp::where('email', $request->email)->get();
 
-                    $resData = ['data' => $getcode, 'message' => 'Validation successful', 'status' => 200];
+                    $resData = ['data' => $getcode[0], 'message' => 'Validation successful', 'status' => 200];
                     $status = 200;
 
                 }
@@ -263,7 +263,11 @@ class RegisterController extends Controller
 		    $updtUser = User::where('email', $request->email)->update(['avatar' => $fileNameToStore]);
 
 		    if($updtUser == 1){
-		    	$resData = ['data' => $updtUser, 'message' => 'Profile Picture Saved', 'status' => 200];
+
+                // Get avatar
+                $getUser = User::select('name', 'specialization', 'avatar as imageUrl')->where('email', $request->email)->get();
+
+		    	$resData = ['data' => $getUser[0], 'message' => 'Profile Picture Saved', 'status' => 200];
                 $status = 200;
 		    }
 		    else{
