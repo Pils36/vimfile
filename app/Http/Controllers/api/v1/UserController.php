@@ -1107,14 +1107,29 @@ class UserController extends Controller
 		}
 
 
-		// Update Proile
-		$updateUser = $user->where('id', $id)->update(['name' => $req->name, 'specialization' => $req->occupation, 'avatar' => $fileNameToStore]);
-
-
 		$getUser = $user->select('name', 'specialization', 'avatar as imageUrl')->where('id', $id)->get();
 
+		if($req->name != ""){
+			$name = $req->name;
+		}
+		else{
+			$name = $getUser[0]->name;
+		}
+		if($req->occupation != ""){
+			$occupation = $req->occupation;
+		}
+		else{
+			$occupation = $getUser[0]->specialization;
+		}
 
-		$resData = ['data' => $getUser[0], 'message' => 'Success', 'status' => 200];
+
+		// Update Proile
+		$user->where('id', $id)->update(['name' => $name, 'specialization' => $occupation, 'avatar' => $fileNameToStore]);
+
+
+		$updateUser = $user->select('name', 'specialization', 'avatar as imageUrl')->where('id', $id)->get();
+
+		$resData = ['data' => $updateUser[0], 'message' => 'Success', 'status' => 200];
 
 		$status = 200;
 

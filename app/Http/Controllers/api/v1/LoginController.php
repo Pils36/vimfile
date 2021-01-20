@@ -20,8 +20,7 @@ class LoginController extends Controller
     public $continent;
 
 
-    public function __construct(Request $request)
-    {
+    public function __construct(Request $request){
 
         $this->getIp = $_SERVER['REMOTE_ADDR'];
 
