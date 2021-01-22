@@ -312,8 +312,8 @@
               <br>
               <div class="row">
                 <div class="col-md-6">
-                      <h6> {{ __('What is your Mothers maiden name?') }}</h6><br>
-                      <input id="maiden_nameez" type="text" class="form-control @error('maiden_nameez') is-invalid @enderror" name="maiden_name" value="{{ old('maiden_nameez') }}" autocomplete="maiden_nameez" placeholder="Mother's maiden name" >
+                      <h6> {{ __('Security Question') }}</h6><br>
+                      <input id="maiden_nameez" type="text" class="form-control @error('maiden_nameez') is-invalid @enderror" name="maiden_name" value="{{ old('maiden_nameez') }}" autocomplete="maiden_nameez" placeholder="Security Question" >
 
                             @error('maiden_nameez')
                                 <span class="invalid-feedback" role="alert">
@@ -323,8 +323,8 @@
                   </div>
 
                     <div class="col-md-6">
-                      <h6> {{ __('Where did your father and mother meet?') }}</h6><br>
-                      <input id="parent_meeteez" type="text" class="form-control" name="parent_meet" required autocomplete="parent_meeteez" placeholder="Where father and mother met">
+                      <h6> {{ __('Security Answer') }}</h6><br>
+                      <input id="parent_meeteez" type="text" class="form-control" name="parent_meet" required autocomplete="parent_meeteez" placeholder="Security Answer">
 
                             @error('parent_meeteez')
                                 <span class="invalid-feedback" role="alert">
@@ -611,8 +611,8 @@
             
               <div class="row">
                 <div class="col-md-6">
-                      <h6> {{ __('What is your Mothers maiden name?') }}</h6><br>
-                      <input id="maiden_nameezcom" type="text" class="form-control @error('maiden_nameez') is-invalid @enderror" name="maiden_name" value="{{ old('maiden_nameez') }}" autocomplete="maiden_nameez" placeholder="Mother's maiden name" >
+                      <h6> {{ __('Security Question') }}</h6><br>
+                      <input id="maiden_nameezcom" type="text" class="form-control @error('maiden_nameez') is-invalid @enderror" name="maiden_name" value="{{ old('maiden_nameez') }}" autocomplete="maiden_nameez" placeholder="Security Question" >
 
                             @error('maiden_nameez')
                                 <span class="invalid-feedback" role="alert">
@@ -622,8 +622,8 @@
                   </div>
 
                     <div class="col-md-6">
-                      <h6> {{ __('Where did your father and mother meet?') }}</h6><br>
-                      <input id="parent_meeteezcom" type="text" class="form-control" name="parent_meet" required autocomplete="parent_meeteez" placeholder="Where father and mother met">
+                      <h6> {{ __('Security Answer') }}</h6><br>
+                      <input id="parent_meeteezcom" type="text" class="form-control" name="parent_meet" required autocomplete="parent_meeteez" placeholder="Security Answer">
 
                             @error('parent_meeteez')
                                 <span class="invalid-feedback" role="alert">
@@ -929,8 +929,8 @@
 
                 <div class="row">
                   <div class="col-md-6">
-                      <h6> {{ __('What is your Mothers maiden name?') }}</h6><br>
-                      <input id="maiden_namez" type="text" class="form-control @error('maiden_namez') is-invalid @enderror" name="maiden_name" value="{{ old('maiden_namez') }}" autocomplete="maiden_namez" placeholder="Mother's maiden name" >
+                      <h6> {{ __('Security Question') }}</h6><br>
+                      <input id="maiden_namez" type="text" class="form-control @error('maiden_namez') is-invalid @enderror" name="maiden_name" value="{{ old('maiden_namez') }}" autocomplete="maiden_namez" placeholder="Security Question" >
 
                             @error('maiden_namez')
                                 <span class="invalid-feedback" role="alert">
@@ -939,8 +939,8 @@
                             @enderror
                   </div>
                   <div class="col-md-6">
-                      <h6>{{ __('Where did your father and mother meet?') }}</h6><br>
-                      <input id="parent_meetz" type="text" class="form-control" name="parent_meet" required autocomplete="parent_meetz" placeholder="Where father and mother met">
+                      <h6>{{ __('Security Answer') }}</h6><br>
+                      <input id="parent_meetz" type="text" class="form-control" name="parent_meet" required autocomplete="parent_meetz" placeholder="Security Answer">
 
                             @error('parent_meetz')
                                 <span class="invalid-feedback" role="alert">
@@ -1213,8 +1213,8 @@
 
                 <div class="row">
                   <div class="col-md-6">
-                      <h6> {{ __('What is your Mothers maiden name?') }}</h6><br>
-                      <input id="maiden_namezdeal" type="text" class="form-control @error('maiden_namezdeal') is-invalid @enderror" name="maiden_name" value="{{ old('maiden_namezdeal') }}" autocomplete="maiden_namezdeal" placeholder="Mother's maiden name" >
+                      <h6> {{ __('Security Question') }}</h6><br>
+                      <input id="maiden_namezdeal" type="text" class="form-control @error('maiden_namezdeal') is-invalid @enderror" name="maiden_name" value="{{ old('maiden_namezdeal') }}" autocomplete="maiden_namezdeal" placeholder="Security Question" >
 
                             @error('maiden_namezdeal')
                                 <span class="invalid-feedback" role="alert">
@@ -1224,8 +1224,8 @@
                             
                   </div>
                   <div class="col-md-6">
-                      <h6>{{ __('Where did your father and mother meet?') }}</h6><br>
-                      <input id="parent_meetzdeal" type="text" class="form-control" name="parent_meet" required autocomplete="parent_meetzdeal" placeholder="Where father and mother met">
+                      <h6>{{ __('Security Answer') }}</h6><br>
+                      <input id="parent_meetzdeal" type="text" class="form-control" name="parent_meet" required autocomplete="parent_meetzdeal" placeholder="Security Answer">
 
                             @error('parent_meetzdeal')
                                 <span class="invalid-feedback" role="alert">
@@ -1553,8 +1553,8 @@
 
                 <div class="row">
                   <div class="col-md-6">
-                      <h6> {{ __('What is your Mothers maiden name?') }}</h6><br>
-                      <input id="maiden_namezcm" type="text" class="form-control @error('maiden_namez') is-invalid @enderror" name="maiden_name" value="{{ old('maiden_namez') }}" autocomplete="maiden_namez" placeholder="Mother's maiden name" >
+                      <h6> {{ __('Security Question') }}</h6><br>
+                      <input id="maiden_namezcm" type="text" class="form-control @error('maiden_namez') is-invalid @enderror" name="maiden_name" value="{{ old('maiden_namez') }}" autocomplete="maiden_namez" placeholder="Security Question" >
 
                             @error('maiden_namez')
                                 <span class="invalid-feedback" role="alert">
@@ -1563,8 +1563,8 @@
                             @enderror
                   </div>
                   <div class="col-md-6">
-                      <h6>{{ __('Where did your father and mother meet?') }}</h6><br>
-                      <input id="parent_meetzcm" type="text" class="form-control" name="parent_meet" required autocomplete="parent_meetz" placeholder="Where father and mother met">
+                      <h6>{{ __('Security Answer') }}</h6><br>
+                      <input id="parent_meetzcm" type="text" class="form-control" name="parent_meet" required autocomplete="parent_meetz" placeholder="Security Answer">
 
                             @error('parent_meetz')
                                 <span class="invalid-feedback" role="alert">
@@ -2204,8 +2204,8 @@
 
                 <div class="row">
                   <div class="col-md-6">
-                      <h6> {{ __('What is your Mothers maiden name?') }}</h6><br>
-                      <input id="maiden_namezacc" type="text" class="form-control @error('maiden_namez') is-invalid @enderror" name="maiden_name" value="{{ old('maiden_namez') }}" autocomplete="maiden_namez" placeholder="Mother's maiden name" >
+                      <h6> {{ __('Security Question') }}</h6><br>
+                      <input id="maiden_namezacc" type="text" class="form-control @error('maiden_namez') is-invalid @enderror" name="maiden_name" value="{{ old('maiden_namez') }}" autocomplete="maiden_namez" placeholder="Security Question" >
 
                             @error('maiden_namez')
                                 <span class="invalid-feedback" role="alert">
@@ -2214,8 +2214,8 @@
                             @enderror
                   </div>
                   <div class="col-md-6">
-                      <h6>{{ __('Where did your father and mother meet?') }}</h6><br>
-                      <input id="parent_meetzacc" type="text" class="form-control" name="parent_meet" required autocomplete="parent_meetz" placeholder="Where father and mother met">
+                      <h6>{{ __('Security Answer') }}</h6><br>
+                      <input id="parent_meetzacc" type="text" class="form-control" name="parent_meet" required autocomplete="parent_meetz" placeholder="Security Answer">
 
                             @error('parent_meetz')
                                 <span class="invalid-feedback" role="alert">
