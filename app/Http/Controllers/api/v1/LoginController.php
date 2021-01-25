@@ -62,11 +62,11 @@ class LoginController extends Controller
 
         if(count($checking) > 0 && $checking[0]->ref_code != null){
 
-            $ref = User::where('email', $request->email)->update(['ref_code' => $checking[0]->ref_code]);
+            $ref = User::where('email', $request->email)->update(['ref_code' => $checking[0]->ref_code, 'api_token' => $accessToken]);
 
         }
         else{
-            $ref = User::where('email', $request->email)->update(['ref_code' => $ref_code]);
+            $ref = User::where('email', $request->email)->update(['ref_code' => $ref_code, 'api_token' => $accessToken]);
         }
 
 

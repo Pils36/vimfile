@@ -44,11 +44,11 @@
                                <h4 class="text-left text-white">Answer Security Question</h4> 
                               </div>
                               <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><h5 class="text-left">What is your Mothers maiden name?</h5></li>
+                                <li class="list-group-item"><h5 class="text-left">Security Question</h5></li>
                                 <li class="list-group-item">
                                     <center>
                                         <input type="hidden" name="email1" value="{{ $email }}" id="email1">
-                                        <input type="text" name="maidenname" class="form-control" placeholder="Mothers maiden name" style="width: 100%" id="maiden_name1"></center> <br>
+                                        <input type="text" name="maidenname" class="form-control" placeholder="Security Question" style="width: 100%" id="maiden_name1"></center> <br>
                                     <center><button class="btn btn-primary" style="background-color: brown; outline: none !important; width: 100%; border: none !important;" onclick="forgotPassword('maidenname1')">Submit <img class="spinner disp-0" src="{{ asset('img/loader/spin.gif') }}" style="width: 30px; height: 30px;"></button></center>
                                 </li>
                               </ul>
@@ -70,11 +70,11 @@
                                <h4 class="text-left text-white">Answer Security Question</h4> 
                               </div>
                               <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><h5 class="text-left">Where did your father and mother meet?</h5></li>
+                                <li class="list-group-item"><h5 class="text-left">Security Answer</h5></li>
                                 <li class="list-group-item">
                                     <center>
                                         <input type="hidden" name="email2" value="{{ $email }}" id="email2">
-                                        <input type="text" name="maidenname" class="form-control" placeholder="Father and Mother Meet" style="width: 100%" id="maiden_name2"></center> <br>
+                                        <input type="text" name="maidenname" class="form-control" placeholder="Security Answer" style="width: 100%" id="maiden_name2"></center> <br>
                                     <center><button class="btn btn-primary" style="background-color: brown; outline: none !important; width: 100%; border: none !important;" onclick="forgotPassword('maidenname2')">Submit <img class="spinner disp-0" src="{{ asset('img/loader/spin.gif') }}" style="width: 30px; height: 30px;"></button></center>
                                 </li>
                               </ul>

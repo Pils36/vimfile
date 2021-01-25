@@ -1075,10 +1075,9 @@ class UserController extends Controller
 
 	public function editProfile(Request $req, User $user, $id){
 
+
 		if($req->hasFile('avatar')){
 
-			if($req->file('avatar'))
-	        {
 	        //Get filename with extension
 	        $filenameWithExt = $req->file('avatar')->getClientOriginalName();
 	        // Get just filename
@@ -1090,17 +1089,16 @@ class UserController extends Controller
 			$filenamestore = rand().'_'.time().'.'.$extension;
 
 			$fileNameToStore = "https://".$_SERVER['HTTP_HOST']."/profile/avatar/".$filenamestore;
+
 			
 	        //Upload Image
 	        // $path = $req->file('file')->storeAs('public/uploads', $filenamestore);
 
 	        // $path = $req->file('avatar')->move(public_path('/profile/avatar/'), $filenamestore);
-	        $path = $req->file('avatar')->move(public_path('../../profile/avatar/'), $filenamestore);
+			$path = $req->file('avatar')->move(public_path('../../profile/avatar/'), $filenamestore);
 
-		    }
-		    else{
-		    	$fileNameToStore = 'https://vimfile.com/img/icon/vimlogo.png';
-		    }
+			
+
 		}
 		else{
 			$fileNameToStore = 'https://vimfile.com/img/icon/vimlogo.png';
