@@ -14804,7 +14804,38 @@ public function ajaxquickmail(Request $req){
 
 
 
-    }
+	}
+	
+
+	// Cron for created mechanics
+	public function createdMechanicCrons(Request $req){
+
+		// Get all created mechanics that has 0 login
+		
+		$userinf = Admin::where('login_times', 0)->where('accountType', '!=', 'Super User')->get();
+
+		if(count($userinf) > 0){
+			foreach ($userinf as $key => $value) {
+				$this->to = $value->email;
+				// $this->to = 'bambo@vimfile.com';
+				$this->name = $value->name;
+
+				$this->subject = "VIMFILE - 30 DAYS FREE TRIAL";
+				$this->message = "<p>Hello ".$this->name.", </p><p>Enjoy your 30 days FREE-TRIAL on busywrench.com when you login to your account. </p><p><a href='https://vimfile.com/AdminLogin'>Login to your account today!</a></p>";
+				$this->file = NULL;
+		
+				$this->sendEmail($this->to, "Compose Mail");
+
+			}
+
+			echo "Done";
+		}
+		else{
+			// Do nothing
+			echo 0;
+		}
+
+	}
 
 
 

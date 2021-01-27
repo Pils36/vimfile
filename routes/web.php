@@ -344,9 +344,13 @@ Route::get('/vehicleinfoReminder', ['uses' => 'HomeController@vehicleinfoReminde
 Route::get('/ivimreportReminder', ['uses' => 'HomeController@ivimreportReminder', 'as' => 'ivimreportReminder']);
 Route::get('/myweeklyPoints', ['uses' => 'HomeController@myweeklyPoints', 'as' => 'myweeklyPoints']);
 Route::get('/myglobalPoints', ['uses' => 'HomeController@myglobalPoints', 'as' => 'myglobalPoints']);
+Route::get('/createdmechanics', ['uses' => 'AdminController@createdMechanicCrons', 'as' => 'createdmechanics']);
 
 // PayPal Route
 Route::post('/paypalpay', ['uses' => 'PaypalController@store', 'as' => 'paypalpay']);
+
+// Free Trial Submission
+Route::post('/submission', ['uses' => 'FreetrialController@submission', 'as' => 'freetrial submission']);
 
 
 

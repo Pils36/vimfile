@@ -164,323 +164,11 @@ font-size: 18px !important;
 -ms-transition:all .5s ease-out;
 -o-transition: all .5s ease-out;
 transition: all .5s ease-out;
-}      
-
-
-/* Nav Menu */
-
-ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  border: 1px solid #e7e7e7;
-  background-color: #f3f3f3;
-}
-
-li {
-  float: left;
-}
-
-li a {
-  display: block;
-  color: #666;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-li a:hover:not(.active) {
-  background-color: #ddd;
-}
-
-li a.active {
-  color: white;
-  background-color: #1e3962;
-}
-
-.my_logo{
-    background-color: #fff !important;
-    border-radius: 10px;
-}
-
-img.my_logo {
-    width: 150px;
-}
-
-@media screen and (max-width: 900px) {
-  ul {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-  
-  ul li a {
-    float: left;
-    padding: 15px;
-  }
-  
-  div.content {margin-left: 0;}
-}
-
-@media screen and (max-width: 400px) {
-  ul li a {
-    text-align: center;
-    float: none;
-  }
-}
-
-a.nav-link {
-    font-size: 16px !important;
-}
-
-.sticky{
-  position: fixed;
-  width: 100%;
-  z-index: 100000;
-  background: #ffffff;
-}
-
-.disp-0{
-  display: none !important;
-}
-
+}         
 
 </style>
 <script>window.__gdprComplianceScripts = window.__gdprComplianceScripts || [];window.__gdprComplianceScripts.push(function() {});</script>
 <!-- end custom BODY code-->
-<script type="text/javascript">
-  window.addEventListener("scroll", function(){
-    var header = document.querySelector("header");
-    header.classList.toggle("sticky", window.scrollY > 0);
-  });
-</script>
-
-    <!--::header part start::-->
-    <header class="main_menu home_menu">
-
-      <div class="container">
-          <div class="row align-items-center">
-              <div class="col-lg-12">
-
-                  <nav class="navbar navbar-expand-lg navbar-light">
-                      @if(Auth::user())
-                      @if(Auth::user()->userType == "Business" || Auth::user()->userType == "Auto Dealer" || Auth::user()->userType == "Auto Care")
-                      @if($busInfo != "")
-
-                      <a class="navbar-brand" title="Home" href="{{ route('Home') }}"> <img src="/company_logo/{{ $busInfo[0]->file2 }}"> </a>
-
-                      @else
-                      <a class="navbar-brand" title="Home" href="{{ route('Home') }}">
-                           {{-- <h2 class="text-white" style="font-weight: bolder; margin-left: 40px;">VIM File</h2> --}}
-                           <img class="my_logo" src="https://res.cloudinary.com/pilstech/image/upload/v1600186029/vimnewlogo_pndv6i.png" alt="VIMFile">
-                           <img class="my_logo" src="https://res.cloudinary.com/pilstech/image/upload/v1600186031/bw_ncbz2n.png" alt="BW">
-
-                      </a>
-                      @endif
-
-                      @else
-                      <a class="navbar-brand" title="Home" href="{{ route('Home') }}">
-                          {{-- <h2 class="text-white" style="font-weight: bolder; margin-left: 40px;">VIM File</h2> --}}
-                          <img class="my_logo" src="https://res.cloudinary.com/pilstech/image/upload/v1600186029/vimnewlogo_pndv6i.png" alt="VIMFile">
-                          <img class="my_logo" src="https://res.cloudinary.com/pilstech/image/upload/v1600186031/bw_ncbz2n.png" alt="BW">
-
-                      </a>
-                      @endif
-
-                      @else
-                      <a class="navbar-brand" title="Home" href="{{ route('Home') }}">
-                          {{-- <h2 class="text-white" style="font-weight: bolder; margin-left: 40px;">VIM File</h2>  --}}
-
-                          <img class="my_logo" src="https://res.cloudinary.com/pilstech/image/upload/v1600186029/vimnewlogo_pndv6i.png" alt="VIMFile">
-                          <img class="my_logo" src="https://res.cloudinary.com/pilstech/image/upload/v1600186031/bw_ncbz2n.png" alt="BW">
-
-                      </a>
-                      @endif
-
-                      {{--  <button class="navbar-toggler" type="button" data-toggle="collapse"
-                          data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                          aria-expanded="false" aria-label="Toggle navigation">
-                          <span class="menu_icon"><i class="fas fa-bars"></i></span>
-                      </button>  --}}
-
-                      <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
-                          <ul class="navbar-nav">
-                              <li class="nav-item">
-                                  <a class="nav-link" title="Home" href="{{ route('Home') }}" style="font-size: 12.5px;">Home</a>
-                              </li>
-                              <li class="nav-item">
-                                  <a class="nav-link" title="About" href="{{ route('About') }}" style="font-size: 12.5px;">About BusyWrench</a>
-                              </li>
-
-                              <li class="nav-item disp-0">
-                                  @if(Auth::user())
-                                  @if(Auth::user()->userType != "Business")
-                                      <a class="nav-link" title="SmartDrivers" href="{{ route('SmartDrivers') }}" style="font-size: 12.5px;">Vimfile <span style="text-transform: lowercase;">for</span> SMART drivers</a>
-                                  @endif
-                                  @endif
-
-                              </li>
-
-                              @if (Auth::user())
-
-                              @if($pages == 'Drivers')
-                              <li class="nav-item">
-                                  <a class="nav-link" title="Features" href="{{ route('Features') }}" style="font-size: 12.5px;">Features</a>
-                              </li>
-
-                              @else
-                              <li class="nav-item disp-0">
-                                  <a class="nav-link" title="Features" href="{{ route('Features') }}" style="font-size: 12.5px;">Features</a>
-                              </li>
-                              @endif
-
-
-
-                              @else
-
-                              @if($pages == 'Drivers')
-                              <li class="nav-item">
-                                  <a class="nav-link" title="Features" href="{{ route('Features') }}" style="font-size: 12.5px;">Features</a>
-                              </li>
-                              @else
-                              <li class="nav-item disp-0">
-                                  <a class="nav-link" title="Features" href="{{ route('Features') }}" style="font-size: 12.5px;">Features</a>
-                              </li>
-                              @endif
-
-
-
-
-                              @endif
-
-                              @if(Auth::user())
-                              <li class="nav-item">
-                                  <a class="nav-link" title="Pricing" style="font-size: 12.5px;" href="{{ route('Pricing') }}">Plan & Pricing</a>
-                              </li>
-
-                              <li class="nav-item">
-                                  <a class="nav-link" title="Ask Expert" style="font-size: 12.5px;" href="{{ route('AskExpert') }}">Ask Expert</a>
-                              </li>
-
-                              <li class="nav-item">
-                                  <a class="nav-link" title="Claim Business For FREE" style="font-size: 12.5px;" href="{{ route('claimbusiness') }}">Claim Business For FREE</a>
-                              </li>
-
-                              <li class="nav-item">
-                                  <a class="nav-link" title="Openticket" style="font-size: 12.5px;" href="{{ route('Openticket') }}">Open Ticket</a>
-                              </li>
-
-                              @else
-
-                              <li class="nav-item">
-                                  <a class="nav-link" title="Ask Expert" href="{{ route('register') }}" style="font-size: 12.5px;">Ask Expert</a>
-                              </li>
-
-                              <li class="nav-item">
-                                  <a class="nav-link" title="Claim Business For FREE" href="{{ route('claimbusiness') }}" style="font-size: 12.5px;">Claim Business For FREE</a>
-                              </li>
-
-                              @endif
-
-
-                              {{-- <li class="nav-item">
-                                  <a class="nav-link" title="Contact" href="{{ route('Contact') }}" style="font-size: 12.5px;">Contact Us</a>
-                              </li> --}}
-
-                              <li class="nav-item">
-                                  <a class="nav-link" title="Web Form" href="{{ route('Webform') }}" style="font-size: 12.5px;">Contact Us</a>
-                              </li>
-
-                              @guest
-
-                              <li class="nav-item">
-                                <a class="nav-link" title="Login" href="{{ route('login') }}" style="font-size: 12.5px;">Login</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link" title="Login" href="{{ route('register') }}" style="font-size: 12.5px;">Register</a>
-                            </li>
-                                  
-                              @endguest
-
-                              
-
-
-
-
-
-                          </ul>
-
-                          
-                      </div>
-
-                      @if(Auth::user())
-
-                      @if(Auth::user()->userType == "Individual" || Auth::user()->userType == "Commercial")
-
-                          <div class="dropdown cart">
-                              <p style="background-color: darkorange; padding: 2px; position: relative; left: 30px;">
-                          <span style="font-weight: 700; color: #0b1d27; font-size: 12px; text-align: center;">REF CODE - @if($ref_code != "") {{ $ref_code }} @else  @endif </span><br><span style="font-weight: 700; color: #fff; font-size: 12px; text-align: center;">POINTS - @if(Auth::user()->userType == "Commercial") {{ $getRefs * 1000 }}  @elseif(Auth::user()->userType == "Individual") {{ $getRefs * 1000 }} @endif </span><button class="btn btn-danger btn-sm" onclick="redeemPoint('{{ Auth::user()->ref_code }}', 'start')">Redeem Point <img class="spinredeem disp-0" src="{{ asset('img/loader/spin.gif') }}" style="width: 8px; height: 8px;"></button></p>
-
-                          </div>
-
-                      @endif
-
-                      <div class="dropdown cart">
-
-                          <ul class="noti-icons">
-                              <li>
-                                  <a title="Prochatr Live Chat" class="dropdown-toggle" href="https://web.prochatr.com/?platform=48cff60d45be26b6c4982d7c416175a8&userid={{ Auth::user()->ref_code }}&key=true&level={{ Auth::user()->userType }}&userrole={{ Auth::user()->userType }}&username=NULL" id="navbarDropdown3" target="_blank">
-                                      <i class="far fa-comment-alt"></i>
-                                  </a>
-                              </li>
-                              <li>
-                                  <a class="dropdown-toggle" href="{{ route('allQuestions') }}" id="navbarDropdown3" title="All questions">
-                                      <i class="fas fa-envelope"></i>
-                                  </a>
-                              </li>
-                              <li>
-                                  <a class="dropdown-toggle" href="{{ route('Notifications') }}" id="navbarDropdown3" title="Notifications">
-                                      <i class="far fa-bell"></i>
-                                  </a>
-                              </li>
-                          </ul>
-
-
-                          {{-- <div class="row">
-                              <div class="col-md-4">
-                                  
-                              </div>
-                              <div class="col-md-4">
-                                  
-                              </div>
-                              <div class="col-md-4">
-                                  
-                              </div>
-                          </div> --}}
-                          
-                          
-                      </div>
-
-                      @endif
-
-
-
-                  </nav>
-
-                  
-
-              </div>
-
-
-          </div>
-
-
-      </div>
-  </header>
-  <!-- Header part end-->
-
 
 
 
@@ -503,7 +191,7 @@ a.nav-link {
 
 
 <main>
-    {{--  <section class="section section-relative " id="page_block_header" data-at="section">
+    <section class="section section-relative " id="page_block_header" data-at="section">
    
   <div class="section-holder-border item-block item-absolute" data-at="section-border"></div>
   <div class="section-holder-overlay item-block item-absolute" data-at="section-overlay"></div>
@@ -522,10 +210,7 @@ a.nav-link {
 
     </div>
   </div>
-
-
-
-</section>  --}}
+</section>
 
     <section class="section section-relative " id="page-block-e4tsvhvr0j9" data-at="section">
    
@@ -544,9 +229,7 @@ a.nav-link {
         <div class="widget item-absolute headline  " id="element-17" data-at="headline">
   <div class="contents">
     <h1>
-      <p  class="x_5f0ed501 x_b796efc8"></p><p  class="x_5f0ed501 x_b796efc8">    </p><p  class="x_5f0ed501 x_b796efc8">
-        {{-- <span  class="x_93908647">See Busy Wrench in Action</span>  --}}
-        <span  class="x_93908647">&nbsp;</span> </p><p  class="x_5f0ed501 x_b796efc8">   </p>
+      <p  class="x_5f0ed501 x_b796efc8"></p><p  class="x_5f0ed501 x_b796efc8">    </p><p  class="x_5f0ed501 x_b796efc8"><span  class="x_93908647">See Busy Wrench in Action</span></p><p  class="x_5f0ed501 x_b796efc8">   </p>
     </h1>
   </div>
 </div>
@@ -560,14 +243,9 @@ a.nav-link {
 </div>
 
         <div class="widget item-absolute  " id="element-15">
-
-
-          <iframe width="100%" height="350" src="https://res.cloudinary.com/pilstech/video/upload/v1590059641/mechanic3_fuhazr.mp4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; loop" allowfullscreen></iframe>
-
-
   <form
     novalidate
-    class="form email-form contents form-labels-outside-top disp-0"
+    class="form email-form contents form-labels-outside-top"
     method="POST"
     data-at="form"
     action="{{ route('freetrial submission') }}"

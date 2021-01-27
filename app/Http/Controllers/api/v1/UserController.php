@@ -396,11 +396,12 @@ class UserController extends Controller
 
     public function weeklyranking(Request $req){
 
-    	$data  = Points::all();
+
+    	$data  = User::where('email', $req->email)->get();
 
 
     	if(count($data) > 0){
-    		$rank = Points::orderBy('weekly_point', 'DESC')->get();
+    		$rank = Points::where('state', $data[0]->state)->orderBy('weekly_point', 'DESC')->get();
 
     		$resData = ['data' => $rank, 'message' => 'success', 'status' => 200];
 
@@ -418,11 +419,11 @@ class UserController extends Controller
 
     public function alltimeranking(Request $req){
 
-    	$data  = Points::all();
+    	$data  = User::where('email', $req->email)->get();
 
 
     	if(count($data) > 0){
-    		$rank = Points::orderBy('alltime_point', 'DESC')->get();
+    		$rank = Points::where('country', $data[0]->country)->orderBy('alltime_point', 'DESC')->get();
 
     		$resData = ['data' => $rank, 'message' => 'success', 'status' => 200];
 

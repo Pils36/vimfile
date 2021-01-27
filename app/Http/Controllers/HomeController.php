@@ -267,7 +267,16 @@ class HomeController extends Controller
 
 
         $this->activities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], 'Visited Home page');
-        return view('pages.index')->with(['pages' => 'Home', 'location' => $this->arr_ip, 'busInfo' => $busInfo, 'ref_code' => $this->ref_code, 'getRefs' => $this->getRefs, 'countQuest' => $this->countQuest, 'askedQuest' => $this->askedQuest, 'postActive' => $postActive, 'notify' => $notify]);
+
+        if(Auth::check() == true){
+            return view('pages.index2')->with(['pages' => 'Home', 'location' => $this->arr_ip, 'busInfo' => $busInfo, 'ref_code' => $this->ref_code, 'getRefs' => $this->getRefs, 'countQuest' => $this->countQuest, 'askedQuest' => $this->askedQuest, 'postActive' => $postActive, 'notify' => $notify]);
+        }
+        else{
+            return view('pages.index')->with(['pages' => 'Home', 'location' => $this->arr_ip, 'busInfo' => $busInfo, 'ref_code' => $this->ref_code, 'getRefs' => $this->getRefs, 'countQuest' => $this->countQuest, 'askedQuest' => $this->askedQuest, 'postActive' => $postActive, 'notify' => $notify]);
+        }
+
+
+        
     }
 
     public function startup()
@@ -367,6 +376,7 @@ class HomeController extends Controller
         $claims = $this->claimdata();
         $userDetails = User::where('station_name', $req->route('key'))->get();
         $station = Stations::where('station_name', $req->route('key'))->get();
+
 
 
         $this->activities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], 'Visited Welcome Page');
@@ -761,6 +771,7 @@ class HomeController extends Controller
 
     public function features()
     {
+
         if(Auth::user()){
 
             // Check for Asked questions
@@ -774,16 +785,27 @@ class HomeController extends Controller
             else{
                 $this->askedQuest = "";
             }
+
+
         }
 
-        // Get Client Info
-        
         $notify = $this->notify();
 
         $busInfo = $this->clientinfo();
 
+        $postActive = Newshappening::where('state', '1')->orderBy('created_at', 'DESC')->take(2)->get();
 
-        return view('pages.features')->with(['pages' => 'Features', 'location' => $this->arr_ip, 'busInfo' => $busInfo, 'ref_code' => $this->ref_code, 'getRefs' => $this->getRefs, 'countQuest' => $this->countQuest, 'askedQuest' => $this->askedQuest, 'notify' => $notify]);
+
+
+
+        $this->activities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], 'Visited Home page');
+
+        
+            return view('pages.features')->with(['pages' => 'Features', 'location' => $this->arr_ip, 'busInfo' => $busInfo, 'ref_code' => $this->ref_code, 'getRefs' => $this->getRefs, 'countQuest' => $this->countQuest, 'askedQuest' => $this->askedQuest, 'postActive' => $postActive, 'notify' => $notify]);
+
+
+
+
     }
 
     public function contact()
