@@ -10798,8 +10798,17 @@ function checkClaim(company, telephone, id){
                         }
 
                         else if(result.action == "update"){
+
+                          if(result.userType == "Auto Dealer"){
+                            swal(result.title, result.res, result.message);
+                            setTimeout(function(){ location.href='https://autodealer.vimfile.com'; }, 3000);
+                          }
+                          else{
                             swal(result.title, result.res, result.message);
                             setTimeout(function(){ location.reload(); }, 3000);
+                          }
+
+                            
                         }
                         else if(result.action == "claim"){
                             swal(result.title, result.res, result.message);
