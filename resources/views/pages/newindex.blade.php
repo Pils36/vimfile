@@ -71,7 +71,7 @@ window.__page_id = 21227386;
   {"mobileDisabled":false,"downloadFileEndpoint":"https://app.instapage.com/ajax/pageserver/files/serve-file","thankYouTimeout":3000,"reCaptchaEnabled":false,"snowplowUrl":"https://cdn.instapagemetrics.com/t/js/it.js","snowplowWrapperUrl":"https://g.fastcdn.co/js/sptw.js"}
 </script>
 
-  <script id="ip-analytics" type="application/json">{"trackingData":{"anthillApiKey":"50669b56cab22602edb672644230f14f7bbf66d4f22e1ed212eadc6eba66f387ae5e046a0338f7d9d2ab2de40b67b661fb9bbb2295a72dd74a9fa1bdada8e4759af4262d6853a30038a77130ff24f6746e3f0c14a2afb93e62b30da4c75a915103fe1ce085723cf2770f107c98f3660702229ea6eac4c832f5c337cc6fe496dd3fc67cc98ce763d2e112c7a4e10d4f9b","ownerId":3676160,"customerId":4177581,"pageId":21227386,"publishedVersion":11,"variationName":"A","variationId":1,"linkedVariationId":2,"variation":"A","trackedLinks":[],"allLinks":[{"href":"#page-block-e4tsvhvr0j9","id":"ld0rpt0z6z","type":"onpage","track":false,"targetNewWindow":false},{"href":"https://vimfile.com/Privacy","id":"c3rm55iw64s","type":"url","track":false,"targetNewWindow":true},{"href":"https://vimfile.com/Terms","id":"1a0zmx9ax6i","type":"url","track":false,"targetNewWindow":true}],"user_id":3676160},"conversionSettings":{"forms":true,"links":true,"external":false},"visitUrl":"https://anthill.instapage.com/projects/56c2f3d796773d0a7e96a536/events/visit","conversionUrl":"https://anthill.instapage.com/projects/56c2f3d796773d0a7e96a536/events/conversion"}</script>
+
 
   <script id="ip-trkr" type="text/javascript" async=1>
     ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
