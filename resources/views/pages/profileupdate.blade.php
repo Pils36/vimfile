@@ -6,6 +6,10 @@
     .about_part{
         height: 45vh !important;
     }
+    .req-field{
+        color: red;
+        font-weight: bold;
+    }
 </style>
 
 @show
@@ -52,7 +56,7 @@
                                 <div class="wprt-spacer clearfix" data-desktop="15" data-mobi="15" data-smobi="15"></div>
 
                                 <span class="form-control-wrap your-name">
-                                    <label>Size of Employee</label>
+                                    <label><span class="req-field">*</span> Size of Employee</label>
                                     <select id="size_of_employee" name="size_of_employee" value="" class="form-control">
                                         <option value="{{ $userDetails[0]->size_of_employee }}">{{ $userDetails[0]->size_of_employee }}</option>
                                         <option value="1">1</option>
@@ -67,17 +71,17 @@
 
 
                                 <span class="form-control-wrap your-phone">
-                                    <label>Company/Shop Name</label>
+                                    <label><span class="req-field">*</span> Company/Shop Name</label>
                                     <input type="text" tabindex="2" id="station_name" name="station_name" value="{{ $userDetails[0]->station_name }}" class="form-control" placeholder="Company/Shop Name" readonly>
                                 </span>
 
                                 <span class="form-control-wrap your-email">
-                                    <label>Company/Shop Address</label>
+                                    <label><span class="req-field">*</span> Company/Shop Address</label>
                                     <input type="text" tabindex="3" id="station_address" name="station_address" value="{{ $userDetails[0]->address }}" class="form-control" placeholder="Company/Shop Address *" required>
                                 </span>
 
                                 <span class="form-control-wrap your-phone">
-                                    <label>City</label>
+                                    <label><span class="req-field">*</span> City</label>
                                     <input type="text" tabindex="2" id="city" name="city" value="{{ $userDetails[0]->city }}" class="form-control" placeholder="City *" required>
                                 </span>
 
@@ -87,14 +91,14 @@
                                 </span>
 
                                 <span class="form-control-wrap your-phone">
-                                    <label>Country</label>
+                                    <label><span class="req-field">*</span> Country</label>
                                     <select id="countryzee" tabindex="3" class="form-control" name="country" autocomplete="country">
                                         <option value="{{ $userDetails[0]->country }}"></option>
                                     </select>
                                 </span>
 
                                 <span class="form-control-wrap your-email">
-                                    <label>State/Province</label>
+                                    <label><span class="req-field">*</span> State/Province</label>
                                     <select id="statezee" tabindex="2" class="form-control" name="state" autocomplete="state">
                                         <option value="{{ $userDetails[0]->state }}"></option>
                                     </select>
@@ -103,12 +107,12 @@
 
 
                                 <span class="form-control-wrap your-phone">
-                                    <label>Year Started Since</label>
+                                    <label><span class="req-field">*</span> Year Started Since</label>
                                     <input type="month" min="1900-01" max="{{ date('Y-m') }}" value="{{ date('Y-m') }}" tabindex="2" id="year_started_since" name="year_started_since" class="form-control" placeholder="Year started since *" required>
                                 </span>
 
                                 <span class="form-control-wrap">
-                                    <label>Year of practical experience</label>
+                                    <label><span class="req-field">*</span> Year of practical experience</label>
                                     <input type="text" tabindex="3" id="year_of_practice" name="year_of_practice" value="{{ $userDetails[0]->year_of_practice }}" class="form-control" placeholder="Year of practical experience *" required>
                                 </span>
 
@@ -129,17 +133,17 @@
                                 <div class="wprt-spacer clearfix" data-desktop="15" data-mobi="15" data-smobi="15"></div>
 
                                 <span class="form-control-wrap your-make">
-                                    <label>Fullname</label>
+                                    <label><span class="req-field">*</span> Fullname</label>
                                     <input type="text" tabindex="4" id="fullname" name="fullname" value="{{ $userDetails[0]->name }}" class="form-control" placeholder="Fullname" @if($userDetails[0]->name != "") readonly="" @endif>
                                 </span>
 
                                 <span class="form-control-wrap your-mileage">
-                                    <label>Telephone</label>
+                                    <label><span class="req-field">*</span> Telephone</label>
                                     <input type="text" tabindex="7" id="phone_number" name="phone_number" value="{{ $userDetails[0]->phone_number }}" class="form-control" placeholder="Telephone">
                                 </span>
 
                                 <span class="form-control-wrap">
-                                    <label>Email Address</label>
+                                    <label><span class="req-field">*</span> Email Address</label>
                                     @php
                                         $email = explode(", ", $userDetails[0]->email);
                                         if(count($email) > 0){
@@ -180,7 +184,7 @@
                                 <div class="wprt-spacer clearfix" data-desktop="15" data-mobi="15" data-smobi="15"></div>
 
                                 <span class="form-control-wrap your-make">
-                                    <label>Mechanical</label>
+                                    <label><span class="req-field">*</span> Mechanical</label>
                                     <select tabindex="4" id="mechanical_skill" name="mechanical_skill" class="form-control">
                                         <option value="{{ $userDetails[0]->mechanical_skill }}">{{ $userDetails[0]->mechanical_skill }}</option>
                                         <option value="Yes">Yes</option>
@@ -189,7 +193,7 @@
                                 </span>
 
                                 <span class="form-control-wrap your-mileage">
-                                    <label>Electrical</label>
+                                    <label><span class="req-field">*</span> Electrical</label>
                                     <select tabindex="4" id="electrical_skill" name="electrical_skill" class="form-control">
                                         <option value="{{ $userDetails[0]->electrical_skill }}">{{ $userDetails[0]->electrical_skill }}</option>
                                         <option value="Yes">Yes</option>
@@ -198,7 +202,7 @@
                                 </span>
 
                                 <span class="form-control-wrap">
-                                    <label>Transmissions</label>
+                                    <label><span class="req-field">*</span> Transmissions</label>
                                     <select tabindex="4" id="transmission_skill" name="transmission_skill" class="form-control">
                                         <option value="{{ $userDetails[0]->transmission_skill }}">{{ $userDetails[0]->transmission_skill }}</option>
                                         <option value="Yes">Yes</option>
@@ -207,7 +211,7 @@
                                 </span>
 
                                 <span class="form-control-wrap your-year">
-                                    <label>Body Works</label>
+                                    <label><span class="req-field">*</span> Body Works</label>
                                     <select tabindex="4" id="body_work_skill" name="body_work_skill" class="form-control">
                                         <option value="{{ $userDetails[0]->body_work_skill }}">{{ $userDetails[0]->body_work_skill }}</option>
                                         <option value="Yes">Yes</option>
@@ -217,7 +221,7 @@
                                 </span>
 
                                 <span class="form-control-wrap your-mileage">
-                                    <label>Others</label>
+                                    <label><span class="req-field">*</span> Others</label>
                                     <select tabindex="4" id="other_skills" name="other_skills" class="form-control">
                                         <option value="{{ $userDetails[0]->other_skills }}">{{ $userDetails[0]->other_skills }}</option>
                                         <option value="Yes">Yes</option>
@@ -248,7 +252,7 @@
                                 <div class="wprt-spacer clearfix" data-desktop="15" data-mobi="15" data-smobi="15"></div>
 
                                 <span class="form-control-wrap your-make">
-                                    <label>VIMfile Discount</label>
+                                    <label><span class="req-field">*</span> VIMfile Discount</label>
                                     <select tabindex="4" id="vimfile_discount" name="vimfile_discount" class="form-control">
                                         <option value="{{ $userDetails[0]->vimfile_discount }}">{{ $userDetails[0]->vimfile_discount }}</option>
                                         <option value="Yes">Yes</option>
@@ -258,7 +262,7 @@
                                 
                                 
                                 <span class="form-control-wrap your-discount-select disp-0">
-                                    <label>Select Discount Range</label>
+                                    <label><span class="req-field">*</span> Select Discount Range</label>
                                     <select class="form-control" id="discountPercent" name="discountPercent">
                                         <option>Select range</option>
                                         @if($discount = \App\MinimumDiscount::where('discount', 'discount')->get())
@@ -275,7 +279,7 @@
                                 </span>
 
                                 <span class="form-control-wrap your-mileage">
-                                    <label>Repair Guaranteed</label>
+                                    <label><span class="req-field">*</span> Repair Guaranteed</label>
                                     <select tabindex="4" id="repair_guaranteed" name="repair_guaranteed" class="form-control">
                                         <option value="{{ $userDetails[0]->repair_guaranteed }}">{{ $userDetails[0]->repair_guaranteed }}</option>
                                         <option value="Yes">Yes</option>
@@ -284,7 +288,7 @@
                                 </span>
 
                                 <span class="form-control-wrap">
-                                    <label>Free Estimates</label>
+                                    <label><span class="req-field">*</span> Free Estimates</label>
                                     <select tabindex="4" id="free_estimated" name="free_estimated" class="form-control">
                                         <option value="{{ $userDetails[0]->free_estimated }}">{{ $userDetails[0]->free_estimated }}</option>
                                         <option value="Yes">Yes</option>
@@ -293,7 +297,7 @@
                                 </span>
 
                                 <span class="form-control-wrap">
-                                    <label>Walks-in Welcome</label>
+                                    <label><span class="req-field">*</span> Walks-in Welcome</label>
                                     <select tabindex="4" id="walk_in_specified" name="walk_in_specified" class="form-control">
                                         <option value="{{ $userDetails[0]->walk_in_specified }}">{{ $userDetails[0]->walk_in_specified }}</option>
                                         <option value="Yes">Yes</option>
@@ -302,17 +306,17 @@
                                 </span>
 
                                 <span class="form-control-wrap">
-                                    <label>Others</label>
+                                    <label><span class="req-field">*</span> Others</label>
                                     <input type="text" tabindex="4" id="other_value_added" name="other_value_added" value="{{ $userDetails[0]->other_value_added }}" class="form-control" placeholder="Other Added Value">
                                 </span>
 
                                 <span class="form-control-wrap your-mileage">
-                                    <label>Average Waiting Period</label>
+                                    <label><span class="req-field">*</span> Average Waiting Period</label>
                                     <input type="text" tabindex="4" id="average_waiting" name="average_waiting" value="{{ $userDetails[0]->average_waiting }}" class="form-control" placeholder="Average Waiting Period">
                                 </span>
 
                                 <span class="form-control-wrap your-year">
-                                    <label>Hours of Operation</label>
+                                    <label><span class="req-field">*</span> Hours of Operation</label>
                                     <input type="text" tabindex="4" id="hours_of_operation" name="hours_of_operation" value="{{ $userDetails[0]->hours_of_operation }}" class="form-control" placeholder="Hours of Operation">
 
                                 </span>
@@ -334,7 +338,7 @@
                                 <div class="wprt-spacer clearfix" data-desktop="15" data-mobi="15" data-smobi="15"></div>
 
                                 <span class="form-control-wrap your-make">
-                                    <label>Wi-Fi</label>
+                                    <label><span class="req-field">*</span> Wi-Fi</label>
                                     <select tabindex="4" id="wifi" name="wifi" class="form-control">
                                         <option value="{{ $userDetails[0]->wifi }}">{{ $userDetails[0]->wifi }}</option>
                                         <option value="Yes">Yes</option>
@@ -343,7 +347,7 @@
                                 </span>
 
                                 <span class="form-control-wrap your-mileage">
-                                    <label>Gender Neutral Rest Room</label>
+                                    <label><span class="req-field">*</span> Gender Neutral Rest Room</label>
                                     <select tabindex="4" id="restroom" name="restroom" class="form-control">
                                         <option value="{{ $userDetails[0]->restroom }}">{{ $userDetails[0]->restroom }}</option>
                                         <option value="Yes">Yes</option>
@@ -352,7 +356,7 @@
                                 </span>
 
                                 <span class="form-control-wrap">
-                                    <label>Lounge</label>
+                                    <label><span class="req-field">*</span> Lounge</label>
                                     <select tabindex="4" id="lounge" name="lounge" class="form-control">
                                         <option value="{{ $userDetails[0]->lounge }}">{{ $userDetails[0]->lounge }}</option>
                                         <option value="Yes">Yes</option>
@@ -361,7 +365,7 @@
                                 </span>
 
                                 <span class="form-control-wrap your-year">
-                                    <label>Parking Space</label>
+                                    <label><span class="req-field">*</span> Parking Space</label>
                                     <select tabindex="4" id="parking_space" name="parking_space" class="form-control">
                                         <option value="{{ $userDetails[0]->parking_space }}">{{ $userDetails[0]->parking_space }}</option>
                                         <option value="Yes">Yes</option>
@@ -379,7 +383,7 @@
                                 <div class="wprt-divider has-icon height-1px">
                                     <div class="divider-icon">
                                         <span class="divider-icon-before divider-center divider-double"></span>
-                                        <h2 class="title">History</h2>
+                                        <h2 class="title"><span class="req-field">*</span> History</h2>
                                         <span class="divider-icon-after divider-center divider-double"></span>
                                     </div>
                                 </div>
@@ -389,13 +393,13 @@
 
 
                                 <span class="form-control-wrap">
-                                    <label>Year Established</label>
+                                    <label><span class="req-field">*</span> Year Established</label>
 
                                     <input type="month" min="1900-01" max="{{ date('Y-m') }}" value="{{ date('Y-m') }}" tabindex="7" id="year_established" name="year_established" class="form-control" placeholder="Year Established">
                                 </span>
 
                                 <span class="form-control-wrap">
-                                    <label>Background</label>
+                                    <label><span class="req-field">*</span> Background</label>
                                     <textarea id="background" type="text" class="form-control" name="background" autocomplete="background">{!! $userDetails[0]->background !!}</textarea>
                                 </span>
                                 <br>

@@ -35,11 +35,23 @@
 
     <!-- banner part start-->
     <section class="banner_parts">
-        
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <div class="banner_text">
+                        <div class="banner_text_iner">
+                            <h1 class="m-t-150" style="color: #fff; font-weight: bold; text-align: center;">See BusyWrench in Action. Try for FREE for 30days</h1>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
     <!-- banner part start-->
     <br><br>
     <div class="container">
+        
         <div class="box">
         <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
           {{-- <li class="nav-item">

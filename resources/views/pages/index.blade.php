@@ -313,6 +313,10 @@ a.nav-link {
                                   <a class="nav-link" title="About" href="{{ route('About') }}" style="font-size: 12.5px;">About BusyWrench</a>
                               </li>
 
+                              <li class="nav-item">
+                                <a class="nav-link" title="Features" href="{{ route('Features') }}" style="font-size: 12.5px;">Features</a>
+                            </li>
+
                               <li class="nav-item disp-0">
                                   @if(Auth::user())
                                   @if(Auth::user()->userType != "Business")
@@ -373,9 +377,9 @@ a.nav-link {
 
                               @else
 
-                              <li class="nav-item">
+                              {{-- <li class="nav-item">
                                   <a class="nav-link" title="Ask Expert" href="{{ route('register') }}" style="font-size: 12.5px;">Ask Expert</a>
-                              </li>
+                              </li> --}}
 
                               <li class="nav-item">
                                   <a class="nav-link" title="Claim Business For FREE" href="{{ route('claimbusiness') }}" style="font-size: 12.5px;">Claim Business For FREE</a>
@@ -399,7 +403,7 @@ a.nav-link {
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" title="Login" href="{{ route('register') }}" style="font-size: 12.5px;">Register</a>
+                                <a class="nav-link" title="Get a Free Trial" href="{{ route('register') }}" style="font-size: 12.5px;">Get a Free Trial</a>
                             </li>
                                   
                               @endguest
@@ -1220,7 +1224,7 @@ a.nav-link {
 
         <div class="widget item-absolute  " id="element-167">
   <a
-    href="#page-block-e4tsvhvr0j9" 
+    href="{{ route('register') }}" 
     id="link-ld0rpt0z6z"
     
     class="onpage-link btn    item-block"
