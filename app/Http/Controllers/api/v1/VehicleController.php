@@ -169,6 +169,35 @@ class VehicleController extends Controller
                                     }
                                     else{
                                         // Insert car record
+
+                                        // Check if has file
+
+                                        if($request->hasFile('vehicle_image')){
+
+                                            //Get filename with extension
+                                            $filenameWithExt = $request->file('vehicle_image')->getClientOriginalName();
+                                            // Get just filename
+                                            $filename = pathinfo($filenameWithExt , PATHINFO_FILENAME);
+                                            // Get just extension
+                                            $extension = $request->file('vehicle_image')->getClientOriginalExtension();
+                                            // Filename to store
+                                            // $fileNameToStore = rand().'_'.time().'.'.$extension;
+                                            $filenamestore = rand().'_'.time().'.'.$extension;
+
+                                            $fileNameToStore = "http://".$_SERVER['HTTP_HOST']."/uploads/".$filenamestore;
+
+
+                                            // $path = $request->file('vehicle_image')->move(public_path('/uploads/'), $filenamestore);
+
+                                            $path = $request->file('vehicle_image')->move(public_path('../../uploads/'), $filenamestore);
+                                
+                                            
+                                
+                                        }
+                                        else{
+                                            $fileNameToStore = 'https://vimfile.com/img/icon/vimlogo.png';
+                                        }
+
                                         $insertRecord =  Carrecord::create([
                                             'vehicle_reg_no' => $request->vehicle_reg_no,
                                             'country_of_reg' => $request->country_of_reg,
@@ -186,6 +215,7 @@ class VehicleController extends Controller
                                             'model' => $request->vehicle_model,
                                             'location' => $request->city.' '.$request->state,
                                             'vehicle_nickname' => $request->vehicle_make.'_'.$request->vehicle_model,
+                                            'file' => $fileNameToStore
 
                                         ]);
 
@@ -201,6 +231,33 @@ class VehicleController extends Controller
                                     // Create User Information
 
                                     // Insert car record
+
+                                    if($request->hasFile('vehicle_image')){
+
+                                        //Get filename with extension
+                                        $filenameWithExt = $request->file('vehicle_image')->getClientOriginalName();
+                                        // Get just filename
+                                        $filename = pathinfo($filenameWithExt , PATHINFO_FILENAME);
+                                        // Get just extension
+                                        $extension = $request->file('vehicle_image')->getClientOriginalExtension();
+                                        // Filename to store
+                                        // $fileNameToStore = rand().'_'.time().'.'.$extension;
+                                        $filenamestore = rand().'_'.time().'.'.$extension;
+
+                                        $fileNameToStore = "http://".$_SERVER['HTTP_HOST']."/uploads/".$filenamestore;
+
+
+                                        // $path = $request->file('vehicle_image')->move(public_path('/uploads/'), $filenamestore);
+
+                                        $path = $request->file('vehicle_image')->move(public_path('../../uploads/'), $filenamestore);
+                            
+                                        
+                            
+                                    }
+                                    else{
+                                        $fileNameToStore = 'https://vimfile.com/img/icon/vimlogo.png';
+                                    }
+
                                     $insertRecord =  Carrecord::create([
                                         'vehicle_reg_no' => $request->vehicle_reg_no,
                                         'country_of_reg' => $request->country_of_reg,
@@ -218,6 +275,7 @@ class VehicleController extends Controller
                                         'model' => $request->vehicle_model,
                                         'location' => $request->city.' '.$request->state,
                                         'vehicle_nickname' => $request->vehicle_make.'_'.$request->vehicle_model,
+                                        'file' => $fileNameToStore
 
                                     ]);
 
@@ -248,6 +306,33 @@ class VehicleController extends Controller
         $carexist = Carrecord::where('vehicle_reg_no', $request->vehicle_reg_no)->get();
 
         if(count($carexist) > 0){
+
+            if($request->hasFile('vehicle_image')){
+
+                //Get filename with extension
+                $filenameWithExt = $request->file('vehicle_image')->getClientOriginalName();
+                // Get just filename
+                $filename = pathinfo($filenameWithExt , PATHINFO_FILENAME);
+                // Get just extension
+                $extension = $request->file('vehicle_image')->getClientOriginalExtension();
+                // Filename to store
+                // $fileNameToStore = rand().'_'.time().'.'.$extension;
+                $filenamestore = rand().'_'.time().'.'.$extension;
+
+                $fileNameToStore = "http://".$_SERVER['HTTP_HOST']."/uploads/".$filenamestore;
+
+
+                // $path = $request->file('vehicle_image')->move(public_path('/uploads/'), $filenamestore);
+
+                $path = $request->file('vehicle_image')->move(public_path('../../uploads/'), $filenamestore);
+    
+                Carrecord::where('vehicle_reg_no', $request->vehicle_reg_no)->update(['file' => $fileNameToStore]);
+    
+            }
+            else{
+                $fileNameToStore = 'https://vimfile.com/img/icon/vimlogo.png';
+            }
+
             // Update
             $updtRecord =  Carrecord::where('vehicle_reg_no', $request->vehicle_reg_no)->update([
                 'country_of_reg' => $request->country_of_reg,
@@ -266,7 +351,10 @@ class VehicleController extends Controller
             ]);
 
 
-            $resData = ['data' => $updtRecord, 'message' => 'Vehicle Information Updated', 'status' => 200];
+            $data = Carrecord::where('vehicle_reg_no', $request->vehicle_reg_no)->first();
+
+
+            $resData = ['data' => $data, 'message' => 'Vehicle Information Updated', 'status' => 200];
             $status = 200;
 
         }
@@ -1002,6 +1090,7 @@ class VehicleController extends Controller
 
 
 
+
         return $this->returnJSON($resData, $status);
     }
 
@@ -1143,7 +1232,7 @@ class VehicleController extends Controller
 
     public function recordListing($email){
 
-        $maintrec = Vehicleinfo::select(DB::raw('vehicle_licence, date, service_type, mileage, service_option, total_cost, service_note'))->where('email', $email)->orderBy('created_at', 'DESC')->get();
+        $maintrec = Vehicleinfo::select(DB::raw('id, vehicle_licence as vehicleLicence, date, service_type as serviceType, mileage, service_option as serviceOption, total_cost as totalCost, service_note as serviceNote, material_cost as materialCost1, material_cost2 as materialCost2, material_cost3 as materialCost3, material_cost4 as materialCost4, material_cost5 as materialCost5, material_cost6 as materialCost6, material_cost7 as materialCost7, material_cost8 as materialCost8, material_cost9 as materialCost9, material_cost10 as materialCost10, labour_cost as labourCost1, labour_cost2 as labourCost2, labour_cost3 as labourCost3, labour_cost4 as labourCost4, labour_cost5 as labourCost5, labour_cost6 as labourCost6, labour_cost7 as labourCost7, labour_cost8 as labourCost8, labour_cost9 as labourCost9, labour_cost10 as labourCost10, update_by as updatedBy'))->where('email', $email)->orderBy('created_at', 'DESC')->get();
 
             if(count($maintrec) > 0){
 

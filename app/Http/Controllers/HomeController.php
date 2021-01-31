@@ -2532,6 +2532,7 @@ class HomeController extends Controller
                     $currinsMile = Vehicleinfo::where('email', Auth::user()->email)->where('service_type', 'LIKE', '%insurance%')->orderBy('created_at', 'DESC')->take(1)->get('mileage');
 
                     if(count($currinsMile) > 0){
+
                         $insMile = $currinsMile[0]->mileage;
 
                         // Calc inspection Prorated
@@ -3688,6 +3689,7 @@ class HomeController extends Controller
 
         $getinvItem = DB::table('create_inventory_item')
             ->join('purchase_order', 'create_inventory_item.busID', '=', 'purchase_order.busID')
+            ->where('create_inventory_item.busID', Auth::user()->busID)
             ->orderBy('create_inventory_item.created_at', 'DESC')->get();
 
         $getPurchaseOrder = PurchaseOrder::where('busID', Auth::user()->busID)->orderBy('created_at', 'DESC')->get();
@@ -8639,16 +8641,18 @@ class HomeController extends Controller
             $getWO = Estimate::where('estimate_id', $req->post_id)->where('work_order', '1')->get();
 
             // Update Create Inventory Table;
-            $minQtys = CreateInventoryItem::where('description', $req->inventory_list1)->where('busID', $req->busID)->get();
-            $minQtys2 = CreateInventoryItem::where('description', $req->inventory_list2)->where('busID', $req->busID)->get();
-            $minQtys3 = CreateInventoryItem::where('description', $req->inventory_list3)->where('busID', $req->busID)->get();
+            $minQtys = CreateInventoryItem::where('description', $getEstval[0]->inventory_list)->where('busID', Auth::user()->busID)->get();
+            $minQtys2 = CreateInventoryItem::where('description', $getEstval[0]->inventory_list2)->where('busID', Auth::user()->busID)->get();
+            $minQtys3 = CreateInventoryItem::where('description', $getEstval[0]->inventory_list3)->where('busID', Auth::user()->busID)->get();
+
+
 
             if(count($minQtys) > 0){
                 // Update
-                $matQty = $req->material_qty;
-                $newRes = $minQty[0]['qtyathand'] - $matQty;
+                $matQty = $getEstval[0]->material_qty;
+                $newRes = $minQtys[0]['qtyathand'] - $matQty;
 
-                CreateInventoryItem::where('description', $req->inventory_list1)->where('busID', $req->busID)->update(['qtyathand' => $newRes]);
+                CreateInventoryItem::where('description', $getEstval[0]->inventory_list)->where('busID', Auth::user()->busID)->update(['qtyathand' => $newRes]);
             }
             else{
                 $resData = ['res' => 'Inventory out of store', 'message' => 'warning'];
@@ -8656,10 +8660,10 @@ class HomeController extends Controller
 
             if(count($minQtys2) > 0){
                 // Update
-                $matQty2 = $req->material_qty2;
-                $newRes2 = $minQty[0]['qtyathand'] - $matQty2;
+                $matQty2 = $getEstval[0]->material_qty2;
+                $newRes2 = $minQtys2[0]['qtyathand'] - $matQty2;
 
-                CreateInventoryItem::where('description', $req->inventory_list2)->where('busID', $req->busID)->update(['qtyathand' => $newRes2]);
+                CreateInventoryItem::where('description', $getEstval[0]->inventory_list2)->where('busID', Auth::user()->busID)->update(['qtyathand' => $newRes2]);
             }
             else
             {
@@ -8667,10 +8671,10 @@ class HomeController extends Controller
             }
             if(count($minQtys3) > 0){
                 // Update
-                $matQty3 = $req->material_qty3;
-                $newRes3 = $minQty[0]['qtyathand'] - $matQty3;
+                $matQty3 = $getEstval[0]->material_qty3;
+                $newRes3 = $minQtys3[0]['qtyathand'] - $matQty3;
 
-                CreateInventoryItem::where('description', $req->inventory_list3)->where('busID', $req->busID)->update(['qtyathand' => $newRes3]);
+                CreateInventoryItem::where('description', $getEstval[0]->inventory_list3)->where('busID', Auth::user()->busID)->update(['qtyathand' => $newRes3]);
             }
             else
             {
@@ -8695,7 +8699,8 @@ class HomeController extends Controller
 
         if(count($getrecs) > 0){
 
-            // dd($getrecs);
+
+
             // Update table
             $insVehicleinfo = Vehicleinfo::insert(['estimate_id' => $req->post_id, 'opportunity_id' => $req->opportunity_id, 'email' => $getrecs[0]['email'], 'telephone' => $getrecs[0]['telephone'], 'busID' => $getrecs[0]['busID'], 'vehicle_licence' => $getrecs[0]['vehicle_licence'], 'date' => $getrecs[0]['date'], 'service_type' => $getrecs[0]['service_type'], 'make' => $getrecs[0]['make'], 'model' => $getrecs[0]['model'], 'service_option' => $getrecs[0]['service_option'], 'service_item_spec' => $getrecs[0]['service_item_spec'], 'manufacturer' => $getrecs[0]['manufacturer'], 'material_qty' => $getrecs[0]['material_qty'], 'material_cost' => $getrecs[0]['material_cost'], 'labour_qty' => $getrecs[0]['labour_qty'], 'labour_cost' => $getrecs[0]['labour_cost'], 'other_qty' => $getrecs[0]['other_qty'], 'other_cost' => $getrecs[0]['other_cost'], 'total_cost' => $getrecs[0]['total_cost'], 'service_note' => $getrecs[0]['service_note'], 'mileage' => $getrecs[0]['mileage'], 'chassis_no' => $getrecs[0]['chassis_no'], 'location' => $getrecs[0]['location'], 'file' => $getrecs[0]['file'], 'update_by' => $getrecs[0]['update_by'], 'material_qty2' => $getrecs[0]['material_qty2'], 'material_qty3' => $getrecs[0]['material_qty3'],'material_qty4' => $getrecs[0]['material_qty4'],'material_qty5' => $getrecs[0]['material_qty5'],'material_qty6' => $getrecs[0]['material_qty6'],'material_qty7' => $getrecs[0]['material_qty7'],'material_qty8' => $getrecs[0]['material_qty8'],'material_qty9' => $getrecs[0]['material_qty9'],'material_qty10' => $getrecs[0]['material_qty10'], 'labour_qty2' => $getrecs[0]['labour_qty2'],'labour_qty3' => $getrecs[0]['labour_qty3'],'labour_qty3' => $getrecs[0]['labour_qty3'],'labour_qty4' => $getrecs[0]['labour_qty4'],'labour_qty5' => $getrecs[0]['labour_qty5'],'labour_qty6' => $getrecs[0]['labour_qty6'],'labour_qty7' => $getrecs[0]['labour_qty7'],'labour_qty8' => $getrecs[0]['labour_qty8'],'labour_qty9' => $getrecs[0]['labour_qty9'],'labour_qty10' => $getrecs[0]['labour_qty10'], 'material_cost2' => $getrecs[0]['material_cost2'], 'material_cost3' => $getrecs[0]['material_cost3'],'material_cost4' => $getrecs[0]['material_cost4'],'material_cost5' => $getrecs[0]['material_cost5'],'material_cost6' => $getrecs[0]['material_cost6'],'material_cost7' => $getrecs[0]['material_cost7'],'material_cost8' => $getrecs[0]['material_cost8'],'material_cost9' => $getrecs[0]['material_cost9'],'material_cost10' => $getrecs[0]['material_cost10'], 'labour_cost2' => $getrecs[0]['labour_cost2'],'labour_cost3' => $getrecs[0]['labour_cost3'],'labour_cost4' => $getrecs[0]['labour_cost4'],'labour_cost5' => $getrecs[0]['labour_cost5'],'labour_cost6' => $getrecs[0]['labour_cost6'],'labour_cost7' => $getrecs[0]['labour_cost7'],'labour_cost8' => $getrecs[0]['labour_cost8'],'labour_cost9' => $getrecs[0]['labour_cost9'],'labour_cost10' => $getrecs[0]['labour_cost10'],'labour_hour' => $getrecs[0]['labour_hour'],'labour_rate' => $getrecs[0]['labour_rate'], 'manufacturer2' => $getrecs[0]['manufacturer2'], 'manufacturer3' => $getrecs[0]['manufacturer3'], 'service_item_spec2' => $getrecs[0]['service_item_spec2'], 'service_item_spec3' => $getrecs[0]['service_item_spec3'], 'inventory_list' => $getrecs[0]['inventory_list1'], 'inventory_amount' => $getrecs[0]['inventory_amount1'], 'inventory_note' => $getrecs[0]['inventory_addnote1'], 'inventory_list2' => $getrecs[0]['inventory_list2'], 'inventory_amount2' => $getrecs[0]['inventory_amount2'], 'inventory_note2' => $getrecs[0]['inventory_addnote2'], 'inventory_list3' => $getrecs[0]['inventory_list3'], 'inventory_amount3' => $getrecs[0]['inventory_amount3'], 'inventory_note3' => $getrecs[0]['inventory_addnote3'], 'technician' => $getrecs[0]['technician']]);
 
@@ -8720,7 +8725,7 @@ class HomeController extends Controller
 
                 // Send Mail
             $this->to = $getrecs[0]['email'];
-                // $this->to = "info@vimfile.com";
+                // $this->to = "bambo@vimfile.com";
                 $this->name = $userDet[0]->name;
             $this->from = $companyNameis;
             $this->licence = $getrecs[0]['vehicle_licence'];
@@ -8734,7 +8739,7 @@ class HomeController extends Controller
 
             $this->sendEmail($this->to, 'VIM File - New Maintenace Record');
 
-            $this->sendEmail($this->to, 'Your vehicle maintenance is completed');
+            $this->sendEmail($this->to, 'Your vehicle maintenance is now completed');
 
             $resData = ['res' => 'Successfully completed Maintenace', 'message' => 'success', 'link' => 'userDashboard'];
             }
@@ -8961,27 +8966,17 @@ class HomeController extends Controller
 
     public function createPO(Request $req){
 
-        $getPO = PurchaseOrder::where('purchase_order_no', $req->purchase_order_no)->where('busID', Auth::user()->busID)->get();
+            $insPO = PurchaseOrder::updateOrInsert(['purchase_order_no' => $req->purchase_order_no, 'busID' => Auth::user()->busID],['busID' => Auth::user()->busID,'post_id' => $req->post_id, 'vendor' => $req->vendor, 'purchase_order_no'=> $req->purchase_order_no, 'order_date'=> $req->order_date, 'expected_date'=> $req->expected_date, 'purchase_order_inventory_item'=> $req->purchase_order_inventory_item, 'purchase_order_qty'=> $req->purchase_order_qty, 'purchase_order_rate'=> $req->purchase_order_rate, 'purchase_order_totcost'=> $req->purchase_order_totcost, 'purchase_order_shippingcost'=> $req->purchase_order_shippingcost, 'purchase_order_discount'=> $req->purchase_order_discount, 'purchase_order_othercost'=> $req->purchase_order_othercost, 'purchase_order_tax'=> $req->purchase_order_tax, 'purchase_order_totalpurchaseorder'=> $req->purchase_order_totalpurchaseorder, 'purchase_order_shipto'=> $req->purchase_order_shipto, 'purchase_order_address1'=> $req->purchase_order_address1, 'purchase_order_address2'=> $req->purchase_order_address2, 'purchase_order_city'=> $req->purchase_order_city, 'purchase_order_state'=> $req->purchase_order_state, 'purchase_order_country'=> $req->purchase_order_country, 'purchase_order_zip'=> $req->purchase_order_zip, 'purchase_order_destphone'=> $req->purchase_order_destphone, 'purchase_order_destfax'=> $req->purchase_order_destfax, 'purchase_order_destmail'=> $req->purchase_order_destmail, 'purchase_order_orderby'=> $req->purchase_order_orderby]);
 
-        if(count($getPO) > 0){
-            // Update Record
-            PurchaseOrder::where('purchase_order_no', $req->purchase_order_no)->where('busID', Auth::user()->busID)->update(['busID' => Auth::user()->busID,'post_id' => $req->post_id, 'vendor' => $req->vendor, 'purchase_order_no'=> $req->purchase_order_no, 'order_date'=> $req->order_date, 'expected_date'=> $req->expected_date, 'purchase_order_inventory_item'=> $req->purchase_order_inventory_item, 'purchase_order_qty'=> $req->purchase_order_qty, 'purchase_order_rate'=> $req->purchase_order_rate, 'purchase_order_totcost'=> $req->purchase_order_totcost, 'purchase_order_shippingcost'=> $req->purchase_order_shippingcost, 'purchase_order_discount'=> $req->purchase_order_discount, 'purchase_order_othercost'=> $req->purchase_order_othercost, 'purchase_order_tax'=> $req->purchase_order_tax, 'purchase_order_totalpurchaseorder'=> $req->purchase_order_totalpurchaseorder, 'purchase_order_shipto'=> $req->purchase_order_shipto, 'purchase_order_address1'=> $req->purchase_order_address1, 'purchase_order_address2'=> $req->purchase_order_address2, 'purchase_order_city'=> $req->purchase_order_city, 'purchase_order_state'=> $req->purchase_order_state, 'purchase_order_country'=> $req->purchase_order_country, 'purchase_order_zip'=> $req->purchase_order_zip, 'purchase_order_destphone'=> $req->purchase_order_destphone, 'purchase_order_destfax'=> $req->purchase_order_destfax, 'purchase_order_destmail'=> $req->purchase_order_destmail, 'purchase_order_orderby'=> $req->purchase_order_orderby]);
-        }
-        else{
-            $insPO = PurchaseOrder::insert(['busID' => Auth::user()->busID,'post_id' => $req->post_id, 'vendor' => $req->vendor, 'purchase_order_no'=> $req->purchase_order_no, 'order_date'=> $req->order_date, 'expected_date'=> $req->expected_date, 'purchase_order_inventory_item'=> $req->purchase_order_inventory_item, 'purchase_order_qty'=> $req->purchase_order_qty, 'purchase_order_rate'=> $req->purchase_order_rate, 'purchase_order_totcost'=> $req->purchase_order_totcost, 'purchase_order_shippingcost'=> $req->purchase_order_shippingcost, 'purchase_order_discount'=> $req->purchase_order_discount, 'purchase_order_othercost'=> $req->purchase_order_othercost, 'purchase_order_tax'=> $req->purchase_order_tax, 'purchase_order_totalpurchaseorder'=> $req->purchase_order_totalpurchaseorder, 'purchase_order_shipto'=> $req->purchase_order_shipto, 'purchase_order_address1'=> $req->purchase_order_address1, 'purchase_order_address2'=> $req->purchase_order_address2, 'purchase_order_city'=> $req->purchase_order_city, 'purchase_order_state'=> $req->purchase_order_state, 'purchase_order_country'=> $req->purchase_order_country, 'purchase_order_zip'=> $req->purchase_order_zip, 'purchase_order_destphone'=> $req->purchase_order_destphone, 'purchase_order_destfax'=> $req->purchase_order_destfax, 'purchase_order_destmail'=> $req->purchase_order_destmail, 'purchase_order_orderby'=> $req->purchase_order_orderby]);
-
-            if($insPO == true){
+            if($insPO){
                 if($req->action == "submit"){
-                    $resData = ['res' => 'Successfully Submitted', 'message' => 'success', 'link' => 'userDashboard?c=manageinventory', 'action' => 'submit'];
+                    $resData = ['res' => 'Successfully Submitted', 'message' => 'success', 'link' => 'userDashboard?c=responsepurchaseorder', 'action' => 'submit'];
                 }
                 elseif ($req->action == 'printmail') {
                     $resData = ['res' => 'Fetching', 'message' => 'success', 'link' => $req->post_id, 'action' => 'printmail'];
                 }
             }
-            else{
-                $resData = ['res' => 'Something went wrong!', 'message' => 'error'];
-            }
-        }
+
 
         return $this->returnJSON($resData);
     }
@@ -9027,7 +9022,7 @@ class HomeController extends Controller
 
                     $genInv = PurchaseOrder::where('post_id', $req->post_id)->where('receive_order', '1')->get();
 
-                $resData = ['res' => 'Generating Invoice..', 'message' => 'success', 'action' => 'receiveorder', 'data' => json_encode($genInv)];
+                $resData = ['res' => 'Generate Invoice..', 'message' => 'success', 'action' => 'receiveorder', 'data' => json_encode($genInv)];
             }
             elseif($req->val == "makepayment"){
                 // Update Table, and goto payment
@@ -9037,7 +9032,7 @@ class HomeController extends Controller
             }
             elseif($req->val == "movetoinventory"){
                 // Update Table, and Move record to Inventory
-                PurchaseOrder::where('post_id', $req->post_id)->update(['receive_order' => '0', 'make_payment' => '0', 'move_to_inventory' => '1']);
+                PurchaseOrder::where('post_id', $req->post_id)->update(['receive_order' => '0', 'make_payment' => '0', 'move_to_inventory' => '1', 'status' => 1]);
 
                $genmoveInv = DB::table('create_inventory_item')
             ->join('purchase_order', 'create_inventory_item.busID', '=', 'purchase_order.busID')->where('purchase_order.move_to_inventory', '1')
@@ -9057,7 +9052,7 @@ class HomeController extends Controller
 
             }
 
-                $resData = ['res' => 'Moved to Inventory', 'message' => 'success', 'action' => 'movetoinventory', 'data' => json_encode($genmoveInv), 'link' => 'userDashboard?c=manageinventory'];
+                $resData = ['res' => 'Moved to Inventory', 'message' => 'success', 'action' => 'movetoinventory', 'data' => json_encode($genmoveInv), 'link' => 'userDashboard?c=vehiclemanageinventory'];
             }
         }
         else{
@@ -9067,6 +9062,11 @@ class HomeController extends Controller
         return $this->returnJSON($resData);
     }
 
+
+
+
+    // Create Inventory Item
+    
     public function createInvItem(Request $req){
         // Check if record exist
         $checkInvitem = CreateInventoryItem::where('post_id', $req->post_id)->get();
@@ -9103,6 +9103,7 @@ class HomeController extends Controller
 
                     // Update Purchase Order
                     $updtPOorder = PurchaseOrder::where('post_id', $req->post_id)->where('busID', Auth::user()->busID)->update(['receive_order' => '0', 'make_payment' => '1']);
+
                     if($updtPOorder == 1){
                         $resData = ['res' => 'Saved Payment', 'message' => 'success', 'action' => 'payment', 'link' => 'userDashboard?c=manageinventory'];
                     }
@@ -9112,6 +9113,9 @@ class HomeController extends Controller
 
                 }
                  elseif ($req->val == "printmail") {
+
+                    PurchaseOrder::where('post_id', $req->post_id)->where('busID', Auth::user()->busID)->update(['status' => '1']);
+
                     $resData = ['res' => 'Saved Payment', 'message' => 'success', 'link' => $req->post_id, 'action' => 'printmail'];
                  }
 
@@ -9138,6 +9142,7 @@ class HomeController extends Controller
 
             }
              elseif ($req->val == "printmail") {
+                PurchaseOrder::where('post_id', $req->post_id)->where('busID', Auth::user()->busID)->update(['status' => '1']);
                 $resData = ['res' => 'Saved Payment', 'message' => 'success', 'link' => $req->post_id, 'action' => 'printmail'];
              }
         }
@@ -9457,6 +9462,9 @@ class HomeController extends Controller
     }
 
     public function fetchtheNeedful(Request $req){
+
+
+        
         if($req->action == "inventory"){
             $getrec = DB::table('create_inventory_item')
             ->join('purchase_order', 'create_inventory_item.busID', '=', 'purchase_order.busID')->where('create_inventory_item.description', $req->inventory)
@@ -9483,6 +9491,7 @@ class HomeController extends Controller
 
            // dd($getdata);
            if(count($getdata) > 0){
+
 
                 $hour_rate = $getdata[0]->rate_per_hour;
                 $flate_rate = $getdata[0]->flat_rate;

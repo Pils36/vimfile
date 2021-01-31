@@ -657,10 +657,10 @@ class Controller extends BaseController
         $objDemo->to = $this->to;
         $objDemo->message = $this->message;
       }
-      elseif($purpose == "Your vehicle maintenance is completed"){
-        $objDemo->name = $this->name;
-        $objDemo->to = $this->to;
-      }
+      // elseif($purpose == "Your vehicle maintenance is completed"){
+      //   $objDemo->name = $this->name;
+      //   $objDemo->to = $this->to;
+      // }
       elseif($purpose == "A new mobile mechanic just signed up on VIM File"){
         $objDemo->name = $this->name;
         $objDemo->to = $this->to;
@@ -746,6 +746,9 @@ class Controller extends BaseController
       }
 
       elseif($purpose == "VIM File - New Maintenace Record"){
+
+        // dd('Item 1: '.$this->licence);
+
         $objDemo->to = $this->to;
         $objDemo->name = $this->name;
         $objDemo->email = $this->email;
@@ -1059,7 +1062,9 @@ class Controller extends BaseController
         $objDemo->curr_mileage = $this->curr_mileage;
       }
 
-      elseif($purpose == "Your vehicle maintenance is completed"){
+      elseif($purpose == "Your vehicle maintenance is now completed"){
+
+
         $objDemo->to = $this->to;
         $objDemo->name = $this->name;
         $objDemo->email = $this->email;

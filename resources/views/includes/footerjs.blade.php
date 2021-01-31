@@ -265,6 +265,8 @@ function logouts(){
         var url = new URL(url_string);
         var c = url.searchParams.get("c");
 
+        
+
         if(c == "business"){
           $("#business-tab").click();
         }
@@ -294,7 +296,23 @@ function logouts(){
         }
 
         if(c == "manageinventory"){
+          // Click on Shop Management and click on manageinventory tab
+          $('#recordmaintenance-tab').click();
           $("#manageinventory-tab").click();
+          $("#createpurchase-tab").click();
+        }
+
+        if(c == "responsepurchaseorder"){
+          // Click on Shop Management and click on managae purchase order tab
+          $('#recordmaintenance-tab').click();
+          $("#manageinventory-tab").click();
+          $("#managepurchase-tab").click();
+        }
+
+        if(c == "vehiclemanageinventory"){
+          // Click on Shop Management and click on vehicle maintenance tab
+          $('#recordmaintenance-tab').click();
+          $("#maintenance-tab").click();
         }
 
         if(c == "manageinventory#inventory"){
@@ -657,6 +675,8 @@ populateCountries("country_of_reg", "statez");
             $("#email").val('');
             $("#telephone").val('');
 
+            var mechFile;
+
             if($(".licenceKey").on("keydown keyup")){
 
                 if($(".licenceKey").val() != ""){
@@ -726,10 +746,10 @@ populateCountries("country_of_reg", "statez");
                         }
 
                         if(file != "noImage.png"){
-                          maint_rec = "<tr style='font-size: 11px;'><td>"+(v+1)+"</td><td>"+ k.vehicle_licence +"</td><td>"+ k.date +"</td><td>"+ k.service_type +"</td><td>"+ k.service_option +"</td><td>"+ k.total_cost +"</td><td>"+ k.service_note +"</td><td>"+ k.mileage +"</td><td><a style='font-size: 11px;' href='/uploads/"+ k.file +"' target='_blank'>Open file</a></td><td>&nbsp;</td><td>"+ k.update_by +"</td><td>"+ pay_status +"</td><td>"+views+"</td><tr>";
+                          maint_rec = "<tr style='font-size: 11px;'><td>"+(v+1)+"</td><td>"+ k.vehicle_licence +"</td><td>"+ k.date +"</td><td>"+ k.service_type +"</td><td>"+ k.service_option +"</td><td>"+ k.total_cost +"</td><td>"+ k.service_note +"</td><td>"+ k.mileage +"</td><td><a style='font-size: 11px;' href='/uploads/"+ k.file +"' target='_blank'>Open file</a></td><td>"+ k.update_by +"</td><td>"+ pay_status +"</td><td>"+views+"</td><tr>";
                         }
                         else{
-                          maint_rec = "<tr style='font-size: 11px;'><td>"+(v+1)+"</td><td>"+ k.vehicle_licence +"</td><td>"+ k.date +"</td><td>"+ k.service_type +"</td><td>"+ k.service_option +"</td><td>"+ k.total_cost +"</td><td>"+ k.service_note +"</td><td>"+ k.mileage +"</td><td>No file</td><td>&nbsp;</td><td>"+ k.update_by +"</td><td>"+ pay_status +"</td><td>"+views+"</td><tr>";
+                          maint_rec = "<tr style='font-size: 11px;'><td>"+(v+1)+"</td><td>"+ k.vehicle_licence +"</td><td>"+ k.date +"</td><td>"+ k.service_type +"</td><td>"+ k.service_option +"</td><td>"+ k.total_cost +"</td><td>"+ k.service_note +"</td><td>"+ k.mileage +"</td><td>No file</td><td>"+ k.update_by +"</td><td>"+ pay_status +"</td><td>"+views+"</td><tr>";
                         }
                         
 
@@ -741,8 +761,16 @@ populateCountries("country_of_reg", "statez");
                   // Start
                   // Estimate Record Information
                     $.each(res3, function(i,j){
+
+
+                        if(j.file != "noImage.png"){
+                          mechFile =  "<a style='font-size: 12px; color: darkblue; font-weight: bolder;' href='/uploads/"+j.file+"' download>Download file</a>";
+                        }
+                        else{
+                          mechFile = "No file";
+                        }
                         
-                            $('tbody.estimateorders').append("<tr style='font-size: 11px;'><td>"+(i+1)+"</td><td>"+j.vehicle_licence+"</td><td>"+j.date+"</td><td>"+j.service_type+"</td><td>"+j.service_option+"</td><td>"+j.total_cost+"</td><td>"+j.service_note+"</td><td>"+j.mileage+"</td><td><a style='font-size: 12px; color: darkblue; font-weight: bolder;' href='/uploads/"+j.file+"' download>Download file</a></td><td>"+j.update_by+"</td><td><i type='button' style='padding: 10px;' title='Edit' class='fas fa-edit text-danger' style='text-align: center; cursor: pointer;' onclick=editRecs(\'"+j.estimate_id+"'\)></i></td><td><i type='button' style='padding: 10px;' title='View More' class='fas fa-eye text-danger' style='text-align: center; cursor: pointer;' onclick=getPage(\'"+j.estimate_id+"'\)></i></td><td><i type='button' style='padding: 10px;' title='Close to diagnostic' class='fas fa-shopping-cart' onclick=diagnostic(\'"+j.estimate_id+"'\)></i></td><td><i type='button' style='padding: 10px;' title='Close to work order' class='fas fa-exchange-alt' onclick=workOrders(\'"+j.estimate_id+"'\)></i></td><td><i type='button' style='padding: 10px;' title='Resend mail' class='fas fa-paper-plane text-primary mailPlane' style='text-align: center; cursor: pointer;' onclick=getPage(\'"+j.estimate_id+"'\)></i></td><td><i type='button' style='padding: 10px;' title='Print copy' class='fas fa-print text-danger' style='text-align: center; cursor: pointer;' onclick=getPage(\'"+j.estimate_id+"'\)></i></td></tr>");
+                            $('tbody.estimateorders').append("<tr style='font-size: 11px;'><td>"+(i+1)+"</td><td>"+j.vehicle_licence+"</td><td>"+j.date+"</td><td>"+j.service_type+"</td><td>"+j.service_option+"</td><td>"+j.total_cost+"</td><td>"+j.service_note+"</td><td>"+j.mileage+"</td><td>"+mechFile+"</td><td>"+j.update_by+"</td><td><i type='button' style='padding: 10px;' title='Edit' class='fas fa-edit text-danger' style='text-align: center; cursor: pointer;' onclick=editRecs(\'"+j.estimate_id+"'\)></i></td><td><i type='button' style='padding: 10px;' title='View More' class='fas fa-eye text-danger' style='text-align: center; cursor: pointer;' onclick=getPage(\'"+j.estimate_id+"'\)></i></td><td><i type='button' style='padding: 10px;' title='Close to diagnostic' class='fas fa-shopping-cart' onclick=diagnostic(\'"+j.estimate_id+"'\)></i></td><td><i type='button' style='padding: 10px;' title='Close to work order' class='fas fa-exchange-alt' onclick=workOrders(\'"+j.estimate_id+"'\)></i></td><td><i type='button' style='padding: 10px;' title='Resend mail' class='fas fa-paper-plane text-primary mailPlane' style='text-align: center; cursor: pointer;' onclick=getPage(\'"+j.estimate_id+"'\)></i></td><td><i type='button' style='padding: 10px;' title='Print copy' class='fas fa-print text-danger' style='text-align: center; cursor: pointer;' onclick=getPage(\'"+j.estimate_id+"'\)></i></td></tr>");
 
                       
                     });
@@ -752,8 +780,16 @@ populateCountries("country_of_reg", "statez");
                     $.each(res4, function(x,y){
 
 
+                      if(y.file != "noImage.png"){
+                          mechFile =  "<a style='font-size: 12px; color: darkblue; font-weight: bolder;' href='/uploads/"+y.file+"' download>Download file</a>";
+                        }
+                        else{
+                          mechFile = "No file";
+                        }
+
+
                         
-                            $('tbody.workorders').append("<tr style='font-size: 11px;'><td>"+(x+1)+"</td><td>"+y.vehicle_licence+"</td><td>"+y.date+"</td><td>"+y.service_type+"</td><td>"+y.service_option+"</td><td>"+y.total_cost+"</td><td>"+y.service_note+"</td><td>"+y.mileage+"</td><td><a style='font-size: 12px; color: darkblue; font-weight: bolder;' href='/uploads/"+y.file+"' download>Download file</a></td><td>"+y.update_by+"</td><td><i type='button' style='padding: 10px;' title='View More' class='fas fa-eye text-danger' style='text-align: center; cursor: pointer;' onclick=getPage(\'"+y.estimate_id+"'\)></i></td><td><i type='button' style='padding: 10px;' title='Move to Estimate' class='fas fa-exchange-alt' onclick=estimateOrders(\'"+y.estimate_id+"'\)></i></td><td><i type='button' style='padding: 10px;' title='Move to Maintenance Record' class='fas fa-tools' onclick=maintenanceOrders(\'"+y.estimate_id+"'\)></i></td><td><i type='button' style='padding: 10px;' title='Resend mail' class='fas fa-paper-plane text-primary mailPlane' style='text-align: center; cursor: pointer;' onclick=getPage(\'"+y.estimate_id+"'\)></i></td><td><i type='button' style='padding: 10px;' title='Print copy' class='fas fa-print text-danger' style='text-align: center; cursor: pointer;' onclick=getPage(\'"+y.estimate_id+"'\)></i></td></tr>");
+                            $('tbody.workorders').append("<tr style='font-size: 11px;'><td>"+(x+1)+"</td><td>"+y.vehicle_licence+"</td><td>"+y.date+"</td><td>"+y.service_type+"</td><td>"+y.service_option+"</td><td>"+y.total_cost+"</td><td>"+y.service_note+"</td><td>"+y.mileage+"</td><td>"+mechFile+"</td><td>"+y.update_by+"</td><td><i type='button' style='padding: 10px;' title='View More' class='fas fa-eye text-danger' style='text-align: center; cursor: pointer;' onclick=getPage(\'"+y.estimate_id+"'\)></i></td><td><i type='button' style='padding: 10px;' title='Move to Estimate' class='fas fa-exchange-alt' onclick=estimateOrders(\'"+y.estimate_id+"'\)></i></td><td><i type='button' style='padding: 10px;' title='Move to Maintenance Record' class='fas fa-tools' onclick=maintenanceOrders(\'"+y.estimate_id+"'\)></i></td><td><i type='button' style='padding: 10px;' title='Resend mail' class='fas fa-paper-plane text-primary mailPlane' style='text-align: center; cursor: pointer;' onclick=getPage(\'"+y.estimate_id+"'\)></i></td><td><i type='button' style='padding: 10px;' title='Print copy' class='fas fa-print text-danger' style='text-align: center; cursor: pointer;' onclick=getPage(\'"+y.estimate_id+"'\)></i></td></tr>");
 
                       
                     });
@@ -7216,6 +7252,7 @@ function createInv(){
   var route = "{{ URL('Ajax/createInvItem') }}";
   var post_id;
   var spinner = $('.spinnerinvs');
+
   if($('#inv_post_id').val() == ""){
     post_id = $('#inv_post_id').val('<?php echo uniqid().'_'.time();?>');
   }
@@ -7965,6 +8002,7 @@ $('#pay_labour_licence').change(function(){
           if(result.message == "success" && result.action == "getLabour"){
             var res = JSON.parse(result.data);
             var labour_rate; var labour_hour;
+            
             if(res[0].labour_hour == null){
               labour_hour = 0;
             }

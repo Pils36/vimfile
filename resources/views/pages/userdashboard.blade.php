@@ -3457,7 +3457,13 @@ to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below
                                     <th>Service Note</th>
                                     <th>Mileage</th>
                                     <th>Uploaded Doc.</th>
+                                    
+                                    @if (Auth::user()->userType != "Auto Care")
+
                                     <th>&nbsp;</th>
+                                           
+                                    @endif
+                                    
                                     <th>Updated By</th>
                                     @if(Auth::user()->userType == "Business" || Auth::user()->userType == "Auto Dealer" || Auth::user()->userType == "Auto Care" || Auth::user()->userType == "Certified Professional")<th>Payment</th>@endif
                                     <th>View More</th>
@@ -3505,7 +3511,12 @@ to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below
 
                                         @else
 
+                                       @if (Auth::user()->userType != "Auto Care")
+
                                         <td>&nbsp;</td>
+                                           
+                                       @endif
+
                                     @endif
 
                                     <td>{{ $vehicleInfos->update_by }}</td>
@@ -5649,6 +5660,7 @@ to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below
                         @if($purchaseOrders->move_to_inventory != 1)
 
                             <tr style="font-size: 11px;">
+                                
                                <td>{{ $i++ }}</td>
                                <td>{{ $purchaseOrders->purchase_order_no }}</td>
                                <td>{{ $purchaseOrders->order_date }}</td>
@@ -5666,9 +5678,10 @@ to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below
                                <td>{{ $purchaseOrders->purchase_order_totalpurchaseorder }}</td>
                                <td>{{ $purchaseOrders->purchase_order_shipto }}</td>
 
-                               <td>@if($purchaseOrders->receive_order == 1 && $purchaseOrders->move_to_inventory == 0) <button type='button' style='border: 1px solid darkblue; border-radius: 10px; padding: 7px; cursor: not-allowed;' title='Receive Order' onclick="orderActions('{{ $purchaseOrders->post_id }}', 'receiveorder')" disabled><span style="color: red; font-size: 12px; font-weight: bold;">deactivate</span></button> @else <button type='button' style='border: 1px solid darkblue; border-radius: 10px; padding: 7px;' title='Receive Order' onclick="orderActions('{{ $purchaseOrders->post_id }}', 'receiveorder')"><span style="color: darkblue; font-size: 12px; font-weight: bold;">activate</span></button> @endif</td>
+                               <td>@if($purchaseOrders->receive_order == 1 && $purchaseOrders->move_to_inventory == 0 && $purchaseOrders->status != 0) <button type='button' class="btn btn-danger" title='Receive Order' onclick="orderActions('{{ $purchaseOrders->post_id }}', 'receiveorder')" disabled><span >deactivate</span></button> @else <button type='button' class="btn btn-primary" title='Receive Order' onclick="orderActions('{{ $purchaseOrders->post_id }}', 'receiveorder')"><span >activate</span></button> @endif</td>
                                {{-- <td><i type='button' style='padding: 10px;' title='Make payment' class="fas fa-donate" onclick="orderActions('{{ $purchaseOrders->post_id }}', 'makepayment')"></i></td> --}}
-                               <td>@if($purchaseOrders->move_to_inventory == 0 && $purchaseOrders->receive_order == 0) <button type='button' style='border: 1px solid darkblue; border-radius: 10px; padding: 7px; cursor: not-allowed;' title='Move to Inventory' onclick="orderActions('{{ $purchaseOrders->post_id }}', 'movetoinventory')" disabled><span style="color: red; font-size: 12px; font-weight: bold;">deactivate</span></button> @elseif($purchaseOrders->move_to_inventory == 0 && $purchaseOrders->receive_order == 1) <button type='button' style='border: 1px solid darkblue; border-radius: 10px; padding: 7px;' title='Move to Inventory' onclick="orderActions('{{ $purchaseOrders->post_id }}', 'movetoinventory')"><span style="color: darkblue; font-size: 12px; font-weight: bold;">activate</span></button> @else <button type='button' style='border: 1px solid darkblue; border-radius: 10px; padding: 7px; cursor: not-allowed;' title='Move to Inventory' onclick="orderActions('{{ $purchaseOrders->post_id }}', 'movetoinventory')" disabled><span style="color: red; font-size: 12px; font-weight: bold;">deactivate</span></button> @endif</td>
+                               <td>@if($purchaseOrders->move_to_inventory == 0 && $purchaseOrders->receive_order == 0 && $purchaseOrders->status != 0) <button type='button' class="btn btn-danger" title='Move to Inventory' onclick="orderActions('{{ $purchaseOrders->post_id }}', 'movetoinventory')" disabled><span >deactivate</span></button> @elseif($purchaseOrders->move_to_inventory == 0 && $purchaseOrders->receive_order == 1 && $purchaseOrders->status != 0) <button type='button' class="btn btn-primary" title='Move to Inventory' onclick="orderActions('{{ $purchaseOrders->post_id }}', 'movetoinventory')"><span >activate</span></button> @else <button type='button' class="btn btn-danger" title='Move to Inventory' onclick="orderActions('{{ $purchaseOrders->post_id }}', 'movetoinventory')" disabled><span >deactivate</span></button> @endif</td>
+
                            </tr>
 
                         @endif
@@ -6037,6 +6050,7 @@ to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below
                 <div class="col-md-3">
                     <h6>&nbsp;</h6>
                     <button type="button" class="btn btn-primary btn-block" onclick="createInv()">Submit <img class="spinnerinvs disp-0" src="{{ asset('img/loader/spin.gif') }}" style="width: 30px; height: 30px;"></button>
+                    
                 </div>
             </div>
 
@@ -6530,7 +6544,7 @@ to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below
                 </div>
                 <div class="col-md-4">
                     <h6>&nbsp;</h6>
-                    <button class="btn btn-secondary btn-block" onclick="poPay('printmail')">Print/Email <img class="spinnerprints disp-0" src="{{ asset('img/loader/spin.gif') }}" style="width: 30px; height: 30px;"></button>
+                    <button class="btn btn-secondary btn-block" onclick="poPay('printmail')">Save & Print/Email <img class="spinnerprints disp-0" src="{{ asset('img/loader/spin.gif') }}" style="width: 30px; height: 30px;"></button>
                 </div>
                 <div class="col-md-4">
                     <h6>&nbsp;</h6>

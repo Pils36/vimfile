@@ -1098,6 +1098,10 @@ class UserController extends Controller
 	        // $path = $req->file('avatar')->move(public_path('/profile/avatar/'), $filenamestore);
 			$path = $req->file('avatar')->move(public_path('../../profile/avatar/'), $filenamestore);
 
+
+			// Update Proile
+				$user->where('id', $id)->update(['avatar' => $fileNameToStore]);
+
 			
 
 		}
@@ -1123,7 +1127,7 @@ class UserController extends Controller
 
 
 		// Update Proile
-		$user->where('id', $id)->update(['name' => $name, 'specialization' => $occupation, 'avatar' => $fileNameToStore]);
+		$user->where('id', $id)->update(['name' => $name, 'specialization' => $occupation]);
 
 
 		$updateUser = $user->select('name', 'specialization', 'avatar as imageUrl')->where('id', $id)->get();

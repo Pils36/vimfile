@@ -171,6 +171,10 @@ class sendEmail extends Mailable
         return $this->subject($this->mail->purpose)->view('mails.maintenancecomplete')
                     ->with('maildata', $this->mail);
         }
+        elseif($this->mail->purpose == "Your vehicle maintenance is now completed"){
+        return $this->subject($this->mail->purpose)->view('mails.maintenancecomplete')
+                    ->with('maildata', $this->mail);
+        }
         elseif($this->mail->purpose == "A new mobile mechanic just signed up on VIM File"){
                 return $this->subject($this->mail->purpose)->view('mails.newmobilemechanic')
                             ->with('maildata', $this->mail);

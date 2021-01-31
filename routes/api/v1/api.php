@@ -73,11 +73,11 @@ Route::group(['prefix' => 'vehicle'], function(){
 	Route::group(['middleware' => ['appkey']], function () {
 
 		Route::post('newvehicle', 'api\v1\VehicleController@vehicleregistration');
+		Route::post('carrecord', 'api\v1\VehicleController@mycarrecord');
 		Route::post('updatevehicle', 'api\v1\VehicleController@updatevehicle');
 		Route::post('vehicleupload', 'api\v1\VehicleController@uploadvehicleImage');
 		Route::post('maintenancerecord', 'api\v1\VehicleController@maintenancerecord');
 		Route::post('maintenancerecordlist', 'api\v1\VehicleController@maintenancerecordlist');
-		Route::post('carrecord', 'api\v1\VehicleController@mycarrecord');
 		Route::get('mycarrecord/{email}', 'api\v1\VehicleController@usercarrecord');
 		Route::post('request_by', 'api\v1\VehicleController@myRequestBy');
 		Route::get('performance', 'api\v1\VehicleController@myperformance');
