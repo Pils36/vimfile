@@ -9560,6 +9560,8 @@ class HomeController extends Controller
 
         }
         elseif ($req->action == "getLabour") {
+
+
             // Fetch Information
 
             if($req->licence == ""){
@@ -9588,7 +9590,6 @@ class HomeController extends Controller
                     $this->technician = Auth::user()->station_name;
                 }
 
-                // dd($getvehInfo);
 
                 $resData = ['res' => 'Fetching', 'message' => 'success', 'data' => json_encode($getvehInfo), 'data2' => $this->technician, 'action' => "getLabour"];
 

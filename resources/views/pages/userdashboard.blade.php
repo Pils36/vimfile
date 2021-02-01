@@ -7253,7 +7253,7 @@ to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below
                     <h6 class="text-left">Labour Hour</h6>
                 </div>
                 <div class="col-md-8">
-                    <input type="number" name="pay_labour_labourhour" id="pay_labour_labourhour" class="form-control" readonly="">
+                    <input type="number" name="pay_labour_labourhour" id="pay_labour_labourhour" class="form-control">
                 </div>
             </div>
             <br>
@@ -7264,7 +7264,7 @@ to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below
                     <h6 class="text-left">Labour Rate</h6>
                 </div>
                 <div class="col-md-8">
-                    <input type="number" name="pay_labour_labourrate" id="pay_labour_labourrate" class="form-control" readonly="">
+                    <input type="number" name="pay_labour_labourrate" id="pay_labour_labourrate" class="form-control">
                 </div>
             </div>
             <br>
@@ -7275,7 +7275,7 @@ to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below
                     <h6 class="text-left">Labour Pay Due</h6>
                 </div>
                 <div class="col-md-8">
-                    <input type="number" name="pay_labour_paydue" id="pay_labour_paydue" class="form-control" readonly="">
+                    <input type="number" name="pay_labour_paydue" id="pay_labour_paydue" class="form-control">
                 </div>
             </div>
             <br>

@@ -139,8 +139,8 @@ class AppointmentController extends Controller
                     $status = 200;
                 }
                 else{
-                	$resData = ['data' => [], 'message' => 'Something went wrong!', 'status' => 201];
-                    $status = 201;
+                	$resData = ['data' => [], 'message' => 'Something went wrong!', 'status' => 400];
+                    $status = 400;
                 }
 
 
@@ -151,8 +151,8 @@ class AppointmentController extends Controller
             $error = implode(",",$validator->messages()->all());
             
 
-        	$resData = ['data' => [], 'message' => $error, 'status' => 201];
-            $status = 201;
+        	$resData = ['data' => [], 'message' => $error, 'status' => 400];
+            $status = 400;
         }
 
 
@@ -208,14 +208,14 @@ class AppointmentController extends Controller
                 
             }
             else{
-                $resData = ['data' => [], 'message' => "No appointment", 'status' => 201];
-                $status = 201;
+                $resData = ['data' => [], 'message' => "No appointment", 'status' => 400];
+                $status = 400;
             }
 
         }   
         else{
-            $resData = ['data' => [], 'message' => "Unauthorized user, kindly login", 'status' => 201];
-            $status = 201;
+            $resData = ['data' => [], 'message' => "Unauthorized user, kindly login", 'status' => 400];
+            $status = 400;
         }     
         
 

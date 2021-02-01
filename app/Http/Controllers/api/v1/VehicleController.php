@@ -294,9 +294,9 @@ class VehicleController extends Controller
 
                     $error = implode(",",$validator->messages()->all());
 
-                    // $resData = ['message' => $validator->errors(), 'status' => 201];
-                    $resData = ['data' => [], 'message' => $error, 'status' => 201];
-                    $status = 201;
+                    // $resData = ['message' => $validator->errors(), 'status' => 400];
+                    $resData = ['data' => [], 'message' => $error, 'status' => 400];
+                    $status = 400;
                 }
 
 
@@ -362,8 +362,8 @@ class VehicleController extends Controller
         }
         else{
 
-            $resData = ['data' => [], 'message' => 'Vehicle licence is not associated with your vehicle', 'status' => 201];
-            $status = 201;
+            $resData = ['data' => [], 'message' => 'Vehicle licence is not associated with your vehicle', 'status' => 400];
+            $status = 400;
         }
 
 
@@ -438,23 +438,23 @@ class VehicleController extends Controller
                     $status = 200;
                 }
                 else{
-                    $resData = ['data' => [], 'message' => 'Something went wrong', 'status' => 201];
-                    $status = 201;
+                    $resData = ['data' => [], 'message' => 'Something went wrong', 'status' => 400];
+                    $status = 400;
                 }
 
             }
             else{
-                $resData = ['data' => [], 'message' => 'Record not found', 'status' => 201];
-                $status = 201;
+                $resData = ['data' => [], 'message' => 'Record not found', 'status' => 400];
+                $status = 400;
             }
         }
         else{
 
             $error = implode(",",$validator->messages()->all());
 
-            // $resData = ['message' => $validator->errors(), 'status' => 201];
-            $resData = ['data' => [], 'message' => $error, 'status' => 201];
-            $status = 201;
+            // $resData = ['message' => $validator->errors(), 'status' => 400];
+            $resData = ['data' => [], 'message' => $error, 'status' => 400];
+            $status = 400;
         }
 
         return $this->returnJSON($resData, $status);
@@ -513,8 +513,8 @@ class VehicleController extends Controller
 
             } 
             else {
-                $resData = ['data' => [], 'message' => 'No mechanics found in your area', 'status' => 201];
-                $status = 201;
+                $resData = ['data' => [], 'message' => 'No mechanics found in your area', 'status' => 400];
+                $status = 400;
             }
         }
         elseif($request->get('lat') != null || $request->get('lon') != null){
@@ -531,8 +531,8 @@ class VehicleController extends Controller
                 $status = 200;
             }
             else{
-                $resData = ['data' => [], 'message' => 'No mechanics found in your area', 'status' => 201];
-                $status = 201;
+                $resData = ['data' => [], 'message' => 'No mechanics found in your area', 'status' => 400];
+                $status = 400;
             }
 
 
@@ -567,8 +567,8 @@ class VehicleController extends Controller
             $status = 200;
         } 
         else {
-            $resData = ['data' => [], 'message' => "No result found", 'status' => 201];
-            $status = 201;
+            $resData = ['data' => [], 'message' => "No result found", 'status' => 400];
+            $status = 400;
         }
 
 
@@ -662,8 +662,8 @@ class VehicleController extends Controller
                     $status = 200;
         }
         else{
-                    $resData = ['data' => [], 'message' => "Something went wrong!", 'status' => 201];
-                    $status = 201;
+                    $resData = ['data' => [], 'message' => "Something went wrong!", 'status' => 400];
+                    $status = 400;
         }
 
                 // End
@@ -687,8 +687,8 @@ class VehicleController extends Controller
         }
         else{
 
-            $resData = ['data' => [], 'message' => "Maintenance record not found", 'status' => 201];
-            $status = 201;
+            $resData = ['data' => [], 'message' => "Maintenance record not found", 'status' => 400];
+            $status = 400;
         }
 
         return $this->returnJSON($resData, $status);
@@ -711,13 +711,13 @@ class VehicleController extends Controller
                 $status = 200;
             }
             else{
-                $resData = ['data' => [], 'message' => "Car record not found", 'status' => 201];
-                $status = 201;
+                $resData = ['data' => [], 'message' => "Car record not found", 'status' => 400];
+                $status = 400;
             }
         }
         else{
-            $resData = ['data' => [], 'message' => "Vehicle licence cannot be empty", 'status' => 201];
-            $status = 201;
+            $resData = ['data' => [], 'message' => "Vehicle licence cannot be empty", 'status' => 400];
+            $status = 400;
         }
 
 
@@ -749,8 +749,8 @@ class VehicleController extends Controller
             $status = 200;
         }
         else{
-            $resData = ['data' => [], 'message' => "No mechanic found within the request location", 'status' => 201];
-            $status = 201;
+            $resData = ['data' => [], 'message' => "No mechanic found within the request location", 'status' => 400];
+            $status = 400;
         }
 
         return $this->returnJSON($resData, $status);
@@ -863,8 +863,8 @@ class VehicleController extends Controller
                     $status = 200;
            }
            else{
-                $resData = ['data' => [], 'message' => "You do not have the performance record on the selected service type", 'status' => 201];
-                    $status = 201;
+                $resData = ['data' => [], 'message' => "You do not have the performance record on the selected service type", 'status' => 400];
+                    $status = 400;
            }
 
             return $this->returnJSON($resData, $status);
@@ -902,8 +902,8 @@ class VehicleController extends Controller
                 $status = 200;
             }
             else{
-                $resData = ['data' => [], 'message' => "No record", 'status' => 201];
-                $status = 201;
+                $resData = ['data' => [], 'message' => "No record", 'status' => 400];
+                $status = 400;
             }
 
 
@@ -925,8 +925,8 @@ class VehicleController extends Controller
         }
         else{
 
-            $resData = ['data' => [], 'message' => "Work order not available for this station with this licence number", 'status' => 201];
-            $status = 201;
+            $resData = ['data' => [], 'message' => "Work order not available for this station with this licence number", 'status' => 400];
+            $status = 400;
 
         }
 
@@ -944,8 +944,8 @@ class VehicleController extends Controller
         }
         else{
 
-            $resData = ['data' => [], 'message' => "No diagonistic record on vehicle with this station", 'status' => 201];
-            $status = 201;
+            $resData = ['data' => [], 'message' => "No diagonistic record on vehicle with this station", 'status' => 400];
+            $status = 400;
 
         }
 
@@ -964,8 +964,8 @@ class VehicleController extends Controller
         }
         else{
 
-            $resData = ['data' => [], 'message' => "Cannot move record", 'status' => 201];
-            $status = 201;
+            $resData = ['data' => [], 'message' => "Cannot move record", 'status' => 400];
+            $status = 400;
 
         }
 
@@ -984,8 +984,8 @@ class VehicleController extends Controller
         }
         else{
 
-            $resData = ['data' => [], 'message' => "Cannot move record", 'status' => 201];
-            $status = 201;
+            $resData = ['data' => [], 'message' => "Cannot move record", 'status' => 400];
+            $status = 400;
 
         }
 
@@ -1002,8 +1002,8 @@ class VehicleController extends Controller
                 $status = 200;
             }
             else{
-                $resData = ['data' => [], 'message' => "There are no ongoing maintenance for you", 'status' => 201];
-                $status = 201;
+                $resData = ['data' => [], 'message' => "There are no ongoing maintenance for you", 'status' => 400];
+                $status = 400;
             }
 
         return $this->returnJSON($resData, $status);
@@ -1018,8 +1018,8 @@ class VehicleController extends Controller
                 $status = 200;
             }
             else{
-                $resData = ['data' => [], 'message' => "There are no ongoing maintenance for you", 'status' => 201];
-                $status = 201;
+                $resData = ['data' => [], 'message' => "There are no ongoing maintenance for you", 'status' => 400];
+                $status = 400;
             }
 
         return $this->returnJSON($resData, $status);
@@ -1034,8 +1034,8 @@ class VehicleController extends Controller
                 $status = 200;
             }
             else{
-                $resData = ['data' => [], 'message' => "There are no ongoing maintenance for you", 'status' => 201];
-                $status = 201;
+                $resData = ['data' => [], 'message' => "There are no ongoing maintenance for you", 'status' => 400];
+                $status = 400;
             }
 
         return $this->returnJSON($resData, $status);
@@ -1087,14 +1087,14 @@ class VehicleController extends Controller
             else{
                 // Cannot update
 
-                $resData = ['data' => [], 'message' => "Cannot update information", 'status' => 201];
-                $status = 201;
+                $resData = ['data' => [], 'message' => "Cannot update information", 'status' => 400];
+                $status = 400;
             }
 
         }
         else{
-            $resData = ['data' => [], 'message' => "This vehicle is not yet registered on the application", 'status' => 201];
-            $status = 201;
+            $resData = ['data' => [], 'message' => "This vehicle is not yet registered on the application", 'status' => 400];
+            $status = 400;
         }
 
 
@@ -1142,8 +1142,8 @@ class VehicleController extends Controller
 
         }
         else{
-            $resData = ['data' => [], 'message' => "This vehicle is not yet registered on the application", 'status' => 201];
-            $status = 201;
+            $resData = ['data' => [], 'message' => "This vehicle is not yet registered on the application", 'status' => 400];
+            $status = 400;
         }
 
 
@@ -1163,8 +1163,8 @@ class VehicleController extends Controller
             $status = 200;
         }
         else{
-            $resData = ['data' => [], 'message' => "No reminder settings set", 'status' => 201];
-            $status = 201;
+            $resData = ['data' => [], 'message' => "No reminder settings set", 'status' => 400];
+            $status = 400;
         }
 
 
@@ -1187,14 +1187,14 @@ class VehicleController extends Controller
                     $status = 200;
                 }
                 else{
-                    $resData = ['data' => [], 'message' => "Something went wrong, Kindly contact the Administrator", 'status' => 201];
-                    $status = 201;
+                    $resData = ['data' => [], 'message' => "Something went wrong, Kindly contact the Administrator", 'status' => 400];
+                    $status = 400;
                 }
             }
             else{
 
-                $resData = ['data' => [], 'message' => "Record not available", 'status' => 201];
-                $status = 201;
+                $resData = ['data' => [], 'message' => "Record not available", 'status' => 400];
+                $status = 400;
             }
         }
 
@@ -1250,8 +1250,8 @@ class VehicleController extends Controller
             }
             else{
 
-                $resData = ['data' => [], 'message' => "Maintenance record not found", 'status' => 201];
-                $status = 201;
+                $resData = ['data' => [], 'message' => "Maintenance record not found", 'status' => 400];
+                $status = 400;
             }
 
             return $this->returnJSON($resData, $status);

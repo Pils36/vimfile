@@ -77,62 +77,70 @@ class RegisterController extends Controller
 
 			    $resData = ['data' => $create, 'message' => 'Success', 'status' => 200, 'action' => 'register'];
                 $status = 200;
-	        }
+            }
+            else{
+
+                // Other account login here
+
+                // Check if Email exist
+                $email = TempUser::where('email', $request->email)->get();
+
+                if(count($email) > 0){
+                    // Check verification code status
+                    $checkotp = Validateotp::where('email', $request->email)->where('status', 0)->get();
+    
+                    if(count($checkotp) > 0){
+                        // Update Record
+                        $data = TempUser::where('email', $request->email)->update([
+                            'name' => $request->firstname.' '.$request->lastname,
+                            'userType' => $request->userType,
+                            'email' => $request->email,
+                            'phone_number'=> $request->phone_number,
+                            'password' => Hash::make($request->password),
+                            'status' => 1,
+                            'verification_code' => $code,
+                        ]);
+    
+                        $this->getOTP($token, $code, $request->email, $request->phone_number);
+    
+                        // Send Mail
+                        $this->to = $request->email;
+                        $this->name = $request->firstname.' '.$request->lastname;
+                        $this->subject = "Verify OTP";
+                        $this->message = "Welcome to VIMFile, We are glad to have you on board. <br><br> Kindly verify your registration with the code below. <br><br>OTP code: ".$code;
+                        $this->file = NULL;
+    
+                        $this->sendEmail($this->to, "Compose Mail");
+    
+                        // Send SMS
+    
+                        // Get user data
+                        $user = TempUser::where('email', $request->email)->get();
+    
+                        $resData = ['data' => $user[0], 'message' => 'Success', 'status' => 200, 'action' => 'register'];
+                        $status= 200;
+                    }
+                    else{
+                        // Already Exist
+                        $resData = ['data' => [], 'message' => 'This email already completed registration', 'status' => 400];
+                        $status = 400;
+                    }
+                    
+                }
+                else{
+                    $resData = ['data' => [], 'message' => 'Registration not successful, try again', 'status' => 400];
+                    $status = 400;
+                }
+
+            }
 
         }
         else{
 
-            $token = md5($request->email);
-            
-            // Check if Email exist
-            $email = TempUser::where('email', $request->email)->get();
+            $error = implode(",",$validator->messages()->all());
 
-            if(count($email) > 0){
-                // Check verification code status
-                $checkotp = Validateotp::where('email', $request->email)->where('status', 0)->get();
-
-                if(count($checkotp) > 0){
-                    // Update Record
-                    $data = TempUser::where('email', $request->email)->update([
-                        'name' => $request->firstname.' '.$request->lastname,
-                        'userType' => $request->userType,
-                        'email' => $request->email,
-                        'phone_number'=> $request->phone_number,
-                        'password' => Hash::make($request->password),
-                        'status' => 1,
-                        'verification_code' => $code,
-                    ]);
-
-                    $this->getOTP($token, $code, $request->email, $request->phone_number);
-
-                    // Send Mail
-                    $this->to = $request->email;
-                    $this->name = $request->firstname.' '.$request->lastname;
-                    $this->subject = "Verify OTP";
-                    $this->message = "Welcome to VIMFile, We are glad to have you on board. <br><br> Kindly verify your registration with the code below. <br><br>OTP code: ".$code;
-                    $this->file = NULL;
-
-                    $this->sendEmail($this->to, "Compose Mail");
-
-                    // Send SMS
-
-                    // Get user data
-                    $user = TempUser::where('email', $request->email)->get();
-
-                    $resData = ['data' => $user[0], 'message' => 'Success', 'status' => 200, 'action' => 'register'];
-                    $status= 200;
-                }
-                else{
-                    // Already Exist
-                    $resData = ['data' => [], 'message' => 'This email already completed registration', 'status' => 201];
-                    $status = 201;
-                }
-                
-            }
-            else{
-                $resData = ['data' => [], 'message' => 'Kindly fill up all fields', 'status' => 201];
-                $status = 201;
-            }
+            $resData = ['data' => [], 'message' => $error, 'status' => 400];
+            $status = 400;
         	
         }
         
@@ -175,14 +183,14 @@ class RegisterController extends Controller
 
             }
             else{
-                    $resData = ['data' => [], 'message' => 'Token mismatch', 'status' => 201];
-                    $status = 201;
+                    $resData = ['data' => [], 'message' => 'Token mismatch', 'status' => 400];
+                    $status = 400;
             }
 	        
         }
         else{
-        	$resData = ['data' => [], 'message' => 'otp code is required', 'status' => 201];
-            $status= 201;
+        	$resData = ['data' => [], 'message' => 'otp code is required', 'status' => 400];
+            $status= 400;
         }
 
         return $this->returnJSON($resData, $status);
@@ -215,13 +223,13 @@ class RegisterController extends Controller
                 $status = 200;
 	        }
 	        else{
-	        	$resData = ['data' => [], 'message' => 'No validation code available', 'status' => 201];
-                $status = 201;
+	        	$resData = ['data' => [], 'message' => 'No validation code available', 'status' => 400];
+                $status = 400;
 	        }
         }
         else{
-        	$resData = ['data' => [], 'message' => 'email address is required', 'status' => 201];
-            $status = 201;
+        	$resData = ['data' => [], 'message' => 'email address is required', 'status' => 400];
+            $status = 400;
         }
 
         
@@ -271,13 +279,13 @@ class RegisterController extends Controller
                 $status = 200;
 		    }
 		    else{
-		    	$resData = ['data' => [], 'message' => 'Something went wrong', 'status' => 201];
-                $status = 201;
+		    	$resData = ['data' => [], 'message' => 'Something went wrong', 'status' => 400];
+                $status = 400;
 		    }
         }
         else{
-        	$resData = ['data' => [], 'message' => 'email address is required', 'status' => 201];
-            $status = 201;
+        	$resData = ['data' => [], 'message' => 'email address is required', 'status' => 400];
+            $status = 400;
         }
 
     	
