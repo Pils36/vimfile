@@ -115,16 +115,16 @@ class UserController extends Controller
 
                 }
                 else{
-                	$resData = ['data' => [], 'message' => 'You cannot claim points by this time', 'status' => 200];
-				    $status = 200;
+                	$resData = ['data' => [], 'message' => 'You cannot claim points by this time', 'status' => 201];
+				    $status = 201;
                 }
 
 
             }
 
             else{
-            	$resData = ['data' => [], 'message' => 'Something went wrong', 'status' => 200];
-			    $status = 200;
+            	$resData = ['data' => [], 'message' => 'Something went wrong', 'status' => 201];
+			    $status = 201;
             }
 
 
@@ -137,8 +137,8 @@ class UserController extends Controller
 
         }
         else{
-        	$resData = ['data' => [], 'message' => 'User not found', 'status' => 200];
-		    $status = 200;
+        	$resData = ['data' => [], 'message' => 'User not found', 'status' => 201];
+		    $status = 201;
         }
 
 
@@ -223,15 +223,15 @@ class UserController extends Controller
             $status = 200;
         }
         else{
-            $resData = ['data' => [], 'message' => 'Could not open at this time', 'status' => 200];
-            $status = 200;
+            $resData = ['data' => [], 'message' => 'Could not open at this time', 'status' => 201];
+            $status = 201;
         }
 
 
     	}
     	else{
-    		$resData = ['data' => [], 'message' => "Please select the options for department and related service", 'status' => 200];
-            $status = 200;
+    		$resData = ['data' => [], 'message' => "Please select the options for department and related service", 'status' => 201];
+            $status = 201;
     	}
 
 
@@ -288,9 +288,9 @@ class UserController extends Controller
         }
         else{
 
-            $resData = ['data' => [], 'message' => 'Cannot post opportunity by this time', 'status' => 200];
+            $resData = ['data' => [], 'message' => 'Cannot post opportunity by this time', 'status' => 201];
 
-            $status = 200;
+            $status = 201;
         }
 
 
@@ -331,23 +331,23 @@ class UserController extends Controller
 
 	    		}
 	    		else{
-	    			$resData = ['data' => [], 'message' => 'Current password not correct', 'status' => 200];
+	    			$resData = ['data' => [], 'message' => 'Current password not correct', 'status' => 201];
 
-		            $status = 200;
+		            $status = 201;
 	    		}
 
 
 	        }
 	        else{
-	            $resData = ['data' => [], 'message' => 'User information not found', 'status' => 200];
+	            $resData = ['data' => [], 'message' => 'User information not found', 'status' => 201];
 
-		            $status = 200;
+		            $status = 201;
 	        }
     	}
     	else{
-    		$resData = ['data' => [], 'message' => 'Confirm password does not match', 'status' => 200];
+    		$resData = ['data' => [], 'message' => 'Confirm password does not match', 'status' => 201];
 
-            $status = 200;
+            $status = 201;
     	}
 
 
@@ -365,9 +365,9 @@ class UserController extends Controller
             $status = 200;
     	}
     	else{
-    		$resData = ['data' => [], 'message' => 'No points achieved yet', 'status' => 200];
+    		$resData = ['data' => [], 'message' => 'No points achieved yet', 'status' => 201];
 
-            $status = 200;
+            $status = 201;
     	}
 
 
@@ -385,9 +385,9 @@ class UserController extends Controller
             $status = 200;
     	}
     	else{
-    		$resData = ['data' => [], 'message' => 'No points achieved yet', 'status' => 200];
+    		$resData = ['data' => [], 'message' => 'No points achieved yet', 'status' => 201];
 
-            $status = 200;
+            $status = 201;
     	}
 
     	return $this->returnJSON($resData, $status);
@@ -408,9 +408,9 @@ class UserController extends Controller
             $status = 200;
     	}
     	else{
-    		$resData = ['data' => [], 'message' => 'No weekly rank achieved yet', 'status' => 200];
+    		$resData = ['data' => [], 'message' => 'No weekly rank achieved yet', 'status' => 201];
 
-            $status = 200;
+            $status = 201;
     	}
 
     	return $this->returnJSON($resData, $status);
@@ -430,9 +430,9 @@ class UserController extends Controller
             $status = 200;
     	}
     	else{
-    		$resData = ['data' => [], 'message' => 'No all time rank achieved yet', 'status' => 200];
+    		$resData = ['data' => [], 'message' => 'No all time rank achieved yet', 'status' => 201];
 
-            $status = 200;
+            $status = 201;
     	}
 
     	return $this->returnJSON($resData, $status);
@@ -452,9 +452,9 @@ class UserController extends Controller
             $status = 200;
     	}
     	else{
-    		$resData = ['data' => [], 'message' => 'No global rank achieved yet', 'status' => 200];
+    		$resData = ['data' => [], 'message' => 'No global rank achieved yet', 'status' => 201];
 
-            $status = 200;
+            $status = 201;
     	}
 
     	return $this->returnJSON($resData, $status);
@@ -501,9 +501,9 @@ class UserController extends Controller
 	        $status = 200;
     	}
     	else{
-    		$resData = ['data' => [], 'message' => 'No station created', 'status' => 200];
+    		$resData = ['data' => [], 'message' => 'No station created', 'status' => 201];
 
-	        $status = 200;
+	        $status = 201;
     	}
 
 
@@ -521,9 +521,9 @@ class UserController extends Controller
 	        $status = 200;
     	}
     	else{
-    		$resData = ['data' => [], 'message' => 'No staffs created', 'status' => 200];
+    		$resData = ['data' => [], 'message' => 'No staffs created', 'status' => 201];
 
-	        $status = 200;
+	        $status = 201;
     	}
 
 
@@ -550,9 +550,9 @@ class UserController extends Controller
 		        $status = 200;
 
     		}else{
-    			$resData = ['data' => [], 'message' => 'No available post for you', 'status' => 200];
+    			$resData = ['data' => [], 'message' => 'No available post for you', 'status' => 201];
 
-		        $status = 200;
+		        $status = 201;
     		}
 
     	}
@@ -587,15 +587,15 @@ class UserController extends Controller
 		        $status = 200;
     		}
     		else{
-    			$resData = ['data' => [], 'message' => 'Something went wrong!', 'status' => 200];
+    			$resData = ['data' => [], 'message' => 'Something went wrong!', 'status' => 201];
 
-		        $status = 200;
+		        $status = 201;
     		}
     	}
     	else{
-    		$resData = ['data' => [], 'message' => 'Station not found', 'status' => 200];
+    		$resData = ['data' => [], 'message' => 'Station not found', 'status' => 201];
 
-		        $status = 200;
+		        $status = 201;
     	}
 
     	return $this->returnJSON($resData, $status);
@@ -618,15 +618,15 @@ class UserController extends Controller
 		        $status = 200;
     		}
     		else{
-    			$resData = ['data' => [], 'message' => 'Something went wrong!', 'status' => 200];
+    			$resData = ['data' => [], 'message' => 'Something went wrong!', 'status' => 201];
 
-		        $status = 200;
+		        $status = 201;
     		}
     	}
     	else{
-    		$resData = ['data' => [], 'message' => 'Review post not found', 'status' => 200];
+    		$resData = ['data' => [], 'message' => 'Review post not found', 'status' => 201];
 
-		        $status = 200;
+		        $status = 201;
     	}
 
 
@@ -654,15 +654,15 @@ class UserController extends Controller
 		        $status = 200;
     		}
     		else{
-    			$resData = ['data' => [], 'message' => 'No available connection', 'status' => 200];
+    			$resData = ['data' => [], 'message' => 'No available connection', 'status' => 201];
 
-		        $status = 200;
+		        $status = 201;
     		}
     	}
     	else{
-    		$resData = ['data' => [], 'message' => 'User information not found', 'status' => 200];
+    		$resData = ['data' => [], 'message' => 'User information not found', 'status' => 201];
 
-		        $status = 200;
+		        $status = 201;
     	}
 
     	return $this->returnJSON($resData, $status);
@@ -693,9 +693,9 @@ class UserController extends Controller
         }
         else{
 
-        	$resData = ['data' => [], 'message' => 'Something Went Wrong', 'status' => 200];
+        	$resData = ['data' => [], 'message' => 'Something Went Wrong', 'status' => 201];
 
-		        $status = 200;
+		        $status = 201;
 
         }
 
@@ -717,9 +717,9 @@ class UserController extends Controller
     	}
     	else{
 
-    		$resData = ['data' => [], 'message' => 'No available questions at the moment', 'status' => 200];
+    		$resData = ['data' => [], 'message' => 'No available questions at the moment', 'status' => 201];
 
-		    $status = 200;
+		    $status = 201;
     	}
 
     	return $this->returnJSON($resData, $status);
@@ -744,9 +744,9 @@ class UserController extends Controller
     	}
     	else{
 
-    		$resData = ['data' => [], 'message' => 'No available questions at the moment', 'status' => 200];
+    		$resData = ['data' => [], 'message' => 'No available questions at the moment', 'status' => 201];
 
-		    $status = 200;
+		    $status = 201;
     	}
 
     	return $this->returnJSON($resData, $status);
@@ -826,9 +826,9 @@ class UserController extends Controller
 			    $status = 200;
         	}
         	else{
-        		$resData = ['data' => [], 'message' => 'Something went wrong', 'status' => 200];
+        		$resData = ['data' => [], 'message' => 'Something went wrong', 'status' => 201];
 
-			    $status = 200;
+			    $status = 201;
         	}
 
         }
@@ -871,9 +871,9 @@ class UserController extends Controller
 
 
         }else{
-            $resData = ['data' => [], 'message' => 'Something went wrong', 'status' => 200];
+            $resData = ['data' => [], 'message' => 'Something went wrong', 'status' => 201];
 
-		    $status = 200;
+		    $status = 201;
         }
 
 
@@ -892,9 +892,9 @@ class UserController extends Controller
     	}
 
     	else{
-    		$resData = ['data' => [], 'message' => 'No available station created', 'status' => 200];
+    		$resData = ['data' => [], 'message' => 'No available station created', 'status' => 201];
 
-		    $status = 200;
+		    $status = 201;
     	}
 
     	return $this->returnJSON($resData, $status);
@@ -915,16 +915,16 @@ class UserController extends Controller
 			    $status = 200;
     		}
     		else{
-    			$resData = ['data' => [], 'message' => 'Something went wrong!', 'status' => 200];
+    			$resData = ['data' => [], 'message' => 'Something went wrong!', 'status' => 201];
 
-			    $status = 200;
+			    $status = 201;
     		}
     	}
     	else{
 
-    		$resData = ['data' => [], 'message' => 'Something seem wrong, as business is not found', 'status' => 200];
+    		$resData = ['data' => [], 'message' => 'Something seem wrong, as business is not found', 'status' => 201];
 
-		    $status = 200;
+		    $status = 201;
 
     	}
 
@@ -1008,9 +1008,9 @@ class UserController extends Controller
     			}
     		}
     		else{
-    			$resData = ['data' => [], 'message' => 'Not permitted to create staff', 'status' => 200];
+    			$resData = ['data' => [], 'message' => 'Not permitted to create staff', 'status' => 201];
 
-			    $status = 200;
+			    $status = 201;
     		}
 
     	}
@@ -1063,9 +1063,9 @@ class UserController extends Controller
 			$status = 200;
 		}
 		else{
-			$resData = ['data' => [], 'message' => 'No new message', 'status' => 200];
+			$resData = ['data' => [], 'message' => 'No new message', 'status' => 201];
 
-			$status = 200;
+			$status = 201;
 		}
 
 		return $this->returnJSON($resData, $status);

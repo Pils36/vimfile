@@ -5457,8 +5457,26 @@ function estimateSave(){
         {appendTo: 'labour_cost8', selector: 'labour_cost8'},
         {appendTo: 'labour_cost9', selector: 'labour_cost9'},
         {appendTo: 'labour_cost10', selector: 'labour_cost10'},
-        {appendTo: 'labour_hour', selector: 'labour_hour'},
-        {appendTo: 'labour_rate', selector: 'labour_rate'},
+        {appendTo: 'labour_hour', selector: 'labour_qty'},
+        {appendTo: 'labour_rate', selector: 'labour_rate1'},
+        {appendTo: 'labour_hour2', selector: 'labour_qty2'},
+        {appendTo: 'labour_rate2', selector: 'labour_rate2'},
+        {appendTo: 'labour_hour3', selector: 'labour_qt3'},
+        {appendTo: 'labour_rate3', selector: 'labour_rate3'},
+        {appendTo: 'labour_hour4', selector: 'labour_qty4'},
+        {appendTo: 'labour_rate4', selector: 'labour_rate4'},
+        {appendTo: 'labour_hour5', selector: 'labour_qty5'},
+        {appendTo: 'labour_rate5', selector: 'labour_rate5'},
+        {appendTo: 'labour_hour6', selector: 'labour_qty6'},
+        {appendTo: 'labour_rate6', selector: 'labour_rate6'},
+        {appendTo: 'labour_hour7', selector: 'labour_qty7'},
+        {appendTo: 'labour_rate7', selector: 'labour_rate7'},
+        {appendTo: 'labour_hour8', selector: 'labour_qty8'},
+        {appendTo: 'labour_rate8', selector: 'labour_rate8'},
+        {appendTo: 'labour_hour9', selector: 'labour_qty9'},
+        {appendTo: 'labour_rate9', selector: 'labour_rate9'},
+        {appendTo: 'labour_hour10', selector: 'labour_qty10'},
+        {appendTo: 'labour_rate10', selector: 'labour_rate10'},
         {appendTo: 'other_qty', selector: 'other_qty'},
         {appendTo: 'other_cost', selector: 'other_cost'},
         {appendTo: 'total_cost', selector: 'total_cost'},
@@ -8002,7 +8020,7 @@ $('#pay_labour_licence').change(function(){
           if(result.message == "success" && result.action == "getLabour"){
             var res = JSON.parse(result.data);
             var labour_rate; var labour_hour;
-            
+
             if(res[0].labour_hour == null){
               labour_hour = 0;
             }

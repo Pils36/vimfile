@@ -124,14 +124,14 @@ class RegisterController extends Controller
                 }
                 else{
                     // Already Exist
-                    $resData = ['data' => [], 'message' => 'This email already completed registration', 'status' => 200];
-                    $status = 200;
+                    $resData = ['data' => [], 'message' => 'This email already completed registration', 'status' => 201];
+                    $status = 201;
                 }
                 
             }
             else{
-                $resData = ['data' => [], 'message' => 'Kindly fill up all fields', 'status' => 200];
-                $status = 200;
+                $resData = ['data' => [], 'message' => 'Kindly fill up all fields', 'status' => 201];
+                $status = 201;
             }
         	
         }
@@ -175,14 +175,14 @@ class RegisterController extends Controller
 
             }
             else{
-                    $resData = ['data' => [], 'message' => 'Token mismatch', 'status' => 200];
-                    $status = 200;
+                    $resData = ['data' => [], 'message' => 'Token mismatch', 'status' => 201];
+                    $status = 201;
             }
 	        
         }
         else{
-        	$resData = ['data' => [], 'message' => 'otp code is required', 'status' => 200];
-            $status= 200;
+        	$resData = ['data' => [], 'message' => 'otp code is required', 'status' => 201];
+            $status= 201;
         }
 
         return $this->returnJSON($resData, $status);
@@ -215,13 +215,13 @@ class RegisterController extends Controller
                 $status = 200;
 	        }
 	        else{
-	        	$resData = ['data' => [], 'message' => 'No validation code available', 'status' => 200];
-                $status = 200;
+	        	$resData = ['data' => [], 'message' => 'No validation code available', 'status' => 201];
+                $status = 201;
 	        }
         }
         else{
-        	$resData = ['data' => [], 'message' => 'email address is required', 'status' => 200];
-            $status = 200;
+        	$resData = ['data' => [], 'message' => 'email address is required', 'status' => 201];
+            $status = 201;
         }
 
         
@@ -271,13 +271,13 @@ class RegisterController extends Controller
                 $status = 200;
 		    }
 		    else{
-		    	$resData = ['data' => [], 'message' => 'Something went wrong', 'status' => 200];
-                $status = 200;
+		    	$resData = ['data' => [], 'message' => 'Something went wrong', 'status' => 201];
+                $status = 201;
 		    }
         }
         else{
-        	$resData = ['data' => [], 'message' => 'email address is required', 'status' => 200];
-            $status = 200;
+        	$resData = ['data' => [], 'message' => 'email address is required', 'status' => 201];
+            $status = 201;
         }
 
     	

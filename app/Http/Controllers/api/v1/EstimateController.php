@@ -129,14 +129,17 @@ class EstimateController extends Controller
 
         }
         else{
-        	$resData = ['data' => [], 'message' => 'Something went wrong!', 'status' => 200];
-          $status = 200;
+        	$resData = ['data' => [], 'message' => 'Something went wrong!', 'status' => 201];
+          $status = 201;
         }
         }
         else{
-        	// $resData = ['message' => $validator->errors(), 'status' => 200];
-          $resData = ['data' => [], 'message' => "Kindly fill up all required fields", 'status' => 200];
-          $status = 200;
+
+          $error = implode(",",$validator->messages()->all());
+          
+        	// $resData = ['message' => $validator->errors(), 'status' => 201];
+          $resData = ['data' => [], 'message' => $error, 'status' => 201];
+          $status = 201;
         }
 
         return $this->returnJSON($resData, $status);
@@ -158,8 +161,8 @@ class EstimateController extends Controller
         $status = 200;
       }
       else{
-        $resData = ['data' => [], 'message' => "No estimate request", 'status' => 200];
-        $status = 200;
+        $resData = ['data' => [], 'message' => "No estimate request", 'status' => 201];
+        $status = 201;
       }
 
 
@@ -221,8 +224,8 @@ class EstimateController extends Controller
             $status = 200;
           }
           else{
-            $resData = ['data' => [], 'message' => "Something went wrong", 'status' => 200];
-            $status = 200;
+            $resData = ['data' => [], 'message' => "Something went wrong", 'status' => 201];
+            $status = 201;
           }
       }
 
@@ -327,16 +330,16 @@ class EstimateController extends Controller
                       $status = 200;
                     }
                     else{
-                      $resData = ['data' => [], 'message' => "Something went wrong", 'status' => 200];
-                      $status = 200;
+                      $resData = ['data' => [], 'message' => "Something went wrong", 'status' => 201];
+                      $status = 201;
                     }
 
 
 
               }
               else{
-                $resData = ['data' => [], 'message' => "Kindly register this vehicle before you can prepare estimate", 'status' => 200];
-                $status = 200;
+                $resData = ['data' => [], 'message' => "Kindly register this vehicle before you can prepare estimate", 'status' => 201];
+                $status = 201;
               }
 
 
@@ -384,16 +387,16 @@ class EstimateController extends Controller
                       $status = 200;
                     }
                     else{
-                      $resData = ['data' => [], 'message' => "Something went wrong", 'status' => 200];
-                      $status = 200;
+                      $resData = ['data' => [], 'message' => "Something went wrong", 'status' => 201];
+                      $status = 201;
                     }
 
 
 
               }
               else{
-                $resData = ['data' => [], 'message' => "Kindly register this vehicle before you can prepare estimate", 'status' => 200];
-                $status = 200;
+                $resData = ['data' => [], 'message' => "Kindly register this vehicle before you can prepare estimate", 'status' => 201];
+                $status = 201;
               }
 
 
