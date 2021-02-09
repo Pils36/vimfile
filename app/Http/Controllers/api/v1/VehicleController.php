@@ -28,6 +28,7 @@ use App\Validateotp as Validateotp;
 use App\Points as Points;
 use App\Estimate as Estimate;
 use App\reminderNotify as reminderNotify;
+use App\SuggestedMechanics as SuggestedMechanics;
 
 use DateTime;
 
@@ -464,7 +465,7 @@ class VehicleController extends Controller
     // Get Nearby Mechanics
     public function getnearby(Request $request){
 
-        
+        $data = [];
 
         // Check for mechanics near me
         if($request->get('city')){
@@ -482,32 +483,15 @@ class VehicleController extends Controller
                             })->where('userType', 'Auto Care')->orWhere('userType', 'Certified Professional')->get();
 
 
-                            
+            $suggested = SuggestedMechanics::select('station_name as stationName', 'address', 'city', 'state', 'country', 'telephone as phoneNumber')->where('city', $category)->get();
+
+
+            $data =  array_merge($mechanics->toArray(), $suggested->toArray());
 
 
             if (count($mechanics) > 0) {
 
-                // foreach ($mechanics as $key => $value) {
-
-                //     dd($value);
-
-                //     $mechID = $value->station_name;
-
-                //     $rating = Review::where('station_name', $mechID)->get();
-
-                //     if(count($rating) > 0){
-
-                //         $resData = ['data' => $mechanics, 'rate_review' => $rating, 'message' => 'success', 'status' => 200];
-                //         $status = 200;
-                //     }
-                //     else{
-                //         $resData = ['data' => $mechanics, 'rate_review' => 0, 'message' => 'success', 'status' => 200];
-                //         $status = 200;
-                //     }
-                // }
-
-
-                $resData = ['data' => $mechanics, 'message' => 'success', 'status' => 200];
+                $resData = ['data' => $data, 'message' => 'success', 'status' => 200];
                         $status = 200;
 
 
@@ -523,7 +507,7 @@ class VehicleController extends Controller
             $data = $this->getDistance($this->arr_ip->lat, $this->arr_ip->lon, $this->arr_ip['state_name'], $this->arr_ip['state']);
 
 
-            Log::info($data);
+            // Log::info($data);
 
 
             if($data != null){
@@ -549,6 +533,8 @@ class VehicleController extends Controller
     public function getmechanicbyCity(Request $request){
         // Check for mechanics near me
 
+        $data = [];
+
         $category = $request->get('city');
 
 
@@ -562,8 +548,18 @@ class VehicleController extends Controller
                         })->where('userType', 'Auto Care')->orWhere('userType', 'Certified Professional')->get();
 
 
+        // Get suggested mechanics
+
+        $suggested = SuggestedMechanics::select('station_name as stationName', 'address', 'city', 'state', 'country', 'telephone as phoneNumber')->where('city', $category)->get();
+
+
+        $data =  array_merge($mechanics->toArray(), $suggested->toArray());
+
+
+
+
         if (count($mechanics)) {
-            $resData = ['data' => $mechanics, 'message' => "Success", 'status' => 200];
+            $resData = ['data' => $data, 'message' => "Success", 'status' => 200];
             $status = 200;
         } 
         else {

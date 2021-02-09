@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Log;
 
 use App\Mail\sendEmail;
 use App\User as User;
@@ -1111,6 +1111,9 @@ class UserController extends Controller
 
 
 		$getUser = $user->select('name', 'specialization', 'avatar as imageUrl')->where('id', $id)->get();
+
+		
+		
 
 		if($req->name != ""){
 			$name = $req->name;

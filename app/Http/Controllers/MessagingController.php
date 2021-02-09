@@ -211,26 +211,26 @@ class MessagingController extends Controller
 
         if($level == "Individual"){
           
-          return User::select('ref_code As user_id', 'name As firstname', 'name As lastname', 'station_name As company', 'userType As profession', 'city', 'state As cstate', 'country', 'email', 'phone_number As phone', 'image', 'userType As level', 'userType As userrole', 'username')->where('userType', 'Individual')->where('ref_code', $this->userid)->get();
+          return User::select('ref_code As user_id', 'name As firstname', 'name As lastname', 'station_name As company', 'userType As profession', 'city', 'state As cstate', 'country', 'email', 'phone_number As phone', 'avatar As image', 'userType As level', 'userType As userrole', 'username')->where('userType', 'Individual')->where('ref_code', $this->userid)->get();
         }
         elseif($level == "Commercial"){
-          return User::select('ref_code As user_id', 'name As firstname', 'name As lastname', 'station_name As company', 'userType As profession', 'city', 'state As cstate', 'country', 'email', 'phone_number As phone', 'image', 'userType As level', 'userType As userrole', 'username')->where('userType', 'Commercial')->where('ref_code', $this->userid)->get();
+          return User::select('ref_code As user_id', 'name As firstname', 'name As lastname', 'station_name As company', 'userType As profession', 'city', 'state As cstate', 'country', 'email', 'phone_number As phone', 'avatar As image', 'userType As level', 'userType As userrole', 'username')->where('userType', 'Commercial')->where('ref_code', $this->userid)->get();
         }
         elseif($level == "Business"){
 
-          return User::select('ref_code As user_id', 'name As firstname', 'name As lastname', 'station_name As company', 'userType As profession', 'city', 'state As cstate', 'country', 'email', 'phone_number As phone', 'image', 'userType As level', 'userType As userrole', 'username')->where('userType', 'Business')->where('ref_code', $this->userid)->get();
+          return User::select('ref_code As user_id', 'name As firstname', 'name As lastname', 'station_name As company', 'userType As profession', 'city', 'state As cstate', 'country', 'email', 'phone_number As phone', 'avatar As image', 'userType As level', 'userType As userrole', 'username')->where('userType', 'Business')->where('ref_code', $this->userid)->get();
         }
         elseif($level == "Auto Care"){
 
-          return User::select('ref_code As user_id', 'name As firstname', 'name As lastname', 'station_name As company', 'userType As profession', 'city', 'state As cstate', 'country', 'email', 'phone_number As phone', 'image', 'userType As level', 'userType As userrole', 'username')->where('userType', 'Auto Care')->where('ref_code', $this->userid)->get();
+          return User::select('ref_code As user_id', 'name As firstname', 'name As lastname', 'station_name As company', 'userType As profession', 'city', 'state As cstate', 'country', 'email', 'phone_number As phone', 'avatar As image', 'userType As level', 'userType As userrole', 'username')->where('userType', 'Auto Care')->where('ref_code', $this->userid)->get();
         }
         elseif($level == "Certified Professional"){
 
-          return User::select('ref_code As user_id', 'name As firstname', 'name As lastname', 'station_name As company', 'userType As profession', 'city', 'state As cstate', 'country', 'email', 'phone_number As phone', 'image', 'userType As level', 'userType As userrole', 'username')->where('userType', 'Certified Professional')->where('ref_code', $this->userid)->get();
+          return User::select('ref_code As user_id', 'name As firstname', 'name As lastname', 'station_name As company', 'userType As profession', 'city', 'state As cstate', 'country', 'email', 'phone_number As phone', 'avatar As image', 'userType As level', 'userType As userrole', 'username')->where('userType', 'Certified Professional')->where('ref_code', $this->userid)->get();
         }
         elseif($level == "Auto Dealer"){
 
-          return User::select('ref_code As user_id', 'name As firstname', 'name As lastname', 'station_name As company', 'userType As profession', 'city', 'state As cstate', 'country', 'email', 'phone_number As phone', 'image', 'userType As level', 'userType As userrole', 'username')->where('userType', 'Auto Dealer')->where('ref_code', $this->userid)->get();
+          return User::select('ref_code As user_id', 'name As firstname', 'name As lastname', 'station_name As company', 'userType As profession', 'city', 'state As cstate', 'country', 'email', 'phone_number As phone', 'avatar As image', 'userType As level', 'userType As userrole', 'username')->where('userType', 'Auto Dealer')->where('ref_code', $this->userid)->get();
         }
         
 
@@ -244,9 +244,9 @@ class MessagingController extends Controller
         case 'Individual':
           //Individual has connection of Business and Auto Care including Staff
 
-           $busclients = User::select('ref_code As login_id','name As firstname', 'name As lastname','email','image As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Certified Professional')->get();
+           $busclients = User::select('ref_code As login_id','name As firstname', 'name As lastname','email', 'avatar As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Certified Professional')->get();
 
-          $autocarelients =  User::select('ref_code As login_id','name As firstname', 'name As lastname','email','image As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Auto Care')->get();
+          $autocarelients =  User::select('ref_code As login_id','name As firstname', 'name As lastname','email', 'avatar As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Auto Care')->get();
 
           return $obj = array_merge($busclients->toArray(), $autocarelients->toArray());
                     
@@ -254,18 +254,18 @@ class MessagingController extends Controller
 
         case 'Commercial':
           //Commercial has connection of Business and Auto Care including Staff
-          $bususerclients = User::select('ref_code As login_id','name As firstname', 'name As lastname','email','image As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Certified Professional')->get();
+          $bususerclients = User::select('ref_code As login_id','name As firstname', 'name As lastname','email', 'avatar As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Certified Professional')->get();
 
-          $autousercarelients =  User::select('ref_code As login_id','name As firstname', 'name As lastname','email','image As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Auto Care')->get();
+          $autousercarelients =  User::select('ref_code As login_id','name As firstname', 'name As lastname','email', 'avatar As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Auto Care')->get();
 
           return $obj = array_merge($bususerclients->toArray(), $autousercarelients->toArray());
           break;
 
           case 'Auto Dealer':
           //Commercial has connection of Business and Auto Care including Staff
-          $bususerclients = User::select('ref_code As login_id','name As firstname', 'name As lastname','email','image As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Certified Professional')->get();
+          $bususerclients = User::select('ref_code As login_id','name As firstname', 'name As lastname','email', 'avatar As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Certified Professional')->get();
 
-          $autousercarelients =  User::select('ref_code As login_id','name As firstname', 'name As lastname','email','image As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Auto Care')->get();
+          $autousercarelients =  User::select('ref_code As login_id','name As firstname', 'name As lastname','email','avatar As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Auto Care')->get();
 
           return $obj = array_merge($bususerclients->toArray(), $autousercarelients->toArray());
           break;
@@ -273,9 +273,9 @@ class MessagingController extends Controller
         case 'Business':
           //Business has connection of Individual & Commercial
 
-        $induserclients = User::select('ref_code As login_id','name As firstname', 'name As lastname','email','image As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Certified Professional')->get();
+        $induserclients = User::select('ref_code As login_id','name As firstname', 'name As lastname','email','avatar As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Certified Professional')->get();
 
-          $comcarelients =  User::select('ref_code As login_id','name As firstname', 'name As lastname','email','image As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Auto Care')->get();
+          $comcarelients =  User::select('ref_code As login_id','name As firstname', 'name As lastname','email','avatar As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Auto Care')->get();
 
           return $obj = array_merge($induserclients->toArray(), $comcarelients->toArray());
 
@@ -284,9 +284,9 @@ class MessagingController extends Controller
           case 'Certified Professional':
           //Business has connection of Individual & Commercial
 
-        $induserclients = User::select('ref_code As login_id','name As firstname', 'name As lastname','email','image As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Individual')->get();
+        $induserclients = User::select('ref_code As login_id','name As firstname', 'name As lastname','email','avatar As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Individual')->get();
 
-          $comcarelients =  User::select('ref_code As login_id','name As firstname', 'name As lastname','email','image As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Business')->get();
+          $comcarelients =  User::select('ref_code As login_id','name As firstname', 'name As lastname','email','avatar As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Business')->get();
 
           return $obj = array_merge($induserclients->toArray(), $comcarelients->toArray());
 
@@ -294,9 +294,9 @@ class MessagingController extends Controller
 
         case 'Auto Care':
           //Auto Care has connection of Individual & Commercial
-        $indusersclients = User::select('ref_code As login_id','name As firstname', 'name As lastname','email','image As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Individual')->get();
+        $indusersclients = User::select('ref_code As login_id','name As firstname', 'name As lastname','email','avatar As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Individual')->get();
 
-          $comcareslients =  User::select('ref_code As login_id','name As firstname', 'name As lastname','email','image As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Business')->get();
+          $comcareslients =  User::select('ref_code As login_id','name As firstname', 'name As lastname','email','avatar As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('userType', 'Business')->get();
 
           return $obj = array_merge($indusersclients->toArray(), $comcareslients->toArray());
 
@@ -321,28 +321,28 @@ class MessagingController extends Controller
         //Get user's profile information
         switch ($role) {
           case 'Individual':
-          return User::select('name As firstname', 'email', 'image', 'userType As position', 'userType As profession')->where('id', $user)->where('userType', 'Individual')->get()[0];
+          return User::select('name As firstname', 'email', 'avatar', 'userType As position', 'userType As profession')->where('id', $user)->where('userType', 'Individual')->get()[0];
 
             break;
 
           case 'Business':
-           return User::select('name As firstname', 'email', 'image', 'userType As position', 'userType As profession')->where('id', $user)->where('userType', 'Business')->get()[0];
+           return User::select('name As firstname', 'email', 'avatar', 'userType As position', 'userType As profession')->where('id', $user)->where('userType', 'Business')->get()[0];
             break;
 
           case 'Commercial':
-            return User::select('name As firstname', 'email', 'image', 'userType As position', 'userType As profession')->where('id', $user)->where('userType', 'Commercial')->get()[0];
+            return User::select('name As firstname', 'email', 'avatar', 'userType As position', 'userType As profession')->where('id', $user)->where('userType', 'Commercial')->get()[0];
             break;
 
           case 'Auto Dealer':
-            return User::select('name As firstname', 'email', 'image', 'userType As position', 'userType As profession')->where('id', $user)->where('userType', 'Auto Dealer')->get()[0];
+            return User::select('name As firstname', 'email', 'avatar', 'userType As position', 'userType As profession')->where('id', $user)->where('userType', 'Auto Dealer')->get()[0];
             break;
 
           case 'Auto Care':
-            return User::select('name As firstname', 'email', 'image', 'userType As position', 'userType As profession')->where('id', $user)->where('userType', 'Auto Care')->get()[0];
+            return User::select('name As firstname', 'email', 'avatar', 'userType As position', 'userType As profession')->where('id', $user)->where('userType', 'Auto Care')->get()[0];
             break;
 
           case 'Certified Professional':
-            return User::select('name As firstname', 'email', 'image', 'userType As position', 'userType As profession')->where('id', $user)->where('userType', 'Certified Professional')->get()[0];
+            return User::select('name As firstname', 'email', 'avatar', 'userType As position', 'userType As profession')->where('id', $user)->where('userType', 'Certified Professional')->get()[0];
             break;
           
           default:
@@ -363,14 +363,14 @@ class MessagingController extends Controller
 
         
         
-        return User::select('ref_code As login_id','name As firstname', 'name As lastname','email','image As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('station_name', $station[0]->station_name)->get();
+        return User::select('ref_code As login_id','name As firstname', 'name As lastname','email','avatar As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('station_name', $station[0]->station_name)->get();
       }
       else{
         // Goto User Table
         $userInfo = User::where('station_name', $identity)->get();
 
         if(count($userInfo) > 0){
-          return User::select('ref_code As login_id','name As firstname', 'name As lastname','email','image As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('station_name', $userInfo[0]->station_name)->get();
+          return User::select('ref_code As login_id','name As firstname', 'name As lastname','email','avatar As photo', 'userType As level', 'station_name As company', 'city', 'country','userType As profession', 'state As cstate', 'phone_number', 'userType As userrole', 'username')->where('station_name', $userInfo[0]->station_name)->get();
         }
         else{
           return "No representative to chat with";

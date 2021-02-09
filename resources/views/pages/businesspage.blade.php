@@ -84,6 +84,12 @@
 			<div class="container">
 				<!-- #ABOUT# -->
 				<section id="about" class="section section-about wow fadeInUp">
+
+                    <br><br>
+                    <center><h1 style="
+                        font-weight: bold;
+                    "><img src="https://img.icons8.com/ios/40/000000/facebook-like--v1.png"/> This is what your page looks like to a visitor</h1><hr></center>
+
 					<div class="profile">
 						<div class="row">
 							<div class="col-sm-4">

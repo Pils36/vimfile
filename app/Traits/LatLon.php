@@ -16,7 +16,7 @@ trait LatLon{
 
     public function getDistance($latitudeFrom, $longitudeFrom, $state, $state_short){
 
-        // dd("My latitude:  ".$latitudeFrom." | My Longitude: ".$longitudeFrom);
+        // dd("My latitude: ".$latitudeFrom." | My Longitude: ".$longitudeFrom);
 
 
         // Get Mechanic LAT ANd LON
