@@ -86,6 +86,16 @@
 
   $(document).ready(function(){
 
+
+    if("{{ Auth::user()->login_times }}" < 2){
+        introJs().start();
+    }
+
+    // Perform Guide Operations
+    
+
+
+
     $('.some-list').simpleLoadMore({
       item:'div.reviewcon',
       btnHTML:'<div class="row"><div class="col-md-12"><br><br><a href="#" class="load-more__btn btn btn-danger">View More</a></div></div>',
@@ -220,7 +230,8 @@ function logouts(){
 
 <script>
   $(document).ready(function(){
-    introJs().start();
+
+
     $('#book_ref').val('');
     $('#feedback_refcode').val('');
     $('#mybook_ref').val('');
@@ -319,6 +330,7 @@ function logouts(){
           $('#inventory-tab').click();
         }
         if(c == "labourschedule"){
+          $('#recordmaintenance-tab').click();
           $("#labourschedule-tab").click();
         }
 

@@ -658,3 +658,4 @@ Route::post('vinlookup', ['uses' => 'VinController@decodeInfo', 'as' => 'vinlook
 Route::group(['prefix' => 'Messaging'], function() {
 	Route::post('index', ['uses' => 'MessagingController@index', 'as' => 'index']);
 });
+
