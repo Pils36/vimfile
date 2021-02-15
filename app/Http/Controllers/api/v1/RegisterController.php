@@ -31,7 +31,7 @@ class RegisterController extends Controller
 
     public function register(Request $request){
 
-        $code = 12345;
+        $code = mt_rand(00000, 99999);
 
     	$validator = Validator::make($request->all(), [
             'firstname' => 'required',

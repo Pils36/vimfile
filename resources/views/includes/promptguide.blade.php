@@ -35,33 +35,30 @@
                                 <tbody>
                                     <tr>
                                         <td>Step 1: </td>
-                                        <td>Click on <a href="#" style="color: rgb(0, 162, 255); font-weight: bold;">SHOP MANAGEMENT</a></td>
+                                        <td>Click on <a href="#" style="color: rgb(0, 162, 255); font-weight: bold;" onclick="userGuide('shopmanagement')">SHOP MANAGEMENT</a></td>
                                     </tr>
                                     <tr>
                                         <td>Step 2: </td>
-                                        <td>To setup inventory record, click on <a href="#" style="color: rgb(0, 162, 255); font-weight: bold;">MANAGE INVENTORY</a></td>
+                                        <td>To setup inventory record, click on <a href="#" style="color: rgb(0, 162, 255); font-weight: bold;" onclick="userGuide('mamangeinventory')">MANAGE INVENTORY</a></td>
                                     </tr>
                                     <tr>
                                         <td>Step 3: </td>
-                                        <td>You need to create a vendor, click on <a href="#" style="color: rgb(0, 162, 255); font-weight: bold;">CREATE VENDOR</a>. If you have already created one, proceed to Step 4.</td>
+                                        <td>You need to create a vendor, click on <a href="#" style="color: rgb(0, 162, 255); font-weight: bold;" onclick="userGuide('createvendor')">CREATE VENDOR</a>. If you have already created one, proceed to Step 4.</td>
                                     </tr>
                                     <tr>
                                         <td>Step 4: </td>
-                                        <td>You need to create inventory category, click on <a href="#" style="color: rgb(0, 162, 255); font-weight: bold;">CREATE CATEGORY</a>. If you have already created one, proceed to Step 5.</td>
+                                        <td>You need to create inventory category, click on <a href="#" style="color: rgb(0, 162, 255); font-weight: bold;" onclick="userGuide('createcategory')">CREATE CATEGORY</a>. If you have already created one, proceed to Step 5.</td>
                                     </tr>
                                     <tr>
                                         <td>Step 5: </td>
-                                        <td>You are almost done, click on <a href="#" style="color: rgb(0, 162, 255); font-weight: bold;">CREATE INVENTORY</a>. Then setup your record</td>
+                                        <td>You are almost done, click on <a href="#" style="color: rgb(0, 162, 255); font-weight: bold;" onclick="userGuide('createinventory')">CREATE INVENTORY</a>. Then setup your record</td>
                                     </tr>
                                     <tr>
                                         <td colspan="2" align="center">VOILA!!!. You have created an inventory.</td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <button class="btn btn-danger" type="button" data-dismiss="modal" aria-label="Close">Skip</button>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-primary">Next</button>
+                                            <button class="btn btn-danger" type="button" data-dismiss="modal" aria-label="Close">Close</button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -123,33 +120,30 @@
                                 <tbody>
                                     <tr>
                                         <td>Step 1: </td>
-                                        <td>Click on <a href="#" style="color: rgb(0, 162, 255); font-weight: bold;">SHOP MANAGEMENT</a></td>
+                                        <td>Click on <a href="#" style="color: rgb(0, 162, 255); font-weight: bold;" onclick="userGuide('shopmanagement')">SHOP MANAGEMENT</a></td>
                                     </tr>
                                     <tr>
                                         <td>Step 2: </td>
-                                        <td>To setup labour record, click on <a href="#" style="color: rgb(0, 162, 255); font-weight: bold;">MANAGE LABOUR</a></td>
+                                        <td>To setup labour record, click on <a href="#" style="color: rgb(0, 162, 255); font-weight: bold;" onclick="userGuide('managelabour')">MANAGE LABOUR</a></td>
                                     </tr>
                                     <tr>
                                         <td>Step 3: </td>
-                                        <td>You need to create a labour category, click on <a href="#" style="color: rgb(0, 162, 255); font-weight: bold;">CREATE LABOUR CATEGORY</a>. If you have already created one, proceed to Step 4.</td>
+                                        <td>You need to create a labour category, click on <a href="#" style="color: rgb(0, 162, 255); font-weight: bold;" onclick="userGuide('createlabourcategory')">CREATE LABOUR CATEGORY</a>. If you have already created one, proceed to Step 4.</td>
                                     </tr>
                                     <tr>
                                         <td>Step 4: </td>
-                                        <td>You need to create labour record, click on <a href="#" style="color: rgb(0, 162, 255); font-weight: bold;">CREATE LABOUR RECORD</a>. If you have already created one, proceed to Step 5.</td>
+                                        <td>You need to create labour record, click on <a href="#" style="color: rgb(0, 162, 255); font-weight: bold;" onclick="userGuide('createlabourrecord')">CREATE LABOUR RECORD</a>. If you have already created one, proceed to Step 5.</td>
                                     </tr>
                                     <tr>
                                         <td>Step 5: </td>
-                                        <td>You are almost done, click on <a href="#" style="color: rgb(0, 162, 255); font-weight: bold;">ADD LABOUR</a>. Then setup your record</td>
+                                        <td>You are almost done, click on <a href="#" style="color: rgb(0, 162, 255); font-weight: bold;" onclick="userGuide('addlabour')">ADD LABOUR</a>. Then setup your record</td>
                                     </tr>
                                     <tr>
                                         <td colspan="2" align="center">VOILA!!!. You have created a labour record.</td>
                                     </tr>
                                     <tr>
                                         <td>
-                                            <button class="btn btn-danger" type="button" data-dismiss="modal" aria-label="Close">Skip</button>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-primary">Next</button>
+                                            <button class="btn btn-danger" type="button" data-dismiss="modal" aria-label="Close">Close</button>
                                         </td>
                                     </tr>
                                 </tbody>

@@ -609,6 +609,9 @@ Route::post('Feedbacks', ['uses' => 'HomeController@Feedbacks', 'as' => 'Feedbac
 Route::post('checkFeedbacks', ['uses' => 'HomeController@checkFeedbacks', 'as' => 'checkFeedbacks']);
 Route::post('updateFeedbacks', ['uses' => 'HomeController@updateFeedbacks', 'as' => 'updateFeedbacks']);
 
+
+Route::post('checkEstRecs', ['uses' => 'HomeController@checkEstRecs', 'as' => 'checkEstRecs']);
+
 Route::post('otherSearch', ['uses' => 'HomeController@otherSearch', 'as' => 'otherSearch']);
 
 Route::post('setDiscount', ['uses' => 'AdminController@setDiscount', 'as' => 'setDiscount']);

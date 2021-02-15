@@ -5619,7 +5619,7 @@ to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below
   <li class="nav-item">
     <a class="nav-link" id="updatevendorprofile-tab" data-toggle="tab" href="#updatevendorprofile" role="tab" aria-controls="updatevendorprofile" aria-selected="false">Update Vendor's Profile</a>
   </li>
-  <li class="nav-item" style="background-color: red;">
+  <li class="nav-item" style="background-color: darkorange;">
     <a class="nav-link" data-toggle="modal" data-target="#exampleModalCenter" id="guide1" href="javascript:void()" style="color: white;">Guide me through</a>
   </li>
 
@@ -6635,7 +6635,7 @@ to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below
   <li class="nav-item">
     <a class="nav-link" id="labourpaystub-tab" data-toggle="tab" href="#labourpaystub" role="tab" aria-controls="labourpaystub" aria-selected="false">Labour Pay Stub</a>
   </li>
-  <li class="nav-item" style="background-color: red;">
+  <li class="nav-item" style="background-color: darkorange;">
     <a class="nav-link" data-toggle="modal" data-target="#labourGuideCenter" id="guide2" href="javascript:void()" style="color: white;">Guide me through</a>
   </li>
   @endif

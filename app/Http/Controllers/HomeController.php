@@ -11466,6 +11466,24 @@ class HomeController extends Controller
     }
 
 
+    public function checkEstRecs(Request $req){
+
+        $data = Estimate::where('update_by', $req->station_name)->count();
+
+        if($data == 0){
+            // Pop Up
+            $resData = ['res' => 'Pop up', 'message' => 'success'];
+        }
+        else{
+
+            $resData = ['res' => 'Do nothing', 'message' => 'info'];
+        }
+
+
+        return $this->returnJSON($resData);
+    }
+
+
     public function ajaxcheckappointment(Request $req, BookAppointment $booking){
         // Get Appointment
         $getAppointment = $booking->where('ref_code', $req->ref_code)->where('email', $req->email)->get();

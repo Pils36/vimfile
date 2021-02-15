@@ -91,7 +91,33 @@
         introJs().start();
     }
 
+    
+
+    setInterval(() => {
+        checkEstRecs();
+    }, 7000);
+
     // Perform Guide Operations
+
+    function checkEstRecs(){
+
+var station_name = "{{ Auth::user()->station_name }}";
+var thisdata = {station_name: station_name};
+// Check Notifications
+// Do Ajax to fetch result
+      setHeaders();
+      jQuery.ajax({
+      url: "{{ URL('Ajax/checkEstRecs') }}",
+      method: 'post',
+      data: thisdata,
+      dataType: 'JSON',
+      success: function(result){
+        if(result.message == "success"){
+          $('#guide1').click();
+        }
+      }
+    });
+}
     
 
 
@@ -199,6 +225,12 @@ function logouts(){
         }
       });
 }
+
+
+// Check for Estimate Record
+
+
+
 
 
 
@@ -11000,6 +11032,56 @@ function appointPop(subject, current_mileage, ref_code){
         });
 }
 
+
+
+function userGuide(val){
+
+  $('.close').click();
+
+  if(val == 'shopmanagement'){
+    $("#recordmaintenance-tab").click();
+  }
+  if(val == 'mamangeinventory'){
+    $("#recordmaintenance-tab").click();
+    $("#manageinventory-tab").click();
+  }
+  if(val == 'createvendor'){
+    $("#recordmaintenance-tab").click();
+    $("#manageinventory-tab").click();
+    $("#createvendor-tab").click();
+  }
+  if(val == 'createcategory'){
+    $("#recordmaintenance-tab").click();
+    $("#manageinventory-tab").click();
+    $("#createcategory-tab").click();
+  }
+  if(val == 'createinventory'){
+    $("#recordmaintenance-tab").click();
+    $("#manageinventory-tab").click();
+    $("#createinventoryitem-tab").click();
+  }
+  if(val == 'managelabour'){
+    $("#recordmaintenance-tab").click();
+    $("#labourschedule-tab").click();
+  }
+  if(val == 'createlabourcategory'){
+    $("#recordmaintenance-tab").click();
+    $("#labourschedule-tab").click();
+    $("#createlabourcategory-tab").click();
+  }
+  if(val == 'createlabourrecord'){
+    $("#recordmaintenance-tab").click();
+    $("#labourschedule-tab").click();
+    $("#createlabourrecord-tab").click();
+  }
+  if(val == 'addlabour'){
+    $("#recordmaintenance-tab").click();
+    $("#labourschedule-tab").click();
+    $("#addlabour-tab").click();
+  }
+
+
+}
 
 
 </script>
