@@ -11079,6 +11079,11 @@ function userGuide(val){
     $("#labourschedule-tab").click();
     $("#addlabour-tab").click();
   }
+  if(val == 'vehiclemaintenance'){
+    $("#recordmaintenance-tab").click();
+    $("#maintenance-tab").click();
+    $("#estimateprep-tab").click();
+  }
 
 
 }

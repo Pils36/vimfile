@@ -228,7 +228,32 @@ to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below
     <section class="feature_part p-t-70 p-b-70" id="userDash">
 
 
+
+
+
+
+
+
         <div class="container">
+
+
+
+            {{-- Start Row --}}
+
+
+
+            <div class="row">
+
+                @include('includes.sideguide')
+
+
+
+                <div class="col-md-8 pull-right">
+
+
+                
+
+
 
             @if(Auth::user()->userType == "Auto Care" || Auth::user()->userType == "Certified Professional")
 
@@ -10605,7 +10630,16 @@ to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below
 
 
 
+        </div>
 
+
+
+        
+
+    </div>
+
+
+            {{-- End Row --}}
 
 
 
