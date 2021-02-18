@@ -58,7 +58,6 @@ class RegisterController extends Controller
 	            'phone_number'=> $request->phone_number,
 	            'password' => Hash::make($request->password),
 	            'status' => 1,
-	            'verification_code' => $code,
 	        ]);
 	        	
 	        $this->getOTP($token, $code, $request->email, $request->phone_number);
@@ -74,8 +73,11 @@ class RegisterController extends Controller
 
 	            // Send SMS
 
+                // Get user data
+                $user = TempUser::where('email', $request->email)->first();
 
-			    $resData = ['data' => $create, 'message' => 'Success', 'status' => 200, 'action' => 'register'];
+
+			    $resData = ['data' => $user, 'message' => 'Success', 'status' => 200, 'action' => 'register'];
                 $status = 200;
             }
             else{
@@ -98,7 +100,6 @@ class RegisterController extends Controller
                             'phone_number'=> $request->phone_number,
                             'password' => Hash::make($request->password),
                             'status' => 1,
-                            'verification_code' => $code,
                         ]);
     
                         $this->getOTP($token, $code, $request->email, $request->phone_number);
@@ -115,9 +116,9 @@ class RegisterController extends Controller
                         // Send SMS
     
                         // Get user data
-                        $user = TempUser::where('email', $request->email)->get();
+                        $user = TempUser::where('email', $request->email)->first();
     
-                        $resData = ['data' => $user[0], 'message' => 'Success', 'status' => 200, 'action' => 'register'];
+                        $resData = ['data' => $user, 'message' => 'Success', 'status' => 200, 'action' => 'register'];
                         $status= 200;
                     }
                     else{
@@ -162,23 +163,26 @@ class RegisterController extends Controller
             if(count($getcode) > 0){
                 if($getcode[0]->token == md5($request->email)){
 
-                    $resData = ['data' => $getcode, 'message' => 'Validation successful', 'status' => 200, 'token' => md5($request->email)];
+
+                    $resData = ['data' => $getcode[0], 'message' => 'Validation successful', 'status' => 200, 'token' => md5($request->email)];
                     $status = 200;
                 }
                 else{
                     // Check if email is available
-                    $getcode = Validateotp::where('email', $request->email)->get();
+                    $getcode = Validateotp::where('email', $request->email)->first();
 
-                    $resData = ['data' => $getcode[0], 'message' => 'Validation successful', 'status' => 200, 'token' => md5($request->email)];
+                    $resData = ['data' => $getcode, 'message' => 'Validation successful', 'status' => 200, 'token' => md5($request->email)];
                     $status = 200;
 
                 }
 
-                $user = TempUser::where('email', $request->email)->get();
+                Validateotp::where('email', $request->email)->update(['status' => 1]);
+
+                $user = TempUser::where('email', $request->email)->first();
 
                 // Create Users Registration
 
-                $this->insertUser($user[0]->name, $user[0]->userType, $user[0]->email, $user[0]->phone_number, $user[0]->password, $user[0]->code, md5($request->email));
+                $this->insertUser($user->name, $user->userType, $user->email, $user->phone_number, $user->password, $user->code, md5($request->email));
 
 
             }
