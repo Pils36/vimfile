@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Log;
+
 use GuzzleHttp;
 
 use Illuminate\Http\Exception\GuzzleException;
@@ -11,6 +13,7 @@ use GuzzleHttp\Client;
 
 use App\Blog as Blog;
 use App\User as User;
+use App\SuggestedMechanics as SuggestedMechanics;
 
 //Scrapping Tool
 // use Goutte\Client;
@@ -93,11 +96,15 @@ class WebScrapper extends Controller
 	//    Get Long and Lat
 
 	public function getAddressinfo(){
-		$user = User::where('address', '!=', null)->get();
+		// $user = User::where('address', '!=', null)->get();
+		$user = SuggestedMechanics::where('address', '!=', null)->inRandomOrder()->take(200)->get();
+
+		// dd($user);
 
 		foreach($user as $key => $value){
 			$address = $value->address;
-			$email = $value->email;
+			// $email = $value->email;
+			$station_name = $value->station_name;
 
 			$url = "https://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($address)."&key=AIzaSyD7blqziwyJPZTh1v0it9Ct9wUq1qurpsA";
 
@@ -116,15 +123,16 @@ class WebScrapper extends Controller
 				$longitude = $response->results[0]->geometry->location->lng;
 
 				// Update USer
-				User::where('address', $address)->update(['lon' => $longitude, 'lat' => $latitude]);
+				SuggestedMechanics::where('address', $address)->update(['lon' => $longitude, 'lat' => $latitude]);
 
-				echo 'Address: ' . $address;
-				echo '<br />';
-				echo 'Latitude: ' . $latitude;
-				echo '<br />';
-				echo 'Longitude: ' . $longitude;
 
-				echo '<hr />';
+				// echo 'Address: ' . $address;
+				// echo '<br />';
+				// echo 'Latitude: ' . $latitude;
+				// echo '<br />';
+				// echo 'Longitude: ' . $longitude;
+
+				// echo '<hr />';
 
 			} else {
 				echo $response->status;
@@ -134,6 +142,7 @@ class WebScrapper extends Controller
 
 		}
 
+		Log::info('Cron executed'. date('d-m-Y h:i a'));
 		 
 
 
