@@ -1287,7 +1287,7 @@ a.nav-link {
 
         <div class="widget item-absolute paragraph  " id="element-179" data-at="paragraph">
   <div class="contents">
-    <p  class="x_fae6260b"><span  class="x_f2074b6c"><u  ><a href="https://vimfile.com/Privacy" id="link-c3rm55iw64s" target="_blank" data-link-c3rm55iw64s class="url-link">Privacy Policy</a><br><a href="https://vimfile.com/Terms" id="link-1a0zmx9ax6i" target="_blank" data-link-1a0zmx9ax6i class="url-link">Terms &amp; Conditions</a></u></span></p>
+    <p  class="x_fae6260b"><span  class="x_f2074b6c"><u  ><a href="https://vimfile.com/privacy" id="link-c3rm55iw64s" target="_blank" data-link-c3rm55iw64s class="url-link">Privacy Policy</a><br><a href="https://vimfile.com/terms" id="link-1a0zmx9ax6i" target="_blank" data-link-1a0zmx9ax6i class="url-link">Terms &amp; Conditions</a></u></span></p>
   </div>
 </div>
 

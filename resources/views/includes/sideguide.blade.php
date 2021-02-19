@@ -36,7 +36,7 @@ border-radius: 10px;
 
         <div class="row">
             <div class="col-md-2">
-                <p><img src="https://img.icons8.com/color/25/000000/info--v1.png"/></p>
+                &nbsp;
             </div>
             <div class="col-md-10">
                 <p>Set up Inventory</p>
@@ -100,7 +100,7 @@ border-radius: 10px;
 
         <div class="row">
             <div class="col-md-2">
-                <p><img src="https://img.icons8.com/color/25/000000/info--v1.png"/></p>
+                &nbsp;
             </div>
             <div class="col-md-10">
                 <p>Set up Labour</p>

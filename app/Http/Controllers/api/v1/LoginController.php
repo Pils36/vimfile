@@ -7,6 +7,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
+
+use Illuminate\Support\Facades\Log;
+
 use App\User as User;
 
 class LoginController extends Controller
@@ -53,25 +56,38 @@ class LoginController extends Controller
             return $this->returnJSON($resData, $status);
         }
 
-        $accessToken = Auth::user()->createToken('authToken')->accessToken;
 
         $letter = chr(rand(65,90));
         $ref_code = $letter.mt_rand(1000, 9999);
 
-        $checking = User::select('id', 'ref_code', 'name', 'email', 'userType', 'phone_number', 'address', 'city', 'state', 'country', 'lon', 'lat', 'zipcode', 'email1', 'email2', 'email3', 'plan', 'specialization', 'avatar as imageUrl')->where('email', $request->email)->get();
+        $checking = User::select('id', 'ref_code', 'name', 'email', 'userType', 'phone_number', 'address', 'city', 'state', 'country', 'lon', 'lat', 'zipcode', 'email1', 'email2', 'email3', 'plan', 'specialization', 'avatar as imageUrl', 'api_token')->where('email', $request->email)->get();
 
         if(count($checking) > 0 && $checking[0]->ref_code != null){
 
-            $ref = User::where('email', $request->email)->update(['ref_code' => $checking[0]->ref_code, 'api_token' => $accessToken]);
+            $accessToken = $checking[0]->api_token;
+
+            if($checking[0]->api_token != null){
+                $ref = User::where('email', $request->email)->update(['ref_code' => $checking[0]->ref_code]);
+            }   
+            else{
+                $ref = User::where('email', $request->email)->update(['ref_code' => $checking[0]->ref_code, 'api_token' => $accessToken]);
+            }
 
         }
         else{
+
+            $accessToken = Auth::user()->createToken('authToken')->accessToken;
+
+
             $ref = User::where('email', $request->email)->update(['ref_code' => $ref_code, 'api_token' => $accessToken]);
         }
 
 
 
         $this->logTrial($request->email, $this->arr_ip['lon'], $this->arr_ip['lat']);
+
+
+        Log::info($accessToken);
         
 
         $resData = ['data' => $checking[0], 'access_token' => $accessToken, 'status' => 200, 'message' => 'success', 'action' => 'login'];

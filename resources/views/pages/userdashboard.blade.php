@@ -192,14 +192,14 @@ To proceed, click 'Next'"></div>
                                     <br>* Cancel/Deactivate anytime
                             </p>
                             @else
-                            <div data-step="1" @if(Auth::user()->userType == "Auto Care" || Auth::user()->userType == "Certified Professional") data-intro="My Name is 'Wrench', Your Vimfile Tour Guide. Thanks for signing up on vimfile.com.
-I understand that you want to manage your Auto Repair Store more efficiently and i
-would be glad assist you to walk-through Vimfile for Auto Repair Centre.
-To proceed, click 'Next' "  @else data-intro="My Name is 'Wrench', Your Vimfile Tour Guide. Thanks for signing up on vimfile.com
-I understand that you want to track maintenance activities on your vehicle and i would be glad
-to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below." @endif></div>
-                                <h1>Maintenance <span style="text-transform: lowercase;">i</span>VIM
-                                                                </h1>
+                            <div data-step="1" @if(Auth::user()->userType == "Auto Care" || Auth::user()->userType == "Certified Professional") data-intro="My Name is 'Wrench', I am our Vimfile Tour Guide. 
+                                Thanks for signing up for Busy Wrench, our Unique SMS that enables you to drive more traffic to your store and also provides you
+                                with a modern tool to manage them.
+                                Let me quikcly walk you through Busy Wrench by VIMfile. To proceed, click 'Next'"  @else data-intro="My Name is 'Wrench', I am our Vimfile Tour Guide. 
+                                Thanks for signing up for Busy Wrench, our Unique SMS that enables you to drive more traffic to your store and also provides you
+                                with a modern tool to manage them.
+                                Let me quikcly walk you through Busy Wrench by VIMfile. To proceed, click 'Next'" @endif></div>
+                                <h1>Dashboard</h1>
                             @endif
 
                         </div>
@@ -258,22 +258,29 @@ to walk-through Vimfile for Vehicle Owner. To proceed, click 'Next' button below
             @if(Auth::user()->userType == "Auto Care" || Auth::user()->userType == "Certified Professional")
 
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
-  <li class="nav-item" @if(Auth::user()->userType == "Auto Care" || Auth::user()->userType == "Certified Professional") data-step="2" data-intro="Use this to respond to Request for Estimates from vehicle owners near you. This menu include Appointments, Opportunity posts, Approved estimates, Submitted estimates and Job done" @endif>
+  <li class="nav-item" @if(Auth::user()->userType == "Auto Care" || Auth::user()->userType == "Certified Professional") data-step="2" data-intro="Opportunity,
+This feature enables you to track appointments booked via Save on Auto Repair Mobile App by vehicle owners nearby,
+access and respond to Request for Estimates and view approved estimates by customers." @endif>
 
     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#opportunity" role="tab" aria-controls="opportunity" aria-selected="true">@if(Auth::user()->userType == "Auto Care" || Auth::user()->userType == "Certified Professional") Opportunity @else Request for Estimate <span style="color: #fff; background: brown; padding: 5px 10px; text-align: center; border-radius: 100%">@if(count($quotedEst) > 0) {{ count($quotedEst) }} @else 0 @endif</span> @endif @if(Auth::user()->userType == "Auto Care" || Auth::user()->userType == "Certified Professional") <span style="color: #fff; background: brown; padding: 5px 10px; text-align: center; border-radius: 100%">@if(count($opportunities) > 0 || count($myBookings) > 0) {{ count($opportunities) + count($myBookings) }} @else 0 @endif</span> @endif</a>
 
   </li>
-  <li class="nav-item" data-step="3" data-intro="Use this to read and respond to service reviews from your customers">
+  <li class="nav-item" data-step="3" data-intro="Servie Review,
+This feature enables you to access and reply to review and service ratings submitted by your customers">
     <a class="nav-link" id="myreviews-tab" data-toggle="tab" href="#myreviews" role="tab" aria-controls="myreviews" aria-selected="false">Service Review <span style="color: #fff; background: brown; padding: 5px 10px; text-align: center; border-radius: 100%">{{ $myreviewcount }}</span></a>
   </li>
-  <li class="nav-item" data-step="4" data-intro="Use this menu to record shop management. Shop management include Vehicle maintenance, Manage Inventory, Manage Labour, Revenue, Expenditure, Business report and Settings">
+  <li class="nav-item" data-step="4" data-intro="Shop Management,
+This is where you create estimates, work orders, access vehicle maintenance records,Set up and manage inventory/labour and generate your business reports 
+including revenue and expenditure.">
     <a class="nav-link" id="recordmaintenance-tab" data-toggle="tab" href="#recordmaintenance" role="tab" aria-controls="recordmaintenance" aria-selected="false">Shop Management</a>
   </li>
-  <li class="nav-item" data-step="5" data-intro="Booking and appointment is made easy when you receive calls from your customer">
+  <li class="nav-item" data-step="5" data-intro="Appointment on Phone,
+Record and track appointment made customers through by phone using this feature">
     <a class="nav-link" id="appointmentonphone-tab" data-toggle="tab" href="#appointmentonphone" role="tab" aria-controls="appointmentonphone" aria-selected="false">Appointment on Phone</a>
   </li>
 
-  <li class="nav-item" data-step="6" data-intro="VIN Lookup">
+  <li class="nav-item" data-step="6" data-intro="VIN Lookup,
+  You can now pull VIN of vehicles brought for maintenance">
     <a class="nav-link" id="vinlookup-tab" data-toggle="tab" href="#vinlookup" role="tab" aria-controls="vinlookup" aria-selected="false">VIN Lookup</a>
   </li>
 </ul>

@@ -1129,6 +1129,9 @@ class UserController extends Controller
 		}
 
 
+		Log::info('Name: '.$name.' | Specialization: '.$occupation);
+
+
 		// Update Proile
 		$user->where('id', $id)->update(['name' => $name, 'specialization' => $occupation]);
 
