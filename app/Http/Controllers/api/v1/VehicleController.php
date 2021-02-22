@@ -489,7 +489,7 @@ class VehicleController extends Controller
             $data =  array_merge($mechanics->toArray(), $suggested->toArray());
 
 
-            if (count($mechanics) > 0) {
+            if (count($mechanics) > 0 || count($suggested) > 0) {
 
                 $resData = ['data' => $data, 'message' => 'success', 'status' => 200];
                         $status = 200;
@@ -551,14 +551,14 @@ class VehicleController extends Controller
         // Get suggested mechanics
 
         $suggested = SuggestedMechanics::select('station_name as stationName', 'address', 'city', 'state', 'country', 'telephone as phoneNumber')->where('city', $category)->get();
-
+        
+        
 
         $data =  array_merge($mechanics->toArray(), $suggested->toArray());
 
+            
 
-
-
-        if (count($mechanics)) {
+        if (count($mechanics) > 0 || count($suggested) > 0) {
             $resData = ['data' => $data, 'message' => "Success", 'status' => 200];
             $status = 200;
         } 

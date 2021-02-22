@@ -263,6 +263,8 @@ function logouts(){
 <script>
   $(document).ready(function(){
 
+    $('.sms').addClass('disp-0');
+
 
     $('#book_ref').val('');
     $('#feedback_refcode').val('');
@@ -341,6 +343,7 @@ function logouts(){
         if(c == "manageinventory"){
           // Click on Shop Management and click on manageinventory tab
           $('#recordmaintenance-tab').click();
+          $('.sms').removeClass('disp-0');
           $("#manageinventory-tab").click();
           $("#createpurchase-tab").click();
         }
@@ -348,6 +351,7 @@ function logouts(){
         if(c == "responsepurchaseorder"){
           // Click on Shop Management and click on managae purchase order tab
           $('#recordmaintenance-tab').click();
+          $('.sms').removeClass('disp-0');
           $("#manageinventory-tab").click();
           $("#managepurchase-tab").click();
         }
@@ -356,6 +360,7 @@ function logouts(){
           // Click on Shop Management and click on vehicle maintenance tab
           $('#recordmaintenance-tab').click();
           $("#maintenance-tab").click();
+          $('.sms').removeClass('disp-0');
         }
 
         if(c == "manageinventory#inventory"){
@@ -364,6 +369,7 @@ function logouts(){
         if(c == "labourschedule"){
           $('#recordmaintenance-tab').click();
           $("#labourschedule-tab").click();
+          $('.sms').removeClass('disp-0');
         }
 
         if(c == "opportunity"){
@@ -9587,6 +9593,7 @@ function createPost(ref_code, email){
 
 function clientIvim(licence){
   $('#checkIvim').val('');
+  $('.sms').addClass('disp-0');
 
     var route = "{{ URL('Ajax/userIvim') }}";
   var thisdata = {licence: licence};
@@ -9604,6 +9611,8 @@ function clientIvim(licence){
         if(result.message == "success"){
 
             $('#recordmaintenance-tab').click();
+
+            $('.sms').removeClass('disp-0');
 
             if($('#checkIvim').val() == '1'){
               $('#ivim-tab').click();
@@ -9623,6 +9632,7 @@ function clientIvim(licence){
 
 function checkIvim(post_id){
   $('#checkIvim').val('');
+  $('.sms').addClass('disp-0');
   var route = "{{ URL('Ajax/checkIvim') }}";
   var thisdata = {post_id: post_id};
   var spinner = $('.spinnerivim'+post_id);
@@ -9642,6 +9652,8 @@ function checkIvim(post_id){
             spinner.addClass('disp-0');
 
             $('#recordmaintenance-tab').click();
+
+            $('.sms').removeClass('disp-0');
 
             if($('#checkIvim').val() == '1'){
 
@@ -9856,6 +9868,7 @@ function updatePost(){
 
 function prepareEstimate(post_id ,email, ref_code){
   $('#prepEst').val('');
+  $('.sms').addClass('disp-0');
   var route = "{{ URL('Ajax/prepareEstimate') }}";
   var thisdata = {post_id: post_id, email: email, ref_code: ref_code};
   var spinner = $('.spinnerprepestimate'+post_id);
@@ -9877,10 +9890,14 @@ function prepareEstimate(post_id ,email, ref_code){
             spinner.addClass('disp-0');
             // Click Estimate Button
             $('#recordmaintenance-tab').click();
+            $('.sms').removeClass('disp-0');
             $('#estimate').click();
+
+            
 
             if($('#prepEst').val() == '1'){
               $('#recordmaintenance-tab').click();
+              $('.sms').removeClass('disp-0');
               // Show Discount and Admin Fee
               $('.moreServ').removeClass('disp-0');
             }
@@ -9914,6 +9931,7 @@ function newprepareEstimate(post_id, email, ref_code){
 
   $('#prepEst').val('');
   $('#discountscheck').val('');
+  $('.sms').addClass('disp-0');
   var route = "{{ URL('Ajax/newestimatePrepare') }}";
   var thisdata = {post_id: post_id, email: email, ref_code: ref_code};
   var spinner = $('.spinnernewprepestimate'+post_id);
@@ -9947,10 +9965,12 @@ function newprepareEstimate(post_id, email, ref_code){
             spinner.addClass('disp-0');
             // Click Estimate Button
             $('#recordmaintenance-tab').click();
+            $('.sms').removeClass('disp-0');
             $('#estimate').click();
 
             if($('#prepEst').val() == '1' && $('#discountscheck').val() == '1'){
               $('#recordmaintenance-tab').click();
+              $('.sms').removeClass('disp-0');
               // Show Discount and Admin Fee
               $('.moreServ').removeClass('disp-0');
               $('.adminfee').addClass('disp-0');
@@ -11038,55 +11058,104 @@ function userGuide(val){
 
   $('.close').click();
 
+  $('.mamangeinventory').removeClass('active');
+  $('.createvendor').removeClass('active');
+  $('.createcategory').removeClass('active');
+  $('.createinventory').removeClass('active');
+  $('.managelabour').removeClass('active');
+  $('.createlabourcategory').removeClass('active');
+  $('.createlabourrecord').removeClass('active');
+  $('.addlabour').removeClass('active');
+  $('.vehiclemaintenance').removeClass('active');
+
   if(val == 'shopmanagement'){
     $("#recordmaintenance-tab").click();
   }
   if(val == 'mamangeinventory'){
     $("#recordmaintenance-tab").click();
     $("#manageinventory-tab").click();
+    $('.mamangeinventory').addClass('active');
   }
   if(val == 'createvendor'){
     $("#recordmaintenance-tab").click();
     $("#manageinventory-tab").click();
     $("#createvendor-tab").click();
+    $('.createvendor').addClass('active');
   }
   if(val == 'createcategory'){
     $("#recordmaintenance-tab").click();
     $("#manageinventory-tab").click();
     $("#createcategory-tab").click();
+    $('.createcategory').addClass('active');
   }
   if(val == 'createinventory'){
     $("#recordmaintenance-tab").click();
     $("#manageinventory-tab").click();
     $("#createinventoryitem-tab").click();
+    $('.createinventory').addClass('active');
   }
   if(val == 'managelabour'){
     $("#recordmaintenance-tab").click();
     $("#labourschedule-tab").click();
+    $('.managelabour').addClass('active');
   }
   if(val == 'createlabourcategory'){
     $("#recordmaintenance-tab").click();
     $("#labourschedule-tab").click();
     $("#createlabourcategory-tab").click();
+    $('.createlabourcategory').addClass('active');
   }
   if(val == 'createlabourrecord'){
     $("#recordmaintenance-tab").click();
     $("#labourschedule-tab").click();
     $("#createlabourrecord-tab").click();
+    $('.createlabourrecord').addClass('active');
   }
   if(val == 'addlabour'){
     $("#recordmaintenance-tab").click();
     $("#labourschedule-tab").click();
     $("#addlabour-tab").click();
+    $('.addlabour').addClass('active');
   }
   if(val == 'vehiclemaintenance'){
     $("#recordmaintenance-tab").click();
     $("#maintenance-tab").click();
     $("#estimateprep-tab").click();
+    $('.vehiclemaintenance').addClass('active');
   }
 
 
 }
+
+
+$('#recordmaintenance-tab').click(function(){
+  if(this){
+    $('.sms').removeClass('disp-0');
+  }
+})
+
+$('#home-tab').click(function(){
+  if(this){
+    $('.sms').addClass('disp-0');
+  }
+})
+$('#myreviews-tab').click(function(){
+  if(this){
+    $('.sms').addClass('disp-0');
+  }
+})
+
+$('#appointmentonphone-tab').click(function(){
+  if(this){
+    $('.sms').addClass('disp-0');
+  }
+})
+
+$('#vinlookup-tab').click(function(){
+  if(this){
+    $('.sms').addClass('disp-0');
+  }
+})
 
 
 </script>
