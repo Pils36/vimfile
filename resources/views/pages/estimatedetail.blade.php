@@ -116,8 +116,10 @@
     <div class="table table-responsive m-t-120" id="estCheck">
         <h3 class="text-center">{{ $heading }}</h3> <hr>
         <table class="table table-striped table-bordered">
-      @if(count($getEstPage) > 0)
+
+      @if(isset($getEstPage) && count($getEstPage) > 0)
       <tbody style="font-size: 13px;">
+
 
         @if($getEstPage[0]->vehicle_licence != "")
           <tr>
@@ -568,7 +570,9 @@
   </table>
     </div>
 
-    <div class="row">
+    @if (isset($getEstPage) && count($getEstPage) > 0)
+        
+        <div class="row">
         <div class="col-md-6" align="center">
             <button style="text-align: center;" class="btn btn-primary" onclick="sendMails('{{ $getEstPage[0]->estimate_id }}','{{ $getEstPage[0]->email }}')">Send as mail <img class="spinnersMail disp-0" src="{{ asset('img/loader/spin.gif') }}" style="width: 30px; height: 30px;"></button>
         </div>
@@ -577,10 +581,14 @@
         </div>
         
       
-            
+      </div>
+    @endif
 
-      </tbody>
-    </div>
+    
+
+
+
+    </tbody>
 
 
 

@@ -200,6 +200,7 @@ To proceed, click 'Next'"></div>
                                 with a modern tool to manage them.
                                 Let me quikcly walk you through Busy Wrench by VIMfile. To proceed, click 'Next'" @endif></div>
                                 <h1>Dashboard</h1>
+                                <button class="btn btn-primary" onclick="startTour()">Click to take a TOUR</button>
                             @endif
 
                         </div>
@@ -282,6 +283,9 @@ Record and track appointment made customers through by phone using this feature"
   <li class="nav-item" data-step="6" data-intro="VIN Lookup,
   You can now pull VIN of vehicles brought for maintenance">
     <a class="nav-link" id="vinlookup-tab" data-toggle="tab" href="#vinlookup" role="tab" aria-controls="vinlookup" aria-selected="false">VIN Lookup</a>
+  </li>
+  <li class="nav-item" data-step="7" data-intro="Create Ticket" onclick="location.href='{{ route('Opennewticket', 'c=Enquiries') }}'">
+    <a class="nav-link" data-toggle="tab" href="{{ route('Opennewticket', 'c=Enquiries') }}" role="tab">Create Ticket</a>
   </li>
 </ul>
 <div class="tab-content" id="myTabContent">
@@ -1523,6 +1527,16 @@ Record and track appointment made customers through by phone using this feature"
     <a class="nav-link" id="clientcheck-tab" data-toggle="tab" href="#clientcheck" role="tab" aria-controls="clientcheck" aria-selected="false">@if(Auth::user()->userType == "Auto Care" || Auth::user()->userType == "Certified Professional") My Client List  @else Vehicle List @endif</a>
   </li>
 
+
+  <li class="nav-item">
+    <a class="nav-link" id="unprocessedtransx-tab" data-toggle="tab" href="#unprocessedtransx" role="tab" aria-controls="unprocessedtransx" aria-selected="false">Unprocessed Transactions</a>
+  </li>
+
+
+  <li class="nav-item">
+    <a class="nav-link" id="completedtransx-tab" data-toggle="tab" href="#completedtransx" role="tab" aria-controls="completedtransx" aria-selected="false">Completed Transactions <span class="badge badge-light" style="color: #fff; background: brown; padding: 5px 10px; text-align: center; border-radius: 100%">@if(isset($completed)) {{ $completed }} @else 0 @endif</span></a>
+  </li>
+
   @endif
 
   @if(Auth::user()->userType == "Auto Dealer")
@@ -1991,6 +2005,9 @@ Record and track appointment made customers through by phone using this feature"
 
 
     @elseif (Auth::user()->userType == "Auto Care" || Auth::user()->userType == "Certified Professional")
+
+        
+
         <form method="POST">
                     @csrf
 
@@ -2138,22 +2155,35 @@ Record and track appointment made customers through by phone using this feature"
         </div>
 
 
-            <div class="row align-items-center justify-content-between" style="margin-top: 10px !important;" id="editEstimate">
-
-                <div class="col-md-12">
-                    <span style="color: darkblue; font-size: 14px; margin-right: 10px;">Estimate
-                        <input type="hidden" name="estimate_id" id="estimate_id" value="{{ uniqid().'_'.time() }}">
-                    <input type="hidden" name="opportunity_ids" id="opportunity_ids" value="">
-                    <input type="hidden" name="discountscheck" id="discountscheck" value="">
-                        <input type="checkbox" name="checkbox" id="estimate" onclick="checkEstimate()">
-                    </span>
+            <div class="row" style="margin-top: 10px !important;" id="editEstimate">
 
 
-                    <span class="disp-0" style="color: darkblue; font-size: 14px; margin-right: 10px;">Work Order
-                        <input type="checkbox" name="checkbox" id="work_order" onclick="checkWorkorder()">
-                    </span>
+                    <div class="col-md-6" style="border: 1px solid grey; padding: 5px; background-color: aliceblue;">
+                        <span style="color: darkblue; font-size: 14px;">Estimate
+                            <input type="hidden" name="estimate_id" id="estimate_id" value="{{ uniqid().'_'.time() }}">
+                        <input type="hidden" name="opportunity_ids" id="opportunity_ids" value="">
+                        <input type="hidden" name="discountscheck" id="discountscheck" value="">
+                            <input type="checkbox" name="checkbox" id="estimate" onclick="checkEstimate()">
+                        </span>
+                        <p>
+                            <small style="color: red; font-weight: bold;">Check the estimate box to GENERATE ESTIMATE.</small>
+                        </p>
+                    </div>
 
-                </div>
+                    <div class="col-md-6" style="border: 1px solid grey; padding: 5px; background-color: floralwhite;">
+                        <span style="color: darkblue; font-size: 14px;">Work Order
+                            <input type="checkbox" name="checkbox" id="work_order" onclick="checkWorkorder()">
+                        </span>
+                        <p>
+                            <small style="color: red; font-weight: bold;">Check the work order box to SAVE TO WORK ORDER.</small>
+                        </p>
+                    </div>
+
+                    
+
+
+                    
+
 
 
             </div>
@@ -5522,6 +5552,88 @@ Record and track appointment made customers through by phone using this feature"
 
 
 {{-- End Monitor Vehicle --}}
+
+
+
+{{--  Start Unoprocessed Tranaction  --}}
+
+
+<div class="tab-pane fade" id="unprocessedtransx" role="tabpanel" aria-labelledby="unprocessedtransx-tab">
+
+    <div class="card">
+    
+        <div id="collapseunprocessedtransx" class="collapse show" aria-labelledby="headingunprocessedtransx" data-parent="#accordion">
+    
+            <div class="card-body table table-responsive">
+                <img align="right" class="spinnerunprocessedtransx disp-0" src="{{ asset('img/loader/spin.gif') }}" style="width: 30px; height: 30px;">
+                <table class="table table-striped table-bordered" id="unprocessedtransxRecs">
+                    <thead>
+                        <tr style="font-size: 13px;">
+                            <th>#</th>
+                            <th style="text-align: center;">Estimate ID</th>
+                            <th style="text-align: center;">Vehicle Licence</th>
+                            <th style="text-align: center;">Vehicle Make/Model</th>
+                            <th style="text-align: center;">Action</th>
+                        </tr>
+                    </thead>
+    
+                    <tbody>
+
+                        @if(isset($unprocessedestimates) && count($unprocessedestimates) > 0)
+    
+                        <?php $i = 1;?>
+                        @foreach($unprocessedestimates as $unprocesseditem)
+    
+                        <tr style="font-size: 13px;">
+                            <td>{{ $i++ }}</td>
+                            <td align="center">{{ $unprocesseditem->estimate_id }}</td>
+                            <td align="center">{{ $unprocesseditem->vehicle_licence }}</td>
+                            <td align="center">{{ $unprocesseditem->make.' / '.$unprocesseditem->model }}</td>
+                            <td align="center">
+                                <i style="padding: 7px; color: darkorange;" title="View Record" class="fas fa-eye" type="button" onclick="location.href='{{ route('EstimateDetail', $unprocesseditem->estimate_id) }}'"></i>
+
+                                <i style="padding: 7px; color: brown;" title="Close to Diagnostic" class="fas fa-clipboard-list" type="button" onclick="diagnostic('{{ $unprocesseditem->estimate_id }}')"></i>
+
+                                <i style="padding: 7px; color: green;" title="Transfer to Work Order" class="far fa-compass" type="button" onclick="workOrderplans('{{ $unprocesseditem->estimate_id }}')"></i>
+
+                                {{--  <i style="padding: 7px; color: red;" title="Delete" class="far fa-trash" type="button" onclick="triplogAction('locations', '{{ $unprocesseditem->estimate_id }}')"></i>  --}}
+                            </td>
+                        </tr>
+    
+                        @endforeach
+
+                        @else
+
+                        <tr>
+                            <td align="center" colspan="5">
+                                No record
+                            </td>
+                        </tr>
+    
+                        @endif
+    
+                    </tbody>
+                </table>
+            </div>
+    
+        </div>
+    
+    </div>
+    
+    
+    </div>
+
+
+{{--  Stop Unprocessed Trasactions  --}}
+
+
+
+
+
+
+
+
+
 
 
 

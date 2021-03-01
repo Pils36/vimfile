@@ -86,6 +86,8 @@
 
   $(document).ready(function(){
 
+    $('.opport').removeClass('disp-0');
+
 
     if("{{ Auth::user()->login_times }}" < 2){
         introJs().start();
@@ -5286,11 +5288,13 @@ function checkEstimate(){
 function checkWorkorder(){
   // Is checked
   if($('#work_order').prop('checked') == true){
+    $('div#maintenances').attr('style', 'background: floralwhite');
     $('.workorder').removeClass('disp-0');
     $('.addVehicle').addClass('disp-0');
     $('#estimate').attr('disabled', true);
   }
   else if($('#work_order').prop('checked') == false){
+    $('div#maintenances').attr('style', 'background: white');
     $('.workorder').addClass('disp-0');
     $('.addVehicle').removeClass('disp-0');
     $('#estimate').attr('disabled', false);
@@ -6099,6 +6103,38 @@ function workOrders(id){
 
           swal("Thanks!", result.res, result.message);
           // setTimeout(function(){ location.href = result.link; }, 1000);
+        }
+
+      });
+}
+
+
+function workOrderplans(id){
+  var route = "{{ URL('Ajax/moveWorkorder') }}";
+  var thisdata = {post_id: id}
+        setHeaders();
+        jQuery.ajax({
+        url: route,
+        method: 'post',
+        data: thisdata,
+        beforeSend: function(){
+          $('tbody#estimateRes').html("<tr align='center'><td colspan='27'><img src='https://cdn.dribbble.com/users/172519/screenshots/3520576/dribbble-spinner-800x600.gif' style='width: 50px; height: 50px;'></td></tr>");
+        },
+        success: function(result){
+          var res = JSON.parse(result.data);
+          $('tbody#estimateRes').html("<tr align='center'><td style='font-weight: bold; color: darkblue;' colspan='27'>This section is active when an estimate is generated</td></tr>");
+
+          $('tbody#workorderRes').html("<tr style='font-size: 11px;'><td style='color: darkblue; font-weight: bold; font-size: 13px;'>NEW</td><td>"+res[0].vehicle_licence+"</td><td>"+res[0].date+"</td><td>"+res[0].service_type+"</td><td>"+res[0].service_option+"</td><td>"+res[0].total_cost+"</td><td>"+res[0].service_note+"</td><td>"+res[0].mileage+"</td><td><a style='font-size: 12px; color: darkblue; font-weight: bolder;' href='/uploads/"+res[0].file+"' download>Download file</a></td><td>"+res[0].update_by+"</td><td><i type='button' style='padding: 10px;' title='View More' class='fas fa-eye text-danger' style='text-align: center; cursor: pointer;' onclick=getPage(\'"+result.info+"'\)></i></td><td><i type='button' style='padding: 10px;' title='Move to Estimate' class='fas fa-exchange-alt' onclick=estimateOrders(\'"+result.info+"'\)></i></td><td><i type='button' style='padding: 10px;' title='Move to Maintenance Record' class='fas fa-tools' onclick=maintenanceOrders(\'"+result.info+"'\)></i></td><td><i type='button' style='padding: 10px;' title='Resend mail' class='fas fa-paper-plane text-primary mailPlane' style='text-align: center; cursor: pointer;' onclick=getPage(\'"+result.info+"'\)></i></td><td><i type='button' style='padding: 10px;' title='Print copy' class='fas fa-print text-danger' style='text-align: center; cursor: pointer;' onclick=getPage(\'"+result.info+"'\)></i></td></tr>");
+
+          $("#estimateprep-tab").click();
+          $('#work_order').prop('checked', true);
+          $('div#maintenances').attr('style', 'background: floralwhite');
+          $('.workorder').removeClass('disp-0');
+          $('.addVehicle').addClass('disp-0');
+          $('#estimate').attr('disabled', true);
+
+          swal("Thanks!", result.res, result.message);
+
         }
 
       });
@@ -11067,6 +11103,15 @@ function userGuide(val){
   $('.createlabourrecord').removeClass('active');
   $('.addlabour').removeClass('active');
   $('.vehiclemaintenance').removeClass('active');
+  $('.appoints').removeClass('active');
+  $('.opptposts').removeClass('active');
+  $('.approvdest').removeClass('active');
+  $('.submtdests').removeClass('active');
+  $('.showjdone').removeClass('active');
+  $('.phonteappoints').removeClass('active');
+  $('.servicerev').removeClass('active');
+  $('.recappoint').removeClass('active');
+  $('.vinlooks').removeClass('active');
 
   if(val == 'shopmanagement'){
     $("#recordmaintenance-tab").click();
@@ -11124,6 +11169,64 @@ function userGuide(val){
     $('.vehiclemaintenance').addClass('active');
   }
 
+  
+  if(val == 'appoints'){
+    $("#home-tab").click();
+    $("#appointment-tab").click();
+    $('.appoints').addClass('active');
+  }
+  if(val == 'opptposts'){
+    $("#home-tab").click();
+    $("#recordposttoboads-tab").click();
+    $('.opptposts').addClass('active');
+  }
+
+  if(val == 'approvdest'){
+    $("#home-tab").click();
+    $("#allapprovedest-tab").click();
+    $('.approvdest').addClass('active');
+  }
+
+  if(val == 'submtdests'){
+    $("#home-tab").click();
+    $("#allsubmittedest-tab").click();
+    $('.submtdests').addClass('active');
+  }
+
+
+  if(val == 'showjdone'){
+    $("#home-tab").click();
+    $("#jobdone-tab").click();
+    $('.showjdone').addClass('active');
+  }
+
+  if(val == 'phonteappoints'){
+    $("#home-tab").click();
+    $("#phoneappointment-tab").click();
+    $('.phonteappoints').addClass('active');
+  }
+
+
+  if(val == 'servicerev'){
+    $("#myreviews-tab").click();
+    $('.servicerev').addClass('active');
+  }
+
+  if(val == 'recappoint'){
+    $("#appointmentonphone-tab").click();
+    $('.recappoint').addClass('active');
+  }
+
+  if(val == 'recappoint'){
+    $("#appointmentonphone-tab").click();
+    $('.recappoint').addClass('active');
+  }
+
+  if(val == 'vinlooks'){
+    $("#vinlookup-tab").click();
+    $('.vinlooks').addClass('active');
+  }
+
 
 }
 
@@ -11131,31 +11234,56 @@ function userGuide(val){
 $('#recordmaintenance-tab').click(function(){
   if(this){
     $('.sms').removeClass('disp-0');
+    $('.opport').addClass('disp-0');
+    $('.serrev').addClass('disp-0');
+    $('.appointonphone').addClass('disp-0');
+    $('.vinlooks').addClass('disp-0');
   }
 })
 
 $('#home-tab').click(function(){
   if(this){
     $('.sms').addClass('disp-0');
+    $('.serrev').addClass('disp-0');
+    $('.appointonphone').addClass('disp-0');
+    $('.vinlooks').addClass('disp-0');
+    $('.opport').removeClass('disp-0');
   }
 })
 $('#myreviews-tab').click(function(){
   if(this){
     $('.sms').addClass('disp-0');
+    $('.opport').addClass('disp-0');
+    $('.appointonphone').addClass('disp-0');
+    $('.vinlooks').addClass('disp-0');
+    $('.serrev').removeClass('disp-0');
   }
 })
 
 $('#appointmentonphone-tab').click(function(){
   if(this){
     $('.sms').addClass('disp-0');
+    $('.opport').addClass('disp-0');
+    $('.serrev').addClass('disp-0');
+    $('.vinlooks').addClass('disp-0');
+    $('.appointonphone').removeClass('disp-0');
   }
 })
 
 $('#vinlookup-tab').click(function(){
   if(this){
     $('.sms').addClass('disp-0');
+    $('.opport').addClass('disp-0');
+    $('.serrev').addClass('disp-0');
+    $('.appointonphone').addClass('disp-0');
+    $('.vinlooks').removeClass('disp-0');
   }
 })
+
+
+function startTour(){
+  introJs().start();
+}
 
 
 </script>
