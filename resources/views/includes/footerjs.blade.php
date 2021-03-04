@@ -10696,6 +10696,7 @@ function appointmentPromo(link){
 
 
 
+
 function checkClaim(company, telephone, id){
 
     var formData = new FormData();
@@ -10776,10 +10777,6 @@ function checkClaim(company, telephone, id){
             }
             else if(city == ""){
                 swal('Oops', 'Please type your city', 'info');
-                return false;
-            }
-            else if(zipcode == ""){
-                swal('Oops', 'Please type your zip code', 'info');
                 return false;
             }
             else if(year_started_since == ""){

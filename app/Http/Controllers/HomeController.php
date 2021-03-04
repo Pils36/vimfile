@@ -15,6 +15,7 @@ namespace App\Http\Controllers;
 use Analytics;
 use Spatie\Analytics\Period;
 
+
 //Session
 use Session;
 
@@ -6062,7 +6063,7 @@ class HomeController extends Controller
 
 
                 // Insert Record
-                $ins = User::insert(['busID' => "BW_".mt_rand(00001, 99999), 'userType' => "Auto Care", 'phone_number' => $checkStation[0]->telephone, 'email' => $checkStation[0]->email, 'address' => $checkStation[0]->address, 'city' => $checkStation[0]->city, 'state' => $checkStation[0]->state, 'country' => $checkStation[0]->country, 'zipcode' => $checkStation[0]->zipcode, 'station_name' => $checkStation[0]->name_of_company, 'platform' => "Busy Wrench", 'specialization' => $checkStation[0]->service_offered, 'verified_mechanics' => 0]);
+                $ins = User::insert(['userType' => "Auto Care", 'phone_number' => $checkStation[0]->telephone, 'email' => $checkStation[0]->email, 'address' => $checkStation[0]->address, 'city' => $checkStation[0]->city, 'state' => $checkStation[0]->state, 'country' => $checkStation[0]->country, 'zipcode' => $checkStation[0]->zipcode, 'station_name' => $checkStation[0]->name_of_company, 'platform' => "Busy Wrench", 'specialization' => $checkStation[0]->service_offered, 'verified_mechanics' => 0]);
 
                 if($ins == true){
 
@@ -6078,7 +6079,7 @@ class HomeController extends Controller
                 $checkStation = SuggestedMechanics::where('station_name', $req->company)->get();
 
                 // Insert Record
-                $ins = User::insert(['busID' => "BW_".mt_rand(00001, 99999), 'userType' => "Auto Care", 'phone_number' => $checkStation[0]->telephone, 'address' => $checkStation[0]->address, 'station_name' => $checkStation[0]->station_name, 'city' => $checkStation[0]->city, 'state' => $checkStation[0]->state, 'country' => $checkStation[0]->country, 'platform' => "Busy Wrench", 'verified_mechanics' => 0]);
+                $ins = User::insert(['userType' => "Auto Care", 'phone_number' => $checkStation[0]->telephone, 'address' => $checkStation[0]->address, 'station_name' => $checkStation[0]->station_name, 'city' => $checkStation[0]->city, 'state' => $checkStation[0]->state, 'country' => $checkStation[0]->country, 'platform' => "Busy Wrench", 'verified_mechanics' => 0]);
 
                 if($ins == true){
 
@@ -6116,12 +6117,16 @@ class HomeController extends Controller
             $letter = chr(rand(65,90));
             $ref_code = $letter.mt_rand(1000, 9999);
 
-            $userIns = User::where('email', $req->email)->where('userType', 'Auto Care')->get();
+            $busid = "BW_".mt_rand(00001, 99999);
+
+
+            $userIns = User::where('email', $req->email)->where('userType', 'Auto Care')->where('ref_code', '!=', null)->get();
 
             if(count($userIns) > 0){
                 $resData = ['title' => 'Oops!', 'res' => 'User with this email address already exist', 'message' => 'info'];
             }
             else{
+
 
                 // Check if has autoloan
 
@@ -6136,13 +6141,17 @@ class HomeController extends Controller
                         $userRefcode = $ref_code;
                     }
 
-
-
-                $update = User::where('email', $req->email)->update(['ref_code' => $userRefcode, 'name' => $req->fullname, 'email' => $req->email, 'phone_number' => $req->phone_number, 'address' => $req->station_address, 'city' => $req->city, 'state' => $req->state, 'country' => $req->country, 'zipcode' => $req->zipcode, 'station_name' => $req->station_name, 'size_of_employee' => $req->size_of_employee, 'year_of_practice' => $req->year_of_practice, 'mobile' => $req->mobile, 'office' => $req->office, 'year_started_since' => $req->year_started_since, 'mechanical_skill' => $req->mechanical_skill, 'electrical_skill' => $req->electrical_skill, 'transmission_skill' => $req->transmission_skill, 'body_work_skill' => $req->body_work_skill, 'other_skills' => $req->other_skills, 'vimfile_discount' => $req->vimfile_discount, 'repair_guaranteed' => $req->repair_guaranteed, 'free_estimated' => $req->free_estimated, 'walk_in_specified' => $req->walk_in_specified, 'other_value_added' => $req->other_value_added, 'average_waiting' => $req->average_waiting, 'hours_of_operation' => $req->hours_of_operation, 'wifi' => $req->wifi, 'restroom' => $req->restroom, 'lounge' => $req->lounge, 'parking_space' => $req->parking_space, 'year_established' => $req->year_established, 'background' => $req->background, 'other_skills_specify' => $req->other_skills_specify, 'discountPercent' => $req->discountPercent, 'verified_mechanics' => 1, 'unverified_mechanics' => 0]);
+                
 
 
 
-                if($update){
+                $update = User::updateOrCreate(['station_name' => $req->station_name],['ref_code' => $userRefcode, 'name' => $req->fullname, 'email' => $req->email, 'phone_number' => $req->phone_number, 'address' => $req->station_address, 'city' => $req->city, 'state' => $req->state, 'country' => $req->country, 'zipcode' => $req->zipcode, 'station_name' => $req->station_name, 'size_of_employee' => $req->size_of_employee, 'year_of_practice' => $req->year_of_practice, 'mobile' => $req->mobile, 'office' => $req->office, 'year_started_since' => $req->year_started_since, 'mechanical_skill' => $req->mechanical_skill, 'electrical_skill' => $req->electrical_skill, 'transmission_skill' => $req->transmission_skill, 'body_work_skill' => $req->body_work_skill, 'other_skills' => $req->other_skills, 'vimfile_discount' => $req->vimfile_discount, 'repair_guaranteed' => $req->repair_guaranteed, 'free_estimated' => $req->free_estimated, 'walk_in_specified' => $req->walk_in_specified, 'other_value_added' => $req->other_value_added, 'average_waiting' => $req->average_waiting, 'hours_of_operation' => $req->hours_of_operation, 'wifi' => $req->wifi, 'restroom' => $req->restroom, 'lounge' => $req->lounge, 'parking_space' => $req->parking_space, 'year_established' => $req->year_established, 'background' => $req->background, 'other_skills_specify' => $req->other_skills_specify, 'discountPercent' => $req->discountPercent, 'verified_mechanics' => 1, 'unverified_mechanics' => 0]);
+
+
+
+                if(isset($update)){
+
+
 
                     if(Auth::check() == true){
 
@@ -6155,8 +6164,10 @@ class HomeController extends Controller
                         $this->activities($ip, $country, $city, $currency, $action);
 
 
-                        Stations::where('busID', Auth::user()->busID)->update(['station_name' => $req->station_name, 'station_address' => $req->station_address, 'station_phone' => $req->phone_number, 'city' => $req->city, 'state' => $req->state, 'country' => $req->country, 'zipcode' => $req->zipcode, 'claim_business' => 1]);
+                        Stations::updateOrCreate(['busID' => Auth::user()->busID],['station_name' => $req->station_name, 'station_address' => $req->station_address, 'station_phone' => $req->phone_number, 'city' => $req->city, 'state' => $req->state, 'country' => $req->country, 'zipcode' => $req->zipcode, 'claim_business' => 1]);
 
+                        // Update BUSID
+                        User::where('email', Auth::user()->email)->update(['busID' => Auth::user()->busID]);
 
                         // Update Business
                         Business::where('busID', Auth::user()->busID)->update(['claims' => 1]);
@@ -6178,7 +6189,6 @@ class HomeController extends Controller
 
                         if($getID[0]->userType == "Auto Dealer"){
 
-                            $busid = "BW_".mt_rand(00001, 99999);
 
                             $stationupdate = Stations::insert([
                                 'busID' => $busid, 'station_name' => $req->station_name, 'station_address' => $req->station_address, 'station_phone' => $req->phone_number, 'city' => $req->city, 'state' => $req->state, 'country' => $req->country, 'zipcode' => $req->zipcode, 'platform_request' => 1, 'claim_business' => 1
@@ -6187,22 +6197,22 @@ class HomeController extends Controller
                             // Insert business record
 
 
-                            User::where('email', $req->email)->update(['station_name' => $req->station_name]);
+                            User::where('email', $req->email)->update(['station_name' => $req->station_name, 'busID' => $busid]);
                         }
                         else{
 
                             $stationupdate = Stations::updateOrCreate([
-                                'busID' => $getID[0]->busID,
+                                'station_name' => $getID[0]->station_name,
 
                             ],[
-                                'station_name' => $req->station_name, 'station_address' => $req->station_address, 'station_phone' => $req->phone_number, 'city' => $req->city, 'state' => $req->state, 'country' => $req->country, 'zipcode' => $req->zipcode, 'platform_request' => 1, 'claim_business' => 1
+                                'busID' => $busid, 'station_name' => $req->station_name, 'station_address' => $req->station_address, 'station_phone' => $req->phone_number, 'city' => $req->city, 'state' => $req->state, 'country' => $req->country, 'zipcode' => $req->zipcode, 'platform_request' => 1, 'claim_business' => 1
                             ]);
 
 
 
-                            Business::where('busID', $getID[0]->busID)->update(['claims' => 1]);
+                            Business::where('email', $getID[0]->email)->update(['claims' => 1]);
 
-                            User::where('email', $req->email)->update(['station_name' => $req->station_name]);
+                            User::where('email', $req->email)->update(['station_name' => $req->station_name, 'busID' => $busid]);
 
                         }
 
@@ -6221,7 +6231,7 @@ class HomeController extends Controller
                     }
 
 
-                    $resData = ['title' => 'Great!', 'res' => 'Profile updated', 'message' => 'success', 'action' => 'update'];
+                    $resData = ['title' => 'Great!', 'res' => 'Profile updated and will be reviewed', 'message' => 'success', 'action' => 'update'];
                 }
                 else{
 
@@ -6236,7 +6246,7 @@ class HomeController extends Controller
                         $userRefcode = $ref_code;
                     }
 
-                    $update = User::where('station_name', $req->station_name)->update(['ref_code' => $userRefcode, 'name' => $req->fullname, 'email' => $req->email, 'phone_number' => $req->phone_number, 'address' => $req->station_address, 'city' => $req->city, 'state' => $req->state, 'country' => $req->country, 'zipcode' => $req->zipcode, 'station_name' => $req->station_name, 'size_of_employee' => $req->size_of_employee, 'year_of_practice' => $req->year_of_practice, 'mobile' => $req->mobile, 'office' => $req->office, 'year_started_since' => $req->year_started_since, 'mechanical_skill' => $req->mechanical_skill, 'electrical_skill' => $req->electrical_skill, 'transmission_skill' => $req->transmission_skill, 'body_work_skill' => $req->body_work_skill, 'other_skills' => $req->other_skills, 'vimfile_discount' => $req->vimfile_discount, 'repair_guaranteed' => $req->repair_guaranteed, 'free_estimated' => $req->free_estimated, 'walk_in_specified' => $req->walk_in_specified, 'other_value_added' => $req->other_value_added, 'average_waiting' => $req->average_waiting, 'hours_of_operation' => $req->hours_of_operation, 'wifi' => $req->wifi, 'restroom' => $req->restroom, 'lounge' => $req->lounge, 'parking_space' => $req->parking_space, 'year_established' => $req->year_established, 'background' => $req->background, 'other_skills_specify' => $req->other_skills_specify, 'discountPercent' => $req->discountPercent, 'verified_mechanics' => 1, 'unverified_mechanics' => 0]);
+                    $update = User::updateOrCreate(['station_name' => $req->station_name],['ref_code' => $userRefcode, 'name' => $req->fullname, 'email' => $req->email, 'phone_number' => $req->phone_number, 'address' => $req->station_address, 'city' => $req->city, 'state' => $req->state, 'country' => $req->country, 'zipcode' => $req->zipcode, 'station_name' => $req->station_name, 'size_of_employee' => $req->size_of_employee, 'year_of_practice' => $req->year_of_practice, 'mobile' => $req->mobile, 'office' => $req->office, 'year_started_since' => $req->year_started_since, 'mechanical_skill' => $req->mechanical_skill, 'electrical_skill' => $req->electrical_skill, 'transmission_skill' => $req->transmission_skill, 'body_work_skill' => $req->body_work_skill, 'other_skills' => $req->other_skills, 'vimfile_discount' => $req->vimfile_discount, 'repair_guaranteed' => $req->repair_guaranteed, 'free_estimated' => $req->free_estimated, 'walk_in_specified' => $req->walk_in_specified, 'other_value_added' => $req->other_value_added, 'average_waiting' => $req->average_waiting, 'hours_of_operation' => $req->hours_of_operation, 'wifi' => $req->wifi, 'restroom' => $req->restroom, 'lounge' => $req->lounge, 'parking_space' => $req->parking_space, 'year_established' => $req->year_established, 'background' => $req->background, 'other_skills_specify' => $req->other_skills_specify, 'discountPercent' => $req->discountPercent, 'verified_mechanics' => 1, 'unverified_mechanics' => 0]);
 
                     if($update){
 
@@ -6256,28 +6266,27 @@ class HomeController extends Controller
 
                         if($getID[0]->userType == "Auto Dealer"){
 
-                            $busid = "BW_".mt_rand(00001, 99999);
 
-                            $stationupdate = Stations::updateOrCreate([
+                            $stationupdate = Stations::updateOrCreate(['station_name' => $req->station_name],[
                                 'busID' => $busid, 'station_name' => $req->station_name, 'station_address' => $req->station_address, 'station_phone' => $req->phone_number, 'city' => $req->city, 'state' => $req->state, 'country' => $req->country, 'zipcode' => $req->zipcode, 'platform_request' => 1, 'claim_business' => 1
                             ]);
 
 
-                            User::where('station_name', $req->station_name)->update(['station_name' => $req->station_name]);
+                            User::where('station_name', $req->station_name)->update(['station_name' => $req->station_name, 'busID' => $busid]);
                         }
                         else{
                             $stationupdate = Stations::updateOrCreate([
-                                'busID' => $getID[0]->busID,
+                                'station_name' => $getID[0]->station_name,
 
                             ],[
-                                'station_name' => $req->station_name, 'station_address' => $req->station_address, 'station_phone' => $req->phone_number, 'city' => $req->city, 'state' => $req->state, 'country' => $req->country, 'zipcode' => $req->zipcode, 'platform_request' => 1, 'claim_business' => 1
+                                'busID' => $busid, 'station_name' => $req->station_name, 'station_address' => $req->station_address, 'station_phone' => $req->phone_number, 'city' => $req->city, 'state' => $req->state, 'country' => $req->country, 'zipcode' => $req->zipcode, 'platform_request' => 1, 'claim_business' => 1
                             ]);
 
 
 
-                            Business::where('busID', $getID[0]->busID)->update(['claims' => 1]);
+                            Business::where('email', $getID[0]->email)->update(['claims' => 1]);
 
-                            User::where('station_name', $req->station_name)->update(['station_name' => $req->station_name]);
+                            User::where('station_name', $req->station_name)->update(['station_name' => $req->station_name, 'busID' => $busid,]);
                         }
 
 
@@ -6293,7 +6302,7 @@ class HomeController extends Controller
 
                         $this->sendEmail($this->email, $this->subject);
 
-                        $resData = ['title' => 'Great!', 'res' => 'Profile updated', 'message' => 'success', 'action' => 'update', 'userType' => $getID[0]->userType];
+                        $resData = ['title' => 'Great!', 'res' => 'Profile updated and will be reviewed', 'message' => 'success', 'action' => 'update', 'userType' => $getID[0]->userType];
 
                     }
 
@@ -8986,7 +8995,7 @@ class HomeController extends Controller
 
     public function createPO(Request $req){
 
-            $insPO = PurchaseOrder::updateOrInsert(['purchase_order_no' => $req->purchase_order_no, 'busID' => Auth::user()->busID],['busID' => Auth::user()->busID,'post_id' => $req->post_id, 'vendor' => $req->vendor, 'purchase_order_no'=> $req->purchase_order_no, 'order_date'=> $req->order_date, 'expected_date'=> $req->expected_date, 'purchase_order_inventory_item'=> $req->purchase_order_inventory_item, 'purchase_order_qty'=> $req->purchase_order_qty, 'purchase_order_rate'=> $req->purchase_order_rate, 'purchase_order_totcost'=> $req->purchase_order_totcost, 'purchase_order_shippingcost'=> $req->purchase_order_shippingcost, 'purchase_order_discount'=> $req->purchase_order_discount, 'purchase_order_othercost'=> $req->purchase_order_othercost, 'purchase_order_tax'=> $req->purchase_order_tax, 'purchase_order_totalpurchaseorder'=> $req->purchase_order_totalpurchaseorder, 'purchase_order_shipto'=> $req->purchase_order_shipto, 'purchase_order_address1'=> $req->purchase_order_address1, 'purchase_order_address2'=> $req->purchase_order_address2, 'purchase_order_city'=> $req->purchase_order_city, 'purchase_order_state'=> $req->purchase_order_state, 'purchase_order_country'=> $req->purchase_order_country, 'purchase_order_zip'=> $req->purchase_order_zip, 'purchase_order_destphone'=> $req->purchase_order_destphone, 'purchase_order_destfax'=> $req->purchase_order_destfax, 'purchase_order_destmail'=> $req->purchase_order_destmail, 'purchase_order_orderby'=> $req->purchase_order_orderby]);
+            $insPO = PurchaseOrder::updateOrCreate(['purchase_order_no' => $req->purchase_order_no, 'busID' => Auth::user()->busID],['busID' => Auth::user()->busID,'post_id' => $req->post_id, 'vendor' => $req->vendor, 'purchase_order_no'=> $req->purchase_order_no, 'order_date'=> $req->order_date, 'expected_date'=> $req->expected_date, 'purchase_order_inventory_item'=> $req->purchase_order_inventory_item, 'purchase_order_qty'=> $req->purchase_order_qty, 'purchase_order_rate'=> $req->purchase_order_rate, 'purchase_order_totcost'=> $req->purchase_order_totcost, 'purchase_order_shippingcost'=> $req->purchase_order_shippingcost, 'purchase_order_discount'=> $req->purchase_order_discount, 'purchase_order_othercost'=> $req->purchase_order_othercost, 'purchase_order_tax'=> $req->purchase_order_tax, 'purchase_order_totalpurchaseorder'=> $req->purchase_order_totalpurchaseorder, 'purchase_order_shipto'=> $req->purchase_order_shipto, 'purchase_order_address1'=> $req->purchase_order_address1, 'purchase_order_address2'=> $req->purchase_order_address2, 'purchase_order_city'=> $req->purchase_order_city, 'purchase_order_state'=> $req->purchase_order_state, 'purchase_order_country'=> $req->purchase_order_country, 'purchase_order_zip'=> $req->purchase_order_zip, 'purchase_order_destphone'=> $req->purchase_order_destphone, 'purchase_order_destfax'=> $req->purchase_order_destfax, 'purchase_order_destmail'=> $req->purchase_order_destmail, 'purchase_order_orderby'=> $req->purchase_order_orderby]);
 
             if($insPO){
                 if($req->action == "submit"){
