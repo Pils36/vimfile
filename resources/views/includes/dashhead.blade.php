@@ -51,8 +51,31 @@ function googleTranslateElementInit() {
               
           </li>
           <!-- Messages: style can be found in dropdown.less-->
+
+          @isset($agentNotification)
+          
+
           <li class="dropdown messages-menu">
               
+            
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <i class="fa fa-bell-o"></i>
+              <span class="label label-warning">{{ count($agentNotification) }}</span>
+            </a>
+            <ul class="dropdown-menu appointMsg">
+
+              @include('includes.newnotify')
+            </ul>
+          </li>
+              
+          @endisset
+
+          
+
+
+          <li class="dropdown messages-menu">
+              
+            
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
               <span class="label label-success">{{ count($getAppointment) }}</span>
@@ -62,6 +85,7 @@ function googleTranslateElementInit() {
               @include('includes.appointmentInbox')
             </ul>
           </li>
+          
           <!-- Notifications: style can be found in dropdown.less -->
           {{-- <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

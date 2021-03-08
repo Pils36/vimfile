@@ -243,6 +243,8 @@ class AdminController extends Controller
  		$getBussiness = Business::where('busID', session('busID'))->orderBy('created_at', 'DESC')->get();
  		$usersPersonal = User::orderBy('created_at', 'DESC')->get();
 
+		
+
  		// Ticketing
 			$tickets = Ticketing::orderBy('created_at', 'DESC')->get();
 			if(count($tickets) > 0){
@@ -410,14 +412,18 @@ class AdminController extends Controller
 
 		$agreementsign = Admin::where('signed_agreement', 1)->orderBy('updated_at', 'DESC')->get();
 
+		$agentNotification = DB::table('agent_notification')->where('agent_id', session('id'))->where('read_state', 0)
+		->orderBy('created_at', 'DESC')->get();
+
 		if(session('role') == "Agent"){
 
 			$this->supportActivities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], session('name').' visits the Dashboard');
 		}
 
+
 		
 
- 		return view('admin.index')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'crawl' => $crawl, 'crawldealers' => $crawldealers, 'nomails' => $nomails, 'claimsCount' => $claimsCount, 'allmechanic' => $allmechanic, 'reviews' => $reviews, 'newmail' => $newmail, 'askexpert' => $askexpert, 'supportagent' => $supportagent, 'free_trial' => $this->free_trial, 'freeusers' => $freeusers, 'paidusers' => $paidusers, 'freeuserscount' => $this->getFreetrialcount(), 'paiduserscount' => $this->getPaidPlancount(), 'freeplanusers' => $freeplanusers, 'freeplanuserscount' => $this->getfreePlancount(), 'workflowcount' => $workflowcount, 'agreementsign' => $agreementsign, 'mechCreated' => $mechCreated]);
+ 		return view('admin.index')->with(['pages'=> 'Dashboard', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'users' => $usersPersonal, 'maintReccount' => $maintReccount, 'CarReccount' => $CarReccount, 'regCars' => $regCars, 'carNos' => $carNos, 'paymentStatus' => $this->getPayment, 'otherUsers' => $this->otherUsers, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'estimatePayment' => $estimatePayment, 'workinprogress' => $workinprogress, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'carwithoutcarrec' => $carwithoutcarrec, 'carwithcarrec' => $carwithcarrec, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'crawl' => $crawl, 'crawldealers' => $crawldealers, 'nomails' => $nomails, 'claimsCount' => $claimsCount, 'allmechanic' => $allmechanic, 'reviews' => $reviews, 'newmail' => $newmail, 'askexpert' => $askexpert, 'supportagent' => $supportagent, 'free_trial' => $this->free_trial, 'freeusers' => $freeusers, 'paidusers' => $paidusers, 'freeuserscount' => $this->getFreetrialcount(), 'paiduserscount' => $this->getPaidPlancount(), 'freeplanusers' => $freeplanusers, 'freeplanuserscount' => $this->getfreePlancount(), 'workflowcount' => $workflowcount, 'agreementsign' => $agreementsign, 'mechCreated' => $mechCreated, 'agentNotification' => $agentNotification]);
  		}
  		else{
  			return redirect()->route('AdminLogin');
@@ -10278,6 +10284,113 @@ class AdminController extends Controller
  		return view('admin.readMessage')->with(['pages'=> 'Read Message', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'getMessage' => $getMessage, 'users' => $usersPersonal, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'workflowcount' => $workflowcount]);
  	}
 
+
+ 	public function readNotification(Request $req, $id){
+ 		$this->checkSession(session('_token'));
+ 		$getAdmins = Admin::all();
+ 		$getStations = Stations::where('busID', session('busID'))->orderBy('created_at', 'DESC')->get();
+ 		$getUsers = User::orderBy('created_at', 'DESC')->get();
+ 		$getVehicleinfo = Vehicleinfo::orderBy('created_at', 'DESC')->get();
+ 		$getCarrecord = Carrecord::orderBy('created_at', 'DESC')->get();
+ 		$getBusinessStaffs = BusinessStaffs::where('busID', session('busID'))->orderBy('created_at', 'DESC')->get();
+ 		$getAppointment = BookAppointment::where('busID', session('busID'))->orderBy('created_at', 'DESC')->get();
+		 $getBussiness = Business::where('busID', session('busID'))->get();
+		 $usersPersonal = User::orderBy('created_at', 'DESC')->get();
+
+		 $countnonCom = User::where('userType', 'Individual')->count();
+ 		$countCom = User::where('userType', 'Commercial')->count();
+ 		$countCorp = User::where('userType', 'Business')->count();
+ 		$countstaffCorp = Business::where('accountType', 'Business')->count();
+ 		$countautoDeal = User::where('userType', 'Auto Dealer')->count();
+ 		$countcertProf = User::where('userType', 'Certified Professional')->count();
+ 		$countautCare = User::where('userType', 'Auto Care')->count();
+
+		 $getNotification = DB::table('agent_notification')->where('id', $id)->first();
+
+		 DB::table('agent_notification')->where('id', $id)->update(['read_state' => 1]);
+
+		 $discount = MinimumDiscount::where('discount', 'discount')->get();
+		 $service_charge = MinimumDiscount::where('discount', 'service')->get();
+
+		 $discountcharge = clientMinimum::where('discount', 'discount')->where('busID', session('busID'))->get();
+        $service_charges = clientMinimum::where('discount', 'service')->where('busID', session('busID'))->get();
+
+        $autoStores = $this->autoStores();
+ 		$autoStaffs = $this->autoStaffs();
+
+		 if(session('role') == "Super"){
+ 			$getStations = Stations::orderBy('created_at', 'DESC')->get();
+ 			$getBusinessStaffs = BusinessStaffs::orderBy('created_at', 'DESC')->get();
+	 		$getAppointment = BookAppointment::orderBy('created_at', 'DESC')->get();
+	 		$getBussiness = Business::all();
+			 $usersPersonal = User::orderBy('created_at', 'DESC')->get();
+			 $this->otherUsers = User::where('userType', '!=', 'Business')->orderBy('created_at', 'DESC')->get();
+			 $this->getPayment = DB::table('payment_plan')
+			->join('vim_admin', 'payment_plan.email', '=', 'vim_admin.email')
+			->orderBy('payment_plan.created_at', 'DESC')->get();
+			$CarReccount = Vehicleinfo::select('vehicle_licence', 'date', 'make', 'model', 'update_by', 'created_at')->distinct()->groupby('vehicle_licence', 'date', 'make', 'model', 'update_by', 'created_at')->orderBy('created_at', 'DESC')->get();
+			$regCars = Carrecord::orderBy('created_at', 'DESC')->get();
+			$maintReccount = Vehicleinfo::count();
+			$maintRec = Vehicleinfo::orderBy('created_at', 'DESC')->get();
+
+			// Ticketing
+			$tickets = Ticketing::orderBy('created_at', 'DESC')->get();
+			if(count($tickets) > 0){
+				$this->ticketing = $tickets;
+			}
+			else{
+				$this->ticketing = "";
+			}
+
+			$getAD = Admin::where('accountType', 'Auto Dealer')->orderBy('created_at', 'DESC')->get();
+
+			if(count($getAD) > 0){
+				$this->getAD = $getAD;
+			}
+			else{
+				$this->getAD = "";
+			}
+
+
+
+			// Registered & Unregistered clients
+			$_RegClient = GoogleImport::where('status', 'registered')->get();
+			if(count($_RegClient) > 0){
+				$this->RegClient = $_RegClient;
+			}
+			else{
+				$this->RegClient = "";
+			}
+
+
+			$_UnregClient = GoogleImport::where('status', 'not registered')->count();
+
+			if($_UnregClient > 0){
+				$this->unregisteredClients = $_UnregClient;
+			}
+			else{
+				$this->unregisteredClients = 0;
+			}
+
+			// Get User with referals
+
+			$getUserref = RedeemPoints::orderBy('created_at', 'DESC')->get();
+
+			if(count($getUserref) > 0){
+
+				$this->refree = $getUserref;
+			}
+			else{
+				$this->refree = "";
+			}
+		 }
+
+		 $workflowcount = $this->workflowcount;
+
+
+ 		return view('admin.readnotification')->with(['pages'=> 'Read Notification', 'getAdmins' => $getAdmins, 'getStations' => $getStations, 'getUsers' => $getUsers, 'getVehicleinfo' => $getVehicleinfo, 'getCarrecord' => $getCarrecord, 'getBusinessStaffs' => $getBusinessStaffs, 'getAppointment' => $getAppointment, 'getBussiness' => $getBussiness, 'getNotification' => $getNotification, 'users' => $usersPersonal, 'ticketing' => $this->ticketing, 'getAD' => $this->getAD, 'registeredClients' => $this->RegClient, 'unregisteredClients' => $this->unregisteredClients, 'refree' => $this->refree, 'discount' => $discount, 'service_charge' => $service_charge, 'discountcharge' => $discountcharge, 'service_charges' => $service_charges, 'countnonCom' => $countnonCom, 'countCom' => $countCom, 'countCorp' => $countCorp, 'countstaffCorp' => $countstaffCorp, 'countautoDeal' => $countautoDeal, 'countcertProf' => $countcertProf, 'countautCare' => $countautCare, 'autoStores' => $autoStores, 'autoStaffs' => $autoStaffs, 'workflowcount' => $workflowcount]);
+ 	}
+
  	public function stationreportexport(Request $req){
  		$this->checkSession(session('_token'));
  		$getAdmins = Admin::all();
@@ -11919,7 +12032,7 @@ class AdminController extends Controller
 
 
 
-		 				$req->session()->put(['busID' => $req->busID, 'userID' => $req->userID, 'username' => $req->username, 'name' => $req->firstname.' '.$req->lastname, 'email' => $req->email, 'company' => $req->name_of_company, 'role' => 'Owner', 'plan' => 'Super', 'status' => 0, 'accountType' => $req->accountType, 'free_trial_expire' => date("Y-m-d", strtotime("+30 days"))]);
+		 				$req->session()->put(['id' => '', 'busID' => $req->busID, 'userID' => $req->userID, 'username' => $req->username, 'name' => $req->firstname.' '.$req->lastname, 'email' => $req->email, 'company' => $req->name_of_company, 'role' => 'Owner', 'plan' => 'Super', 'status' => 0, 'accountType' => $req->accountType, 'free_trial_expire' => date("Y-m-d", strtotime("+30 days"))]);
 
 		 				if($req->plan == 'Start Up'){
 		 					$resData = ['res' => 'Welcome'.' '.$req->firstname.' we are redirecting you to your Dashboard', 'message' => 'success', 'link' => 'Admin'];
@@ -11974,7 +12087,7 @@ class AdminController extends Controller
 
 
 
-		 				$req->session()->put(['busID' => $req->busID, 'userID' => $req->userID, 'username' => $req->username, 'name' => $req->firstname.' '.$req->lastname, 'email' => $req->email, 'company' => $req->name_of_company, 'role' => 'Owner', 'plan' => 'Super', 'status' => 0, 'accountType' => $req->accountType, 'free_trial_expire' => date("Y-m-d", strtotime("+30 days"))]);
+		 				$req->session()->put(['id' => '', 'busID' => $req->busID, 'userID' => $req->userID, 'username' => $req->username, 'name' => $req->firstname.' '.$req->lastname, 'email' => $req->email, 'company' => $req->name_of_company, 'role' => 'Owner', 'plan' => 'Super', 'status' => 0, 'accountType' => $req->accountType, 'free_trial_expire' => date("Y-m-d", strtotime("+30 days"))]);
 
 		 				if($req->plan == 'Start Up'){
 		 					$resData = ['res' => 'Welcome'.' '.$req->firstname.' we are redirecting you to your Dashboard', 'message' => 'success', 'link' => 'Admin'];
@@ -12008,7 +12121,7 @@ class AdminController extends Controller
 
 
 
-		 				$req->session()->put(['busID' => $req->busID, 'userID' => $req->userID, 'username' => $req->username, 'name' => $req->firstname.' '.$req->lastname, 'email' => $req->email, 'company' => $req->name_of_company, 'role' => 'Owner', 'plan' => 'Super', 'status' => 0, 'accountType' => $req->accountType, 'free_trial_expire' => date("Y-m-d", strtotime("+30 days"))]);
+		 				$req->session()->put(['id' => '', 'busID' => $req->busID, 'userID' => $req->userID, 'username' => $req->username, 'name' => $req->firstname.' '.$req->lastname, 'email' => $req->email, 'company' => $req->name_of_company, 'role' => 'Owner', 'plan' => 'Super', 'status' => 0, 'accountType' => $req->accountType, 'free_trial_expire' => date("Y-m-d", strtotime("+30 days"))]);
 
 		 				if($req->plan == 'Start Up'){
 		 					$resData = ['res' => 'Welcome'.' '.$req->firstname.' we are redirecting you to your Dashboard', 'message' => 'success', 'link' => 'Admin'];
@@ -12104,7 +12217,7 @@ class AdminController extends Controller
 
 
 
- 				$req->session()->put(['busID' => $req->busID, 'userID' => $req->userID, 'username' => $req->username, 'name' => $req->firstname.' '.$req->lastname, 'email' => $req->email, 'company' => $req->name_of_company, 'role' => 'Owner', 'plan' => $req->plan, 'status' => 0, 'accountType' => $req->accountType, 'free_trial_expire' => date("Y-m-d", strtotime("+30 days"))]);
+ 				$req->session()->put(['id' => '', 'busID' => $req->busID, 'userID' => $req->userID, 'username' => $req->username, 'name' => $req->firstname.' '.$req->lastname, 'email' => $req->email, 'company' => $req->name_of_company, 'role' => 'Owner', 'plan' => $req->plan, 'status' => 0, 'accountType' => $req->accountType, 'free_trial_expire' => date("Y-m-d", strtotime("+30 days"))]);
 
  				if($req->plan == 'Start Up'){
  					$resData = ['res' => 'Welcome'.' '.$req->firstname.' we are redirecting you to your Dashboard', 'message' => 'success', 'link' => 'Admin'];
@@ -12203,7 +12316,7 @@ class AdminController extends Controller
 
 
 
- 				$req->session()->put(['busID' => $req->busID, 'userID' => $req->userID, 'username' => $req->username, 'name' => $req->firstname.' '.$req->lastname, 'email' => $req->email, 'company' => $req->name_of_company, 'role' => 'Owner', 'plan' => $req->plan, 'status' => 0, 'accountType' => $req->accountType, 'free_trial_expire' => date("Y-m-d", strtotime("+30 days"))]);
+ 				$req->session()->put(['id' => '', 'busID' => $req->busID, 'userID' => $req->userID, 'username' => $req->username, 'name' => $req->firstname.' '.$req->lastname, 'email' => $req->email, 'company' => $req->name_of_company, 'role' => 'Owner', 'plan' => $req->plan, 'status' => 0, 'accountType' => $req->accountType, 'free_trial_expire' => date("Y-m-d", strtotime("+30 days"))]);
 
  				if($req->plan == 'Start Up'){
  					$resData = ['res' => 'Welcome'.' '.$req->firstname.' we are redirecting you to your Dashboard', 'message' => 'success', 'link' => 'Admin'];
@@ -12252,7 +12365,7 @@ class AdminController extends Controller
 					    $trial_free = date("Y-m-d", strtotime("+30 days"));
 					}
 
-                    $req->session()->put(['busID' => $checkUser[0]['busID'], 'userID' => $checkUser[0]['userID'], 'username' => $checkUser[0]['username'], 'name' => $checkUser[0]['name'], 'email' => $checkUser[0]['email'], 'company' => $checkUser[0]['company'], 'role' => $checkUser[0]['role'], 'plan' => $checkUser[0]['plan'], 'status' => $checkUser[0]['status'], 'payment' => $this->payment_status, 'accountType' => $checkUser[0]['accountType'], 'free_trial_expire' => $trial_free]);
+                    $req->session()->put(['id' => $checkUser[0]['id'], 'busID' => $checkUser[0]['busID'], 'userID' => $checkUser[0]['userID'], 'username' => $checkUser[0]['username'], 'name' => $checkUser[0]['name'], 'email' => $checkUser[0]['email'], 'company' => $checkUser[0]['company'], 'role' => $checkUser[0]['role'], 'plan' => $checkUser[0]['plan'], 'status' => $checkUser[0]['status'], 'payment' => $this->payment_status, 'accountType' => $checkUser[0]['accountType'], 'free_trial_expire' => $trial_free]);
 
                     // Check Login
                     $this->logTrial($checkUser[0]['email']);
@@ -13430,7 +13543,39 @@ public function ajaxquickmail(Request $req){
 
 				$insInfo = PromotionalMaterial::insert(['title' => $req->title, 'file' => $fileNameToStore, 'category' => $req->category]);
 
+				// Notification to Agents
+				$allagents = Admin::where('role', 'Agent')->get();
+
+				
+
 				if($insInfo == true){
+
+					if(count($allagents) > 0){
+						// Save notification and mail
+						foreach($allagents as $key => $value){
+							$id = $value->id;
+							$name = $value->name;
+							$email = $value->email;
+							$username = $value->username;
+
+
+							// Save notification for agent
+							DB::table('agent_notification')->insert(['activity' => "<p>New promotional material on <b>".$req->title."</b></p><p><a href='".$fileNameToStore."' style='color: navy; text-decoration: underline;'>Open file</a></p>", 'agent_id' => $id, 'read_state' => 0]);
+
+							$this->to = $email;
+							// $this->to = 'bambo@vimfile.com';
+							$this->name = $name;
+
+							$this->subject = "VIMFILE - Promotional Material";
+							$this->message = "<p>Hello ".$this->name.", </p><p>There is a promotional material for you on VIMFile.</p><hr><p>Material Title: <b>".$req->title."</b></p><p>File: <b><a href='".$fileNameToStore."'>Open File</a></b></p><p>Material Category: <b>".$req->category."</b></p><p><a href='https://vimfile.com/AdminLogin'>Login to your account today!</a></p>";
+							$this->file = NULL;
+					
+							$this->sendEmail($this->to, "Compose Mail");
+						}
+					}
+					else{
+						// DO nothing
+					}
 		
 					$response = 'success';
 					$message = 'Successful';

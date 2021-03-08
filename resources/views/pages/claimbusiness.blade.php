@@ -89,7 +89,7 @@
                                         <td>{{ $datas->location }}</td>
                                         <td>{{ $datas->search_count }}</td>
                                         <td>
-                                            <button class="btn btn-primary" onclick="checkClaim('{{ $datas->company }}', '{{ $datas->telephone }}', {{ $i }})">Claim Business <img class="spin{{ $i }} disp-0" src="https://i.ya-webdesign.com/images/loading-gif-png-5.gif" style="width: 20px; height: 20px;"></button>
+                                            <button class="btn btn-primary" onclick='checkClaim("{{ $datas->company }}", "{{ $datas->telephone }}", {{ $i }})'>Claim Business <img class="spin{{ $i }} disp-0" src="https://i.ya-webdesign.com/images/loading-gif-png-5.gif" style="width: 20px; height: 20px;"></button>
                                         </td>
                                     </tr>
                                     

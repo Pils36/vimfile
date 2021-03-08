@@ -63,7 +63,7 @@
 
             @if(session('role') == "Super" || session('role') == "Agent")
 
-            <li><a href="{{ route('createdmechanics') }}"><i class="fa fa-circle-o"></i> Signed Up Mechanics</a></li>
+            <li><a href="{{ route('agentcreatedmechanics') }}"><i class="fa fa-circle-o"></i> Signed Up Mechanics</a></li>
 
             @endif
 

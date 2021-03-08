@@ -23,7 +23,15 @@
 // Application LOGS
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
 
+// CAA Migrate Data
 Route::get('caa/migratedata', ['uses' => 'CAAController@index', 'as' => 'migratedata']);
+
+
+// CAA Import Data
+Route::get('caa/importexcel', ['uses' => 'ImportExcelController@index', 'as' => 'importexcel']);
+Route::post('caa/uploadexcel', ['uses' => 'ImportExcelController@uploadExcel', 'as' => 'uploadexcel']);
+
+
 Route::get('admin/pdf/claimbusiness', ['uses' => 'HomeController@checkbusiness', 'as' => 'checkbusiness']);
 Route::get('startup', ['uses' => 'HomeController@startup', 'as' => 'Startup']);
 Route::get('promo_1', ['uses' => 'HomeController@promo_1', 'as' => 'Promo1']);
@@ -154,7 +162,7 @@ Route::get('bankbalance/{id}', ['uses' => 'HomeController@bankbalance', 'as' => 
 
 Route::get('Admin', ['uses' => 'AdminController@index', 'as' => 'Admin']);
 
-Route::get('Admin/createdmechanics', ['uses' => 'AdminController@createdMechanics', 'as' => 'createdmechanics']);
+Route::get('Admin/createdmechanics', ['uses' => 'AdminController@createdMechanics', 'as' => 'agentcreatedmechanics']);
 
 Route::get('Pricings', ['uses' => 'AdminController@pricing', 'as' => 'Pricings']);
 Route::get('AdminLogin', ['uses' => 'AdminController@login', 'as' => 'AdminLogin']);
@@ -164,6 +172,7 @@ Route::post('adminpasswordreset', ['uses' => 'PasswordResetController@adminpassw
 Route::post('changepassword', ['uses' => 'PasswordResetController@changepassword', 'as' => 'changepassword']);
 Route::get('reset/newpassword/{userid}', ['uses' => 'PasswordResetController@adminpasswordresetnew', 'as' => 'newpasswordreset']);
 
+Route::get('readnotification/{key}', ['uses' => 'AdminController@readNotification', 'as' => 'readnotification']);
 Route::get('ReadMessage/{key}', ['uses' => 'AdminController@readmessage', 'as' => 'ReadMessage']);
 Route::get('Registeredclients', ['uses' => 'AdminController@registeredclients', 'as' => 'Registeredclients']);
 Route::get('Unregisteredclients', ['uses' => 'AdminController@unregisteredclients', 'as' => 'Unregisteredclients']);

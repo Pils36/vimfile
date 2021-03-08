@@ -191,7 +191,7 @@ class HomeController extends Controller
         // $this->arr_ip = geoip()->getLocation('154.120.86.96');
         // $this->arr_ip = geoip()->getLocation('206.189.30.235');
         // $this->arr_ip = geoip()->getLocation('165.227.36.202');
-        // $this->arr_ip = geoip()->getLocation('64.235.204.107');
+        // $this->arr_ip = geoip()->getLocation('50.100.240.127');
 
         $this->country = $this->arr_ip['country'];
         $this->continent = $this->arr_ip['continent'];
@@ -11728,7 +11728,7 @@ class HomeController extends Controller
 
 
         // Get all ACC we have their data
-            $getbusiness = DB::table('business')->select('name_of_company as company', 'address', 'state as location', 'telephone', 'city as city', 'search_count')->distinct()->where('claims', 1)->where('state', 'LIKE', '%'.$this->arr_ip['city'].'%')->orWhere('city', 'LIKE', '%'.$this->arr_ip['city'].'%')->orderBy('created_at', 'DESC')->get();
+            $getbusiness = DB::table('business')->select('name_of_company as company', 'address', 'state as location', 'telephone', 'city as city', 'search_count')->distinct()->where('claims', 1)->where('state', 'LIKE', '%'.$this->arr_ip['state'].'%')->orWhere('city', 'LIKE', '%'.$this->arr_ip['city'].'%')->orderBy('created_at', 'DESC')->get();
 
             $crawled = DB::table('suggestedmechanics')->select('station_name as company', 'address', 'location', 'telephone', 'search_count')->distinct()->where('location', 'LIKE', '%'.$this->arr_ip['city'].'%')->orderBy('created_at', 'DESC')->get();
 
