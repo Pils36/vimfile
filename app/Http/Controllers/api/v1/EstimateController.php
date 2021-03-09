@@ -123,6 +123,14 @@ class EstimateController extends Controller
                     // $this->sendEmail($this->to, 'There is a new opportunity post within your proximity');
                 }
 
+                $currUser = User::where('api_token', $request->bearerToken())->first();
+
+
+              $this->earnYourPoints($currUser->name, $currUser->email, 40, $currUser->state, $currUser->country);
+
+
+              $this->notifications($currUser->ref_code, 'You just earned 40 point', 'https://i.ya-webdesign.com/images/notification-bell-gif-png-youtube.png');
+
                 $resData = ['data' => $postOpport, 'message' => 'success', 'status' => 200];
                 $status = 200;
             }

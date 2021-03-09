@@ -52,5 +52,11 @@ Vimfile Team
 · Manage inventory and Labour with ease <br>
 · Maintain and easily retrieve warranties issued to clients <br>
 	</p>
+
+
+	<p>
+		<a href="https://play.google.com/store/apps/details?id=com.ex.vimfile&ah=Ozv2osEnvf0c0AgZAqXzvZpxJrM" target="_blank"> <img src="https://res.cloudinary.com/pilstech/image/upload/v1614794205/googleplay_utscxu.png" alt="vimfile.apk" style="width: 140px; height: 140px;"></a>
+	</p>
+
 </body>
 </html>

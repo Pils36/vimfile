@@ -310,6 +310,9 @@ and to know when its more financially -prudent to either replace the vehicle or 
 Thanks.<br><br>
 
 Vim File Team<br>
+
+
+<a href="https://play.google.com/store/apps/details?id=com.ex.vimfile&ah=Ozv2osEnvf0c0AgZAqXzvZpxJrM" target="_blank"> <img src="https://res.cloudinary.com/pilstech/image/upload/v1614794205/googleplay_utscxu.png" alt="vimfile.apk" style="width: 140px; height: 140px;"></a>
                                         </td>
                                       </tr>
                                     </tbody></table>

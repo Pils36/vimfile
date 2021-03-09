@@ -581,6 +581,15 @@ class UserController extends Controller
 
     		$ins = Review::insert(['ref_code' => $req->ref_code, 'post_id' => "POST_".mt_rand(00000, 99999), 'technician' => $technician[0]->name, 'station_name' => $req->station_name, 'rating' => $req->rating, 'comment' => $req->message, 'busID' => $technician[0]->busID, 'service_maintenance' => $service_maint, 'service_type' => $req->service_type, 'period_visited' => $req->reservationtime, 'service_description' => $req->service_description, 'mechanic_email' => $req->mechanic_email]);
 
+
+			$currUser = User::where('api_token', $request->bearerToken())->first();
+
+
+			$this->earnYourPoints($currUser->name, $currUser->email, 150, $currUser->state, $currUser->country);
+
+
+			$this->notifications($currUser->ref_code, 'You just earned 150 point', 'https://i.ya-webdesign.com/images/notification-bell-gif-png-youtube.png');
+
     		if($ins == true){
     			$resData = ['data' => $ins, 'message' => 'success', 'status' => 200];
 

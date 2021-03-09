@@ -10032,6 +10032,7 @@ Record and track appointment made customers through by phone using this feature"
         </button>
       </h5>
     </div>
+    
 
     <div id="collapseRef" class="collapse" aria-labelledby="headingRef" data-parent="#accordion">
       <div class="card-body">
