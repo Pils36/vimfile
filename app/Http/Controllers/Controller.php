@@ -24,6 +24,7 @@ use App\Notification as Notification;
 use App\Business as Business;
 use App\SuggestedDealers as SuggestedDealers;
 use App\SuggestedMechanics as SuggestedMechanics;
+use App\Points as Points;
 
 class Controller extends BaseController
 {
@@ -628,6 +629,24 @@ class Controller extends BaseController
     // Support Log
     public function supportActivities($ip, $country, $city, $currency, $action){
       DB::table('support_activity')->insert(['ipaddress' => $ip, 'country' => $country, 'city' => $city, 'currency' => $currency, 'action' => $action]);
+  }
+
+
+  public function earnYourPoints($name, $email, $weekly, $state, $country){
+    
+    $addnewPoints = Points::where('email', $email)->first();
+
+    if(isset($addnewPoints)){
+      $weeknewPoint = $addnewPoints->weekly_point + $weekly;
+      $allnewPoint = $addnewPoints->alltime_point + $weeknewPoint;
+    }
+    else{
+      $weeknewPoint = $weekly;
+      $allnewPoint = $weekly;
+    }
+
+    
+    Points::updateOrCreate(['email' => $email], ['name' => $name, 'email' => $email, 'weekly_point' => $weeknewPoint, 'alltime_point' => $allnewPoint, 'global_point' => $allnewPoint, 'state' => $state, 'country' => $country]);
   }
     
 

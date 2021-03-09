@@ -819,6 +819,15 @@ class UserController extends Controller
         	if($insPost == true){
 
 
+				$currUser = User::where('api_token', $request->bearerToken())->first();
+
+
+				$this->earnYourPoints($currUser->name, $currUser->email, 15, $currUser->state, $currUser->country);
+
+
+				$this->notifications($currUser->ref_code, 'You just earned 15 point', 'https://i.ya-webdesign.com/images/notification-bell-gif-png-youtube.png');
+
+
         		// Send Mail Here
 
         		$resData = ['data' => true, 'message' => 'success', 'status' => 200];

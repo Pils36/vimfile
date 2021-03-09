@@ -58,6 +58,7 @@ class ImportExcelController extends Controller
                                 'state' => $key['state'],
                                 'businesslogo' => 'logocaa.png',
                                 'country' => 'Canada',
+                                'userType' => 'Auto Care',
                             );
                         }
                         else{

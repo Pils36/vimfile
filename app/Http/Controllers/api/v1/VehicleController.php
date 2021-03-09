@@ -110,6 +110,8 @@ class VehicleController extends Controller
 
                                 $plans = User::where('email', $request->owners_email)->get();
 
+
+
                                 if(count($plans) > 0){
 
                                     switch ($plans[0]->plan) {
@@ -220,6 +222,9 @@ class VehicleController extends Controller
 
                                         ]);
 
+                                    $this->earnYourPoints($plans[0]->name, $plans[0]->email, 10, $plans[0]->state, $plans[0]->country);
+                                    $this->notifications($plans[0]->ref_code, 'You just earned 10 point', 'https://i.ya-webdesign.com/images/notification-bell-gif-png-youtube.png');
+
 
                                         $resData = ['data' => $insertRecord, 'message' => 'Successful', 'status' => 200];
                                         $status = 200;
@@ -279,6 +284,12 @@ class VehicleController extends Controller
                                         'file' => $fileNameToStore
 
                                     ]);
+
+
+                                $this->earnYourPoints($plans[0]->name, $plans[0]->email, 10, $plans[0]->state, $plans[0]->country);
+
+
+                                $this->notifications($plans[0]->ref_code, 'You just earned 10 point', 'https://i.ya-webdesign.com/images/notification-bell-gif-png-youtube.png');
 
                                     $resData = ['data' => $insertRecord, 'message' => 'Successful', 'status' => 200];
                                     $status = 200;
@@ -355,6 +366,14 @@ class VehicleController extends Controller
 
 
             $data = Carrecord::where('vehicle_reg_no', $request->vehicle_reg_no)->first();
+
+            $currUser = User::where('api_token', $request->bearerToken())->first();
+
+
+            $this->earnYourPoints($currUser->name, $currUser->email, 15, $currUser->state, $currUser->country);
+
+
+            $this->notifications($currUser->ref_code, 'You just earned 15 point', 'https://i.ya-webdesign.com/images/notification-bell-gif-png-youtube.png');
 
 
             $resData = ['data' => $data, 'message' => 'Vehicle Information Updated', 'status' => 200];
@@ -490,6 +509,15 @@ class VehicleController extends Controller
 
 
             if (count($mechanics) > 0 || count($suggested) > 0) {
+
+                // Get User
+                $currUser = User::where('api_token', $request->bearerToken())->first();
+
+
+                $this->earnYourPoints($currUser->name, $currUser->email, 5, $currUser->state, $currUser->country);
+
+
+                $this->notifications($currUser->ref_code, 'You just earned 5 point', 'https://i.ya-webdesign.com/images/notification-bell-gif-png-youtube.png');
 
                 $resData = ['data' => $data, 'message' => 'success', 'status' => 200];
                         $status = 200;
@@ -634,24 +662,11 @@ class VehicleController extends Controller
                         // $this->sendEmail($this->to, 'VIM File - New Maintenace Record');
                     }
 
-                    // Check if exist
-                    $addnewPoints = Points::where('email', $request->email)->get();
+                        $this->earnYourPoints($request->name, $request->email, 10, $request->state, $request->country);
 
-                    if(count($addnewPoints) > 0){
-                        $weeknewPoint = $addnewPoints[0]->weekly_point + 10;
-                        $allnewPoint = $addnewPoints[0]->alltime_point + $weeknewPoint;
-                        $point = Points::where('email', $request->email)->update(['weekly_point' => $weeknewPoint, 'alltime_point' => $allnewPoint, 'global_point' => $allnewPoint, 'state' => $request->state, 'country' => $request->country]);
 
-                        $this->activities($this->arr_ip['ip'], $this->arr_ip['country'], $this->arr_ip['city'], $this->arr_ip['currency'], $request->name. ' currently earned point is '.$allnewPoint);
+                        $this->notifications($request->ref_code, 'You just earned 10 point', 'https://i.ya-webdesign.com/images/notification-bell-gif-png-youtube.png');
 
-                    }
-                    else{
-                            // Insert
-                            $inspoint = Points::insert(['name' => $request->name, 'email' => $request->email, 'weekly_point' => '10', 'alltime_point' => '10', 'global_point' => '10', 'state' => $request->state, 'country' => $request->country]);
-
-                            $this->notifications($request->ref_code, 'You just earned 10 point', 'https://i.ya-webdesign.com/images/notification-bell-gif-png-youtube.png');
-
-                        }
 
 
                     $resData = ['data' => true, 'message' => "Record Added", 'status' => 200];
@@ -1268,6 +1283,8 @@ class VehicleController extends Controller
     public function activities($ip, $country, $city, $currency, $action){
         DB::table('activity')->insert(['ipaddress' => $ip, 'country' => $country, 'city' => $city, 'currency' => $currency, 'action' => $action]);
     }
+
+
 
 
 }

@@ -74,6 +74,7 @@ class LoginController extends Controller
 
     public function logTrial($email, $lon, $lat){
 
+
         $getUser = User::where('email', $email)->get();
 
         if(count($getUser) > 0){
@@ -89,11 +90,15 @@ class LoginController extends Controller
             }
         }
         else{
+
+
             $response = 'error';
             $message = 'Your credentials do not match our records!';
+            
 
             return redirect()->back()->with($response, $message);
         }
+
 
         
 

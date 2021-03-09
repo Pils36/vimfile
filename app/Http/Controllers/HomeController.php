@@ -1985,6 +1985,9 @@ class HomeController extends Controller
 
     public function ranking(Request $req)
     {
+
+
+
         if(Auth::user()){
 
 
@@ -2105,6 +2108,7 @@ class HomeController extends Controller
 
     public function userDashboard(Request $req)
     {
+
 
 
         // Redirect
