@@ -198,6 +198,7 @@ class HomeController extends Controller
 
         // dd($this->arr_ip);
 
+
     }
 
 
@@ -2108,7 +2109,6 @@ class HomeController extends Controller
 
     public function userDashboard(Request $req)
     {
-
 
 
         // Redirect
@@ -6140,16 +6140,18 @@ class HomeController extends Controller
 
                     if(count($autoloan) > 0){
                         $userRefcode = $autoloan[0]->ref_code;
+                        $platform = 'Auto Dealer';
                     }
                     else{
                         $userRefcode = $ref_code;
+                        $platform = 'Busy Wrench';
                     }
 
                 
 
 
 
-                $update = User::updateOrCreate(['station_name' => $req->station_name],['ref_code' => $userRefcode, 'name' => $req->fullname, 'email' => $req->email, 'phone_number' => $req->phone_number, 'address' => $req->station_address, 'city' => $req->city, 'state' => $req->state, 'country' => $req->country, 'zipcode' => $req->zipcode, 'station_name' => $req->station_name, 'size_of_employee' => $req->size_of_employee, 'year_of_practice' => $req->year_of_practice, 'mobile' => $req->mobile, 'office' => $req->office, 'year_started_since' => $req->year_started_since, 'mechanical_skill' => $req->mechanical_skill, 'electrical_skill' => $req->electrical_skill, 'transmission_skill' => $req->transmission_skill, 'body_work_skill' => $req->body_work_skill, 'other_skills' => $req->other_skills, 'vimfile_discount' => $req->vimfile_discount, 'repair_guaranteed' => $req->repair_guaranteed, 'free_estimated' => $req->free_estimated, 'walk_in_specified' => $req->walk_in_specified, 'other_value_added' => $req->other_value_added, 'average_waiting' => $req->average_waiting, 'hours_of_operation' => $req->hours_of_operation, 'wifi' => $req->wifi, 'restroom' => $req->restroom, 'lounge' => $req->lounge, 'parking_space' => $req->parking_space, 'year_established' => $req->year_established, 'background' => $req->background, 'other_skills_specify' => $req->other_skills_specify, 'discountPercent' => $req->discountPercent, 'verified_mechanics' => 1, 'unverified_mechanics' => 0]);
+                $update = User::updateOrCreate(['station_name' => $req->station_name],['ref_code' => $userRefcode, 'name' => $req->fullname, 'email' => $req->email, 'phone_number' => $req->phone_number, 'address' => $req->station_address, 'city' => $req->city, 'state' => $req->state, 'country' => $req->country, 'zipcode' => $req->zipcode, 'station_name' => $req->station_name, 'size_of_employee' => $req->size_of_employee, 'year_of_practice' => $req->year_of_practice, 'mobile' => $req->mobile, 'office' => $req->office, 'year_started_since' => $req->year_started_since, 'mechanical_skill' => $req->mechanical_skill, 'electrical_skill' => $req->electrical_skill, 'transmission_skill' => $req->transmission_skill, 'body_work_skill' => $req->body_work_skill, 'other_skills' => $req->other_skills, 'vimfile_discount' => $req->vimfile_discount, 'repair_guaranteed' => $req->repair_guaranteed, 'free_estimated' => $req->free_estimated, 'walk_in_specified' => $req->walk_in_specified, 'other_value_added' => $req->other_value_added, 'average_waiting' => $req->average_waiting, 'hours_of_operation' => $req->hours_of_operation, 'wifi' => $req->wifi, 'restroom' => $req->restroom, 'lounge' => $req->lounge, 'parking_space' => $req->parking_space, 'year_established' => $req->year_established, 'background' => $req->background, 'other_skills_specify' => $req->other_skills_specify, 'discountPercent' => $req->discountPercent, 'verified_mechanics' => 1, 'unverified_mechanics' => 0, 'platform' => $platform]);
 
 
 
@@ -6245,12 +6247,16 @@ class HomeController extends Controller
 
                     if(count($autoloan) > 0){
                         $userRefcode = $autoloan[0]->ref_code;
+
+                        $platform = 'Auto Dealer';
                     }
                     else{
                         $userRefcode = $ref_code;
+
+                        $platform = 'Busy Wrench';
                     }
 
-                    $update = User::updateOrCreate(['station_name' => $req->station_name],['ref_code' => $userRefcode, 'name' => $req->fullname, 'email' => $req->email, 'phone_number' => $req->phone_number, 'address' => $req->station_address, 'city' => $req->city, 'state' => $req->state, 'country' => $req->country, 'zipcode' => $req->zipcode, 'station_name' => $req->station_name, 'size_of_employee' => $req->size_of_employee, 'year_of_practice' => $req->year_of_practice, 'mobile' => $req->mobile, 'office' => $req->office, 'year_started_since' => $req->year_started_since, 'mechanical_skill' => $req->mechanical_skill, 'electrical_skill' => $req->electrical_skill, 'transmission_skill' => $req->transmission_skill, 'body_work_skill' => $req->body_work_skill, 'other_skills' => $req->other_skills, 'vimfile_discount' => $req->vimfile_discount, 'repair_guaranteed' => $req->repair_guaranteed, 'free_estimated' => $req->free_estimated, 'walk_in_specified' => $req->walk_in_specified, 'other_value_added' => $req->other_value_added, 'average_waiting' => $req->average_waiting, 'hours_of_operation' => $req->hours_of_operation, 'wifi' => $req->wifi, 'restroom' => $req->restroom, 'lounge' => $req->lounge, 'parking_space' => $req->parking_space, 'year_established' => $req->year_established, 'background' => $req->background, 'other_skills_specify' => $req->other_skills_specify, 'discountPercent' => $req->discountPercent, 'verified_mechanics' => 1, 'unverified_mechanics' => 0]);
+                    $update = User::updateOrCreate(['station_name' => $req->station_name],['ref_code' => $userRefcode, 'name' => $req->fullname, 'email' => $req->email, 'phone_number' => $req->phone_number, 'address' => $req->station_address, 'city' => $req->city, 'state' => $req->state, 'country' => $req->country, 'zipcode' => $req->zipcode, 'station_name' => $req->station_name, 'size_of_employee' => $req->size_of_employee, 'year_of_practice' => $req->year_of_practice, 'mobile' => $req->mobile, 'office' => $req->office, 'year_started_since' => $req->year_started_since, 'mechanical_skill' => $req->mechanical_skill, 'electrical_skill' => $req->electrical_skill, 'transmission_skill' => $req->transmission_skill, 'body_work_skill' => $req->body_work_skill, 'other_skills' => $req->other_skills, 'vimfile_discount' => $req->vimfile_discount, 'repair_guaranteed' => $req->repair_guaranteed, 'free_estimated' => $req->free_estimated, 'walk_in_specified' => $req->walk_in_specified, 'other_value_added' => $req->other_value_added, 'average_waiting' => $req->average_waiting, 'hours_of_operation' => $req->hours_of_operation, 'wifi' => $req->wifi, 'restroom' => $req->restroom, 'lounge' => $req->lounge, 'parking_space' => $req->parking_space, 'year_established' => $req->year_established, 'background' => $req->background, 'other_skills_specify' => $req->other_skills_specify, 'discountPercent' => $req->discountPercent, 'verified_mechanics' => 1, 'unverified_mechanics' => 0, 'platform' => $platform]);
 
                     if($update){
 

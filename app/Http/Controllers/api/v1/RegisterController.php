@@ -324,7 +324,8 @@ class RegisterController extends Controller
             'password' => $password,
             'status' => 1,
             'verification_code' => $code,
-            'api_token' => $token
+            'api_token' => $token,
+            'platform' => 'Mobile App'
         ]);
 
         // Delete Temp User

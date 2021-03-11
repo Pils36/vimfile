@@ -1253,6 +1253,7 @@ Record and track appointment made customers through by phone using this feature"
   </div>
 
 
+
   <div class="tab-pane fade" id="myreviews" role="tabpanel" aria-labelledby="myreviews-tab">
 
       <br>
@@ -1313,7 +1314,7 @@ Record and track appointment made customers through by phone using this feature"
                         <div class="col-md-12">
                             <p style="font-weight: bold;">Reply <img src="https://img.icons8.com/fluent/20/000000/comments.png"/></p>
 
-                            @if($postReply = \App\ReplyRating::where('post_id', $myreview->post_id)->get()) 
+                            @if($postReply = \App\ReplyRating::where('post_id', $myreview->post_id)->orderBy('created_at', 'DESC')->get()) 
 
                                 @if(count($postReply) > 0)  
 
@@ -10679,7 +10680,7 @@ Record and track appointment made customers through by phone using this feature"
         {{-- If Paid --}}
 
 
-        @if (Auth::user()->plan != "Free" && Auth::user()->plan != "Start Up")
+        @if (Auth::user()->plan != "Free" || Auth::user()->plan != "Start Up")
 
         <div class="row">
             <div class="col-md-8">

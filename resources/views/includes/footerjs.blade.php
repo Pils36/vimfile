@@ -10992,7 +10992,7 @@ function checkClaim(company, telephone, id){
                     }
                 }
             });
-    };
+    }
 
 
 

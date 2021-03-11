@@ -214,7 +214,7 @@ function googleTranslateElementInit() {
 
               @if(session('role') == "Super")
 
-          <img src="/company_logo/vimfile.jpg" class="img-circle" alt="User Image" style="width: 30px; height: 30px;">
+          <img src="https://res.cloudinary.com/pilstech/image/upload/v1615462252/vimlogo_eh8dqn.jpg" class="img-circle" alt="User Image" style="width: 30px; height: 30px;">
           @else
           <img @if(count($getBussiness) > 0 && $getBussiness[0]->file2 != "") src="/company_logo/{{ $getBussiness[0]->file2 }}" @else src="{{ asset('company_logo/vimfile.jpg') }}" @endif  class="img-circle" alt="User Image" style="width: 30px; height: 30px;">
           @endif
@@ -232,7 +232,7 @@ function googleTranslateElementInit() {
 
                 @if(session('role') == "Super")
 
-          <img src="/company_logo/vimfile.jpg" class="img-circle" alt="User Image" style="width: 100px; height: 100px;">
+          <img src="https://res.cloudinary.com/pilstech/image/upload/v1615462252/vimlogo_eh8dqn.jpg" class="img-circle" alt="User Image" style="width: 100px; height: 100px;">
           @else
           <img @if(count($getBussiness) > 0 && $getBussiness[0]->file2 != "") src="/company_logo/{{ $getBussiness[0]->file2 }}" @else src="{{ asset('company_logo/vimfile.jpg') }}" @endif  class="img-circle" alt="User Image">
           @endif

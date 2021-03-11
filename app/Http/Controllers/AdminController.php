@@ -10667,6 +10667,10 @@ class AdminController extends Controller
 
 
  	public function allstaffs(){
+
+
+
+
  		$this->checkSession(session('_token'));
 
  		$getAdmins = Admin::where('role', '!=', 'Super')->get();
@@ -12595,6 +12599,7 @@ public function extendtrial(Request $req, Admin $admin){
 		}
 
 		elseif ($req->purpose == "delstaff") {
+			
 			$getStaff = BusinessStaffs::where('id', $req->id)->get();
 
 			if(count($getStaff) > 0){
@@ -12603,6 +12608,14 @@ public function extendtrial(Request $req, Admin $admin){
 
 				$resData = ['res' => 'Deleted', 'message' => 'success', 'action' => 'delete', 'link' => 'Admin'];
 			}
+		}
+		elseif ($req->purpose == "deluser") {
+			
+			User::where('email', $req->id)->delete();
+			BusinessStaffs::where('email', $req->id)->delete();
+			Business::where('email', $req->id)->delete();
+
+			$resData = ['res' => 'Deleted', 'message' => 'success', 'action' => 'delete', 'link' => 'Admin'];
 		}
 
 		return $this->returnJSON($resData);
@@ -13500,7 +13513,7 @@ public function ajaxquickmail(Request $req){
             $message = 'Post successful';
         }
         else{
-            $response = 'error';
+            $response = 'warning';
             $message = 'Something went wrong, try again!';
         }
 
@@ -13582,7 +13595,7 @@ public function ajaxquickmail(Request $req){
 				}
 				else{
 		
-					$response = 'error';
+					$response = 'warning';
 					$message = 'Something went wrong, try again!';
 				}
 				
@@ -13590,14 +13603,14 @@ public function ajaxquickmail(Request $req){
             }
             else{
 
-            	$response = 'error';
+            	$response = 'warning';
 				$message = 'File not detected';
             }
 
 
 		}
 		else{
-			$response = 'error';
+			$response = 'warning';
 			$message = 'File not detected';
 		}
 
@@ -13646,7 +13659,7 @@ public function ajaxquickmail(Request $req){
 				}
 				else{
 		
-					$response = 'error';
+					$response = 'warning';
 					$message = 'Something went wrong, try again!';
 				}
 				
@@ -13654,14 +13667,14 @@ public function ajaxquickmail(Request $req){
             }
             else{
 
-            	$response = 'error';
+            	$response = 'warning';
 				$message = 'File not detected';
             }
 
 
 		}
 		else{
-			$response = 'error';
+			$response = 'warning';
 			$message = 'File not detected';
 		}
 
@@ -13724,7 +13737,7 @@ public function ajaxquickmail(Request $req){
 		}
 		else{
 
-			$response = 'error';
+			$response = 'warning';
 			$message = 'Something went wrong, try again!';
 		}
 
@@ -13788,7 +13801,7 @@ public function ajaxquickmail(Request $req){
 		}
 		else{
 
-			$response = 'error';
+			$response = 'warning';
 			$message = 'Something went wrong, try again!';
 		}
 
@@ -14842,17 +14855,17 @@ public function ajaxquickmail(Request $req){
                     return redirect()->back()->with('success', 'Password updated');
                 }
                 else{
-                    return redirect()->back()->with('error', 'Something went wrong!');
+                    return redirect()->back()->with('warning', 'Something went wrong!');
                 }
             }
             else{
                 // Return response back
-                return redirect()->back()->with('error', 'Old password does not match');
+                return redirect()->back()->with('warning', 'Old password does not match');
             }
         }
         else{
             // Return response back
-            return redirect('Admin')->with('error', 'Invalid username');
+            return redirect('Admin')->with('warning', 'Invalid username');
         }
     }
 

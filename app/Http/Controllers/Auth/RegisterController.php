@@ -122,7 +122,8 @@ class RegisterController extends Controller
             'status' => $this->status,
             'market_place' => $this->market_place,
             'referred_by' => $request->referred_by,
-            'know_about' => $request->know_about
+            'know_about' => $request->know_about,
+            'platform' => 'Busy Wrench'
         ]);
 
         if($user){

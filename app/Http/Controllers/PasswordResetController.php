@@ -45,7 +45,7 @@ class PasswordResetController extends Controller
             return redirect()->back()->with('success', 'Reset password link sent to your mail');
         }
         else{
-            return redirect()->back()->with('error', 'Email address does not exist');
+            return redirect()->back()->with('warning', 'Email address does not exist');
         }
 
         

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 use App\User as User;
+use Session;
 
 class LoginController extends Controller
 {
@@ -57,17 +58,28 @@ class LoginController extends Controller
         $this->country = $this->arr_ip['country'];
         $this->continent = $this->arr_ip['continent'];
 
-        $this->username = $this->findUsername();
 
-        // dd($this->arr_ip);
+        if($this->findUsername() != null){
+            $this->username = $this->findUsername();
+        }
+
 
     }
 
 
     public function findUsername(){
+
+
         $email = request()->input('email');
 
-        $this->logTrial($email, $this->arr_ip['lon'], $this->arr_ip['lat']);
+        if(isset($email) == true){
+            $this->logTrial($email, $this->arr_ip['lon'], $this->arr_ip['lat']);
+        }
+        else{
+
+            Session::flush();
+        }
+
 
     }
 
@@ -89,15 +101,15 @@ class LoginController extends Controller
                 User::where('email', $email)->update(['login_times' => $times, 'free_trial_expire' => $trial_expire, 'lon' => $lon, 'lat' => $lat]);
             }
         }
-        else{
+        // else{
 
 
-            $response = 'error';
-            $message = 'Your credentials do not match our records!';
+        //     $response = 'error';
+        //     $message = 'Your credentials do not match our records!';
             
 
-            return redirect()->back()->with($response, $message);
-        }
+        //     return redirect()->back()->with($response, $message);
+        // }
 
 
         

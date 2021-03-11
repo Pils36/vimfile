@@ -190,58 +190,68 @@
           <div class="nav-tabs-custom">
             <h4 class="bg-aqua" style="padding: 5px;">All Users</h4>
 
-            <table id="example1" class="table table-bordered table-hover">
-              @if (count($otherUsers) > 0)
-                <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Name</th>
-                  <th>Username</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>City</th>
-                  <th>State</th>
-                  <th>Country</th>
-                  <th>Action</th>
-                </tr>
-                </thead>
-
-                <tbody>
-                  <?php $i = 1;?>
-                  @foreach ($otherUsers as $otherUser)
-                     <tr style="font-size: 12px;">
-                      <td>{{ $i++ }}</td>
-                      <td>{{ $otherUser->name }} </td>
-                      @if($username = \App\Admin::where('email', $otherUser->email)->get())
-                        @if (count($username) > 0)
-                        <td> {{ $username[0]->username }} </td>
+            <div class="table-responsive">
+              <table id="example1" class="table table-bordered table-hover">
+                @if (count($otherUsers) > 0)
+                  <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Country</th>
+                    <th>Platform</th>
+                    <th>Date of Reg.</th>
+                    <th>Action</th>
+                  </tr>
+                  </thead>
+  
+                  <tbody>
+                    <?php $i = 1;?>
+                    @foreach ($otherUsers as $otherUser)
+                       <tr style="font-size: 12px;">
+                        <td>{{ $i++ }}</td>
+                        <td>{{ $otherUser->name }} </td>
+                        @if($username = \App\Admin::where('email', $otherUser->email)->get())
+                          @if (count($username) > 0)
+                          <td> {{ $username[0]->username }} </td>
+                          @else
+                          <td> - </td>
+                          @endif
+  
                         @else
                         <td> - </td>
                         @endif
-
-                      @else
-                      <td> - </td>
-                      @endif
-
-                      <td>{{ $otherUser->email }}</td>
-                      <td>{{ $otherUser->phone_number }}</td>
-                      <td>{{ $otherUser->city }}</td>
-                      <td>{{ $otherUser->state }}</td>
-                      <td>{{ $otherUser->country }}</td>
-
-                      <td><button onclick="crud('{{ $otherUser->id }}','editUser')" style="background: none;"><span class="label pull-left"><img src="https://img.icons8.com/color/48/000000/edit.png" style="width: 15px; height: 15px;"></span></button><button onclick="crud('{{ $otherUser->id }}','deluser')" style="background: none;"><span class="label pull-right"><img src="https://img.icons8.com/color/48/000000/delete-sign.png" style="width: 15px; height: 15px;"></span></button></td>
-                    </tr>
-                  @endforeach
-               
-                </tbody>
-
-                @else
-
-                <p class="text-center">No user registration yet</p>
-              @endif
-                
-                
-              </table>
+  
+                        <td>{{ $otherUser->email }}</td>
+                        <td>{{ $otherUser->phone_number }}</td>
+                        <td>{{ $otherUser->city }}</td>
+                        <td>{{ $otherUser->state }}</td>
+                        <td>{{ $otherUser->country }}</td>
+                        <td>{{ ucwords($otherUser->platform) }}</td>
+                        <td>{{ date('d/F/Y', strtotime($otherUser->created_at)) }}</td>
+  
+                        <td>
+                          {{-- <button onclick="crud('{{ $otherUser->id }}','editUser')" style="background: none;"><span class="label pull-left"><img src="https://img.icons8.com/color/48/000000/edit.png" style="width: 15px; height: 15px;"></span></button> --}}
+  
+                          <button onclick="crud('{{ $otherUser->email }}','deluser')" style="background: none;" title="Delete {{ $otherUser->name }}"><span class="label pull-right"><img src="https://img.icons8.com/color/48/000000/delete-sign.png" style="width: 15px; height: 15px;"></span></button>
+                        </td>
+                      </tr>
+                    @endforeach
+                 
+                  </tbody>
+  
+                  @else
+  
+                  <p class="text-center">No user registration yet</p>
+                @endif
+                  
+                  
+                </table>
+            </div>
             
           </div>
           <!-- /.box -->

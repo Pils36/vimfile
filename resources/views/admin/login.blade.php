@@ -48,10 +48,10 @@
             <span style="font-size: 14px; text-align: center">{{ session('success') }}</span>
         </div>
 
-    @elseif(session('error'))
+    @elseif(session('warning'))
 
         <div class="alert alert-danger">
-            <span style="font-size: 14px; text-align: center">{{ session('error') }}</span>
+            <span style="font-size: 14px; text-align: center">{{ session('warning') }}</span>
         </div>
 
     @endif

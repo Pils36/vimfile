@@ -92,7 +92,7 @@ class InappMessagingController extends Controller
 
             }
             else{
-                $response = "error";
+                $response = "warning";
                 $message = "Something went wrong!";
             }
 

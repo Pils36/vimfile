@@ -331,7 +331,7 @@ function crud(id, val){
     purpose: val,
   };
 
-  if(val == 'delstation' || val == 'delstaff'){
+  if(val == 'delstation' || val == 'delstaff' || val == 'deluser'){
     swal({
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this detail!",
@@ -354,7 +354,7 @@ function crud(id, val){
         success: function(result){
           if(result.action == "delete"){
               swal('Ok!',result.res, result.message);
-              setTimeout(function(){ location.href = result.link; }, 1000);
+              setTimeout(function(){ location.reload(); }, 1000);
             }
         }
       });

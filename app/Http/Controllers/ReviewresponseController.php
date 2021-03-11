@@ -73,7 +73,7 @@ class ReviewresponseController extends Controller
         if(count($checkExist) > 0){
             
             // Insert
-            ReplyRating::insert(['post_id' => $req->post_message_id, 'reply' => $req->review_reply]);
+            ReplyRating::insert(['post_id' => $req->post_message_id, 'reply' => $req->review_reply, 'ref_code' => Auth::user()->ref_code]);
 
             
 

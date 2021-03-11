@@ -236,7 +236,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
 
                 
@@ -254,7 +254,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
             }
         }
@@ -277,7 +277,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
 
                 
@@ -295,7 +295,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
             }
         }
@@ -317,7 +317,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
 
                 
@@ -335,7 +335,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
             }
         }
@@ -359,7 +359,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
 
                 
@@ -377,7 +377,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
             }
         }
@@ -400,7 +400,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
 
                 
@@ -418,7 +418,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
             }
             
@@ -442,7 +442,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
 
                 
@@ -460,7 +460,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
             }
             
@@ -484,7 +484,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
 
                 
@@ -502,7 +502,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
             }
             
@@ -526,7 +526,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
 
                 
@@ -544,7 +544,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
             }
             
@@ -567,7 +567,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
 
                 
@@ -585,7 +585,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
             }
         }
@@ -606,7 +606,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
 
                 
@@ -624,7 +624,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
             }
         }
@@ -646,7 +646,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
 
                 
@@ -665,7 +665,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
             }
         }
@@ -687,7 +687,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
 
                 
@@ -705,7 +705,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
             }
         }
@@ -728,7 +728,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
 
                 
@@ -746,7 +746,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
             }
         }
@@ -768,7 +768,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
 
                 
@@ -786,7 +786,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
             }
         } 
@@ -808,7 +808,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
 
                 
@@ -826,7 +826,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
             }
         }
@@ -851,7 +851,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
 
                 
@@ -869,7 +869,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong. Please check payment form and try again');
+                    return redirect()->back()->with('warning', 'Something went wrong. Please check payment form and try again');
                 }
             }
         }
@@ -880,7 +880,7 @@ class PaypalController extends Controller
 
             if(count($chekpostid) > 0){
                 // Return to PayPal Form
-                    return redirect()->back()->with('error', 'You already have an active transaction on this estimate. Kindly contact the Administrator');
+                    return redirect()->back()->with('warning', 'You already have an active transaction on this estimate. Kindly contact the Administrator');
             }
             else{
                 $insestPay = EstimatePay::insert(['transactionid' => $req->transactionid, 'name' => $req->name, 'email' => $req->email, 'amount' => $req->price, 'currency' => $req->currency, 'station' => $req->payto, 'post_id' => $req->postid, 'estimate_id' => $req->estimate_id]);
@@ -891,7 +891,7 @@ class PaypalController extends Controller
                 }
                 else{
                     // Return to PayPal Form
-                    return redirect()->back()->with('error', 'Something went wrong, Kindly contact the Administrator');
+                    return redirect()->back()->with('warning', 'Something went wrong, Kindly contact the Administrator');
                 }
             }
         }

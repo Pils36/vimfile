@@ -4,10 +4,10 @@
             swal('Good', '{{ session("success") }}', 'success');
         </script>
 
-    @elseif(session('error'))
+    @elseif(session('warning'))
 
         <script>
-            swal('Oops', '{{ session("error") }}', 'error');
+            swal('Oops', '{{ session("warning") }}', 'error');
         </script>
 
     @elseif(session('info'))

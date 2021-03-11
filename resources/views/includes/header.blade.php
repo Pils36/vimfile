@@ -16,7 +16,7 @@
                         @else
                         <a class="navbar-brand" title="Home" href="{{ route('Home') }}">
                              {{-- <h2 class="text-white" style="font-weight: bolder; margin-left: 40px;">VIM File</h2> --}}
-                             <img class="my_logo" src="https://res.cloudinary.com/pilstech/image/upload/v1600186029/vimnewlogo_pndv6i.png" alt="VIMFile">
+                             <img class="my_logo" src="https://res.cloudinary.com/pilstech/image/upload/v1615455777/vimlogo-removebg-preview_xic8sv.png" alt="VIMFile">
                              <img class="my_logo" src="https://res.cloudinary.com/pilstech/image/upload/v1600186031/bw_ncbz2n.png" alt="BW">
 
                         </a>
@@ -25,7 +25,7 @@
                         @else
                         <a class="navbar-brand" title="Home" href="{{ route('Home') }}">
                             {{-- <h2 class="text-white" style="font-weight: bolder; margin-left: 40px;">VIM File</h2> --}}
-                            <img class="my_logo" src="https://res.cloudinary.com/pilstech/image/upload/v1600186029/vimnewlogo_pndv6i.png" alt="VIMFile">
+                            <img class="my_logo" src="https://res.cloudinary.com/pilstech/image/upload/v1615455777/vimlogo-removebg-preview_xic8sv.png" alt="VIMFile">
                             <img class="my_logo" src="https://res.cloudinary.com/pilstech/image/upload/v1600186031/bw_ncbz2n.png" alt="BW">
 
                         </a>
@@ -35,7 +35,7 @@
                         <a class="navbar-brand" title="Home" href="{{ route('Home') }}">
                             {{-- <h2 class="text-white" style="font-weight: bolder; margin-left: 40px;">VIM File</h2>  --}}
 
-                            <img class="my_logo" src="https://res.cloudinary.com/pilstech/image/upload/v1600186029/vimnewlogo_pndv6i.png" alt="VIMFile">
+                            <img class="my_logo" src="https://res.cloudinary.com/pilstech/image/upload/v1615455777/vimlogo-removebg-preview_xic8sv.png" alt="VIMFile">
                             <img class="my_logo" src="https://res.cloudinary.com/pilstech/image/upload/v1600186031/bw_ncbz2n.png" alt="BW">
 
                         </a>

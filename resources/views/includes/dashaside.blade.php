@@ -11,7 +11,7 @@
 
           @if(session('role') == "Super")
 
-          <img src="/company_logo/vimfile.jpg" class="img-circle" alt="User Image">
+          <img src="https://res.cloudinary.com/pilstech/image/upload/v1615462252/vimlogo_eh8dqn.jpg" class="img-circle" alt="User Image">
           @else
           <img @if(count($getBussiness) > 0 && $getBussiness[0]->file2 != "") src="/company_logo/{{ $getBussiness[0]->file2 }}" @else src="{{ asset('company_logo/vimfile.jpg') }}" @endif  class="img-circle" alt="User Image">
           @endif
