@@ -95,7 +95,7 @@
 							<div class="col-sm-4">
 								<div class="photo-profile">
                                     
-									<img id="my_image" @if($profileDetails[0]['businesslogo'] != "") src="/company_logo/{{ $profileDetails[0]['businesslogo'] }}" @elseif(count($busInfo) > 0 && $busInfo[0]->file2 != "") src="/company_logo/{{ $busInfo[0]->file2 }}" @else src="https://res.cloudinary.com/pilstech/image/upload/v1600186029/vimnewlogo_pndv6i.png" @endif alt="Business Image">
+									<img id="my_image" @if($profileDetails[0]['businesslogo'] != "") src="/company_logo/{{ $profileDetails[0]['businesslogo'] }}" @elseif(count($busInfo) > 0 && $busInfo[0]->file2 != "") src="/company_logo/{{ $busInfo[0]->file2 }}" @else src="https://res.cloudinary.com/pilstech/image/upload/v1615455777/vimlogo-removebg-preview_xic8sv.png" @endif alt="Business Image">
 								</div>
 								<a style="cursor: pointer;">
 									<div class="download-resume" style="background-color: navy; color: #fff;">
@@ -309,6 +309,47 @@
                                             No background history
                                         @endif
                                     </p>
+
+                                    <hr>
+                                    <h2>Affiliates</h2>
+                                    <hr>
+                                    <div class="row">
+
+                                        @if($profileDetails[0]['affiliatelogo'] != null)
+                                        @php $affiliate = json_decode($profileDetails[0]['affiliatelogo']); @endphp
+
+                                        
+
+                                        <?php $splitfile = explode(",", implode(",", $affiliate));?>
+
+
+                                        @if (count($splitfile) > 0)
+
+
+                                            @foreach ($splitfile as $image)
+
+                                                <div class="col-md-4">
+                                                    <a href="{{ $image }}" target="_blank"><img class="comphotos" src="{{ $image }}" alt="images"></a>
+                                                </div>
+                                            @endforeach
+                                        
+                                            
+                                        @endif
+                                            
+
+
+                                        @else
+
+                                        <div class="col-md-12">
+                                            <span class="title-infos" style="text-align: center; font-weight: bold;"><i class="fas fa-images"></i>No images and photos yet</span>
+                                        </div>
+
+                                        @endif
+
+                                        <br><br>
+
+
+                                    </div>
 
 
 

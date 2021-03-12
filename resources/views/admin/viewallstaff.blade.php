@@ -203,6 +203,7 @@
                     <th>City</th>
                     <th>State</th>
                     <th>Country</th>
+                    <th>User Type</th>
                     <th>Platform</th>
                     <th>Date of Reg.</th>
                     <th>Action</th>
@@ -231,6 +232,7 @@
                         <td>{{ $otherUser->city }}</td>
                         <td>{{ $otherUser->state }}</td>
                         <td>{{ $otherUser->country }}</td>
+                        <td>{{ $otherUser->userType }}</td>
                         <td>{{ ucwords($otherUser->platform) }}</td>
                         <td>{{ date('d/F/Y', strtotime($otherUser->created_at)) }}</td>
   

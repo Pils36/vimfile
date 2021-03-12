@@ -1118,7 +1118,7 @@ class UserController extends Controller
 
 
 			// Update Proile
-				$user->where('id', $id)->update(['avatar' => $fileNameToStore]);
+				$user->where('api_token', $req->bearerToken())->update(['avatar' => $fileNameToStore]);
 
 			
 
@@ -1128,7 +1128,7 @@ class UserController extends Controller
 		}
 
 
-		$getUser = $user->select('name', 'specialization', 'avatar as imageUrl')->where('id', $id)->get();
+		$getUser = $user->select('name', 'specialization', 'avatar as imageUrl')->where('api_token', $req->bearerToken())->get();
 
 		
 		
@@ -1147,14 +1147,14 @@ class UserController extends Controller
 		}
 
 
-		Log::info('Name: '.$name.' | Specialization: '.$occupation);
+		Log::info('Name: '.$name.' | Specialization: '.$occupation. ' | ID: '.$id);
 
 
 		// Update Proile
-		$user->where('id', $id)->update(['name' => $name, 'specialization' => $occupation]);
+		$user->where('api_token', $req->bearerToken())->update(['name' => $name, 'specialization' => $occupation]);
 
 
-		$updateUser = $user->select('name', 'specialization', 'avatar as imageUrl')->where('id', $id)->get();
+		$updateUser = $user->select('name', 'specialization', 'avatar as imageUrl')->where('api_token', $req->bearerToken())->get();
 
 		$resData = ['data' => $updateUser[0], 'message' => 'Success', 'status' => 200];
 

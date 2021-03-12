@@ -10722,6 +10722,7 @@ class AdminController extends Controller
 			 
 	 		$maintReccount = Vehicleinfo::count();
 	 		$maintRec = Vehicleinfo::orderBy('created_at', 'DESC')->get();
+			 
 	 		$this->otherUsers = User::where('userType', '!=', 'Business')->orderBy('created_at', 'DESC')->get();
 
 	 		// Ticketing
